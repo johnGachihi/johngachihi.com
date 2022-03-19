@@ -5,13 +5,25 @@ import reportWebVitals from './reportWebVitals';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {BrowserRouter} from "react-router-dom";
 import theme from "./theme";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from "react-query/devtools";
+
+if (process.env.NODE_ENV === "development") {
+  const {worker} = require("./api/mock")
+  worker.start()
+}
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline/>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <App/>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false}/>
+          <App/>
+        </QueryClientProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

@@ -15,18 +15,21 @@ export const Default = Template.bind({});
 Default.args = {
   projects: [
     {
+      id: "1",
       title: "Kotlin Symbol Processing (KSP) Example",
       slug: "",
       startedAt: "21 Jan 2022",
       tags: ["Kotlin", "KSP", "CodeGen"]
     },
     {
+      id: "2",
       title: "Kotlin Symbol Processing (KSP) Example",
       slug: "",
       startedAt: "21 Jan 2022",
       tags: ["Kotlin", "KSP", "CodeGen"]
     },
     {
+      id: "3",
       title: "Kotlin Symbol Processing (KSP) Example",
       slug: "",
       startedAt: "21 Jan 2022",

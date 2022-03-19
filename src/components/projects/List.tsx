@@ -5,10 +5,11 @@ import styled from "@emotion/styled";
 type Props = {
   projects?: ProjectSummary[],
   isLoading?: boolean,
+  error?: Error,
 }
 
 // TODO: Empty state
-function List({projects, isLoading = false}: Props) {
+function List({projects, isLoading = false, error}: Props) {
   if (isLoading) {
     return (
       <ProjectList>
@@ -19,9 +20,13 @@ function List({projects, isLoading = false}: Props) {
     )
   }
 
+  if (error) {
+    return <div>Error</div>
+  }
+
   return (
     <ProjectList>
-      {projects?.map(project => (<ListItem {...project} />))}
+      {projects?.map(project => (<ListItem {...project} key={project.id}/>))}
     </ProjectList>
   )
 }

@@ -1,37 +1,19 @@
 import {h6} from "../../style/text"
 import styled from "@emotion/styled";
 import ProjectList from "../../components/projects/List";
+import useProjects from "../../components/projects/useProjects";
 
 function Projects() {
+  const {isLoading, data, isError, error} = useProjects()
+
   return (
     <Content>
       <Title>Projects</Title>
-      <ProjectList projects={[
-        {
-          title: "Kotlin Symbol Processing (KSP) Example",
-          slug: "",
-          startedAt: "21 Jan 2022",
-          tags: ["Kotlin", "KSP", "CodeGen"]
-        },
-        {
-          title: "Kotlin Symbol Processing (KSP) Example Kotlin Symbol Processing (KSP) Example",
-          slug: "",
-          startedAt: "21 Jan 2022",
-          tags: ["Kotlin", "KSP", "CodeGen"]
-        },
-        {
-          title: "Kotlin Symbol Processing (KSP) Example",
-          slug: "",
-          startedAt: "21 Jan 2022",
-          tags: ["Kotlin", "KSP", "CodeGen"]
-        },
-        {
-          title: "Kotlin Symbol Processing (KSP) Example",
-          slug: "",
-          startedAt: "21 Jan 2022",
-          tags: ["Kotlin", "KSP", "CodeGen"]
-        },
-      ]} />
+      <ProjectList
+        projects={data}
+        isLoading={isLoading}
+        error={isError ? error : undefined}
+      />
     </Content>
   )
 }
