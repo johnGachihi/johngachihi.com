@@ -1,19 +1,20 @@
 import {Link as RouterLink} from "react-router-dom";
 import styled from "@emotion/styled";
-import { caption, body2, body1, h6 } from "../../style/text";
+import {caption, body2, body1, h6} from "../../style/text";
+import {Skeleton} from "@mui/material";
 
 type Props = {
   title: string;
-  startedOn: string;
+  startedAt: string;
   tags: string[];
   slug: string;
 }
 
-function ListItem({startedOn, title, tags, slug}: Props) {
+function ListItem({startedAt, title, tags, slug}: Props) {
   return (
     <Link to={slug}>
       <Container>
-        <StartedOn>{startedOn}</StartedOn>
+        <StartedOn>{startedAt}</StartedOn>
 
         <div>
           <Title>{title}</Title>
@@ -27,9 +28,27 @@ function ListItem({startedOn, title, tags, slug}: Props) {
   )
 }
 
+function LoadingListItem() {
+  return (
+    <Container>
+      <StartedOn children={<Skeleton width={75}/>} />
+
+      <div>
+        <Title children={<Skeleton width="100%"/>} />
+        <Tags>
+          <Tag children={<Skeleton width={60}/>}/>
+          <Tag children={<Skeleton width={60}/>}/>
+          <Tag children={<Skeleton width={60}/>}/>
+        </Tags>
+      </div>
+    </Container>
+  )
+}
+
 const Link = styled(RouterLink)`
   text-decoration: none;
   color: inherit;
+  display: block;
 `
 const Container = styled.div`
   @media (max-width: 600px) {
@@ -54,14 +73,6 @@ const StartedOn = styled.span`
     ${body2};
   }
 `
-const Tag = styled.span`
-  margin-right: 8px;
-  ${caption};
-  
-  @media (min-width: 900px) {
-    ${body2};
-  }
-`
 const Title = styled.span`
   font-weight: 500;
   display: block;
@@ -80,4 +91,17 @@ const Title = styled.span`
   }
 `
 
-export default ListItem
+const Tags = styled.div`
+  display: flex;
+`
+
+const Tag = styled.span`
+  margin-right: 8px;
+  ${caption};
+  
+  @media (min-width: 900px) {
+    ${body2};
+  }
+`
+
+export {ListItem as default, LoadingListItem}

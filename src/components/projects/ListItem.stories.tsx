@@ -1,20 +1,20 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import ListItem from './ListItem';
+import ListItem, {LoadingListItem} from './ListItem';
 
 export default {
-  title: 'Components/Blog/ListItem',
+  title: 'Components/Projects/ListItem',
   component: ListItem,
 } as ComponentMeta<typeof ListItem>;
 
 
-const Template: ComponentStory<typeof ListItem> = (args) => <ListItem {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
+const args = {
   title: "Kotlin KSP Example",
-  startedOn: "12 Jan 2022",
+  startedAt: "12 Jan 2022",
   tags: ["Kotlin", "KSP", "CodeGen"],
   slug: "kotlin-ksp-example"
 };
+export const Default: ComponentStory<typeof ListItem> = () => <ListItem {...args} />;
+
+export const Loading = () => <LoadingListItem />
