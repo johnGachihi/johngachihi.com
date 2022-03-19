@@ -14,7 +14,7 @@ function Home() {
           <ArrowForwardIcon/>
         </NavLink>
 
-        <NavLink to="#">
+        <NavLink to="/projects">
           <Typography variant="h5">Projects</Typography>
           <ArrowForwardIcon/>
         </NavLink>

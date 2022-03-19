@@ -4,9 +4,10 @@ import styled from "@emotion/styled";
 
 type Props = {
   projects?: ProjectSummary[],
-  isLoading: boolean,
+  isLoading?: boolean,
 }
 
+// TODO: Empty state
 function List({projects, isLoading = false}: Props) {
   if (isLoading) {
     return (
