@@ -19,9 +19,9 @@ function ListItem({startedAt, title, tags, slug}: Props) {
         <div>
           <Title>{title}</Title>
 
-          <div>
+          <Tags>
             {tags.map(tag => (<Tag children={"#" + tag} key={tag}/>))}
-          </div>
+          </Tags>
         </div>
       </Container>
     </Link>
@@ -93,6 +93,7 @@ const Title = styled.span`
 
 const Tags = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `
 
 const Tag = styled.span`
