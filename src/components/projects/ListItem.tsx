@@ -33,7 +33,7 @@ function LoadingListItem() {
     <Container>
       <StartedOn children={<Skeleton width={75}/>} />
 
-      <div>
+      <div style={{minWidth: "40%"}}>
         <Title children={<Skeleton width="100%"/>} />
         <Tags>
           <Tag children={<Skeleton width={60}/>}/>

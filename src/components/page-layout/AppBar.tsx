@@ -26,7 +26,7 @@ function AppBar() {
           </Nav>
         </Toolbar>
       </MuiAppBar>
-      <Toolbar/>
+      <Toolbar/> {/*Offset the content below top-app-bar*/}
     </>
   )
 }

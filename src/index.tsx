@@ -13,7 +13,13 @@ if (process.env.NODE_ENV === "development") {
   worker.start()
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      useErrorBoundary: true
+    }
+  }
+})
 
 ReactDOM.render(
   <React.StrictMode>
