@@ -1,0 +1,184 @@
+{
+  "kotlin-symbol-processor-ksp-example": {
+    "result": {
+      "_id": "e8098605-5da0-4c2d-9d64-9088f571ff70",
+      "githubLink": "https://github.com/johngachihi",
+      "liveLink": "https://johngachihi.me",
+      "shortDescription": [
+        {
+          "_key": "c4e544929b3d",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "67621a79a3fb",
+              "_type": "span",
+              "marks": [],
+              "text": "A short description with "
+            },
+            {
+              "_key": "d3f6e2b51a40",
+              "_type": "span",
+              "marks": [
+                "strong"
+              ],
+              "text": "bold "
+            },
+            {
+              "_key": "71b648f8a669",
+              "_type": "span",
+              "marks": [],
+              "text": "and some "
+            },
+            {
+              "_key": "500de905772a",
+              "_type": "span",
+              "marks": [
+                "em"
+              ],
+              "text": "italics"
+            },
+            {
+              "_key": "134a958c41e5",
+              "_type": "span",
+              "marks": [],
+              "text": ". Also, a few points:"
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "a49dfa16e398",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1a13c1e1a045",
+              "_type": "span",
+              "marks": [],
+              "text": "cat"
+            }
+          ],
+          "level": 1,
+          "listItem": "bullet",
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "56bed4c7836e",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "e251c58225fa",
+              "_type": "span",
+              "marks": [],
+              "text": "camel"
+            }
+          ],
+          "level": 1,
+          "listItem": "bullet",
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "018c489b24ba",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "70bad5b568b3",
+              "_type": "span",
+              "marks": [],
+              "text": "cow"
+            }
+          ],
+          "level": 1,
+          "listItem": "bullet",
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "91f361a46718",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "6bd9bded2ece",
+              "_type": "span",
+              "marks": [],
+              "text": ""
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "474b49893af3",
+          "_type": "image",
+          "asset": {
+            "_ref": "image-975bb98588d4a2ae6e4e1dccbd63908a9435e11b-596x321-png",
+            "_type": "reference"
+          }
+        }
+      ],
+      "showcaseMedia": {
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_ref": "image-3bfb6edac6db4c4635346f73d1eb38a6b616cbd3-601x361-png",
+            "_type": "reference"
+          }
+        }
+      },
+      "slug": {
+        "_type": "slug",
+        "current": "kotlin-symbol-processor-ksp-example"
+      },
+      "startedAt": "2022-03-10T16:07:00.000Z",
+      "tags": [
+        "Kotlin",
+        "KSP",
+        "CodeGen"
+      ],
+      "technicalDescription": [
+        {
+          "_key": "b86db02d614e",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "5d471d1a9e3a",
+              "_type": "span",
+              "marks": [],
+              "text": "An awesome technical description"
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "title": "Kotlin Symbol Processor (KSP) Example"
+    }
+  },
+  "ai-exam-invigilator": {
+    "result": {
+      "_id": "04632dbc-ecc3-46ed-9f83-b7910316b51c",
+      "githubLink": null,
+      "liveLink": null,
+      "longDescription": null,
+      "shortDescription": null,
+      "showcaseMedia": {
+        "youtubeLink": "https://youtu.be/dtn2FqtlluY"
+      },
+      "slug": {
+        "_type": "slug",
+        "current": "ai-exam-invigilator"
+      },
+      "startedAt": "2022-03-18T12:20:00.000Z",
+      "tags": [
+        "AI",
+        "TensorFlow",
+        "TensorFlowJS",
+        "Keras",
+        "ComputerVision"
+      ],
+      "title": "AI Exam Invigilator"
+    }
+  }
+}

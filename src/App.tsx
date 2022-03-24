@@ -1,8 +1,9 @@
 import React from 'react';
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import PageLayout from "./components/page-layout/PageLayout";
 import Projects from "./pages/projects/Projects";
+import Project from "./pages/projects/Project";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route index element={<Home/>}/>
       <Route element={<PageLayout/>}>
         <Route path="projects" element={<Projects/>}/>
+        <Route path="projects/:slug" element={<Project/>}/>
       </Route>
     </Routes>
   );
