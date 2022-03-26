@@ -2,20 +2,19 @@ import { sanityClient } from "./sanity-client"
 import { Block, Image, Slug } from "@sanity/types";
 import { formatDate } from "../util/date";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface RawProject {
   _id: string
   title: string
   slug: Slug
   startedAt: string
   tags: string[]
-  githubLink: string
-  liveLink: string
-  showcaseMedia:
+  githubLink?: string
+  liveLink?: string
+  showcaseMedia?:
     | { youtubeLink: string }
     | { image: Image & { _type: "image" } }
-  shortDescription: (Block | Image)[]
-  technicalDescription: (Block | Image)[]
+  shortDescription: (Block | Image & { _type: "image" })[]
+  technicalDescription: (Block | Image & { _type: "image" })[]
 }
 
 export interface Project extends Omit<RawProject, "slug" | "_id"> {
@@ -75,7 +74,8 @@ async function fetchProject(slug: string): Promise<Project> {
   return {
     ...project,
     id: project._id,
-    slug: project.slug.current
+    slug: project.slug.current,
+    startedAt: formatDate(project.startedAt, "DD MMM YYYY")
   }
 }
 

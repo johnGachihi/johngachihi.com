@@ -4,6 +4,20 @@ const baseText = css`
   font-family: 'Poppins', sans-serif;
 `
 
+const h4 = css`
+  ${baseText};
+  font-size: 34px;
+  letter-spacing: 0.25px;
+  font-weight: normal;
+`
+
+const h5 = css`
+  ${baseText};
+  font-size: 24px;
+  letter-spacing: 0;
+  font-weight: normal;
+`
+
 const h6 = css`
   ${baseText};
   font-size: 20px;
@@ -29,4 +43,4 @@ const caption = css`
   letter-spacing: 0.4px;
 `
 
-export { body2, body1, h6, caption }
+export { body2, body1, h6, caption, h5, h4 }
