@@ -11,7 +11,9 @@ import { css } from "@emotion/react";
 import ProjectLink from "../../components/project/ProjectLink";
 import GitHub from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
-import { caption } from "../../style/text";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { body1, caption } from "../../style/text";
+import { emphaticLink } from "../../style/link";
 
 function Project() {
   const { slug } = useParams()
@@ -39,7 +41,7 @@ function Project() {
         {showCaseMedia}
 
         <div css={css`
-          margin-top: 24px;
+          margin-top: 16px;
           display: flex;
         `}>
           {data.githubLink &&
@@ -65,7 +67,18 @@ function Project() {
           )}
         </div>
 
-        <Body css={css`margin-top: 40px`} content={data.shortDescription}/>
+        <Body css={
+          css`
+            margin-top: 24px;
+            margin-bottom: 42px;
+          `}
+          content={data.shortDescription}
+        />
+
+        <ShowTechnicalDescriptionButton>
+          <span css={css`${body1}; margin-right: 4px;`}>Technical Description</span>
+          <ExpandMoreIcon/>
+        </ShowTechnicalDescriptionButton>
       </Content>
     )
   else
@@ -76,11 +89,25 @@ const Content = styled.article`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 48px;
+  margin-bottom: 200px;
   
   @media (max-width: 600px) {
     margin-top: 8px
   }
+  
+  @media (min-width: 600px) {
+    margin-top: 24px;
+  }
+  
+  @media (min-width: 1440px) {
+    margin-top: 48px;
+  }
+`
+
+const ShowTechnicalDescriptionButton = styled.button`
+  border: none;
+  padding: 0;
+  ${emphaticLink};
 `
 
 export default Project

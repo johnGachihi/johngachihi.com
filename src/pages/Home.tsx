@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import {Typography} from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {Link} from "react-router-dom"
+import { emphaticLink } from "../style/link";
 
 function Home() {
   return (
@@ -57,22 +58,11 @@ const Title = styled.div`
 `
 
 const NavLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  background-color: #e8e8e8;
+  ${emphaticLink};
   margin-bottom: 32px;
-  border-bottom: 1px solid black;
-  transition: background-color 200ms ease;
   
   & > *:first-child {
     margin-right: 8px;
-  }
-  
-  &:hover {
-    background-color: #b6b6b6
   }
 `
 
