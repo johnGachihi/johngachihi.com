@@ -61,7 +61,7 @@ async function fetchProject(slug: string): Promise<Project> {
       githubLink, liveLink,
       showcaseMedia,
       shortDescription,
-      longDescription
+      technicalDescription
     }[0]
   `
 

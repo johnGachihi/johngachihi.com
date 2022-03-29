@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import useProject from "../../components/projects/useProject";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import ShowcaseVideoPlayer from "../../components/project/ShowcaseVideoPlayer";
@@ -12,12 +12,15 @@ import ProjectLink from "../../components/project/ProjectLink";
 import GitHub from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { body1, caption } from "../../style/text";
 import { emphaticLink } from "../../style/link";
+import { CSSTransition } from "react-transition-group";
 
 function Project() {
   const { slug } = useParams()
   const { data, isSuccess } = useProject(slug)
+  const [isShowTechnicalDesc, setIsShowTechnicalDesc] = useState(false)
 
   const showCaseMedia = useMemo(() => {
     if (data?.showcaseMedia) {
@@ -70,15 +73,28 @@ function Project() {
         <Body css={
           css`
             margin-top: 24px;
-            margin-bottom: 42px;
+            margin-bottom: 40px;
           `}
           content={data.shortDescription}
         />
 
-        <ShowTechnicalDescriptionButton>
+        <ShowTechnicalDescriptionButton
+          onClick={() => setIsShowTechnicalDesc((desc) => !desc)}
+        >
           <span css={css`${body1}; margin-right: 4px;`}>Technical Description</span>
-          <ExpandMoreIcon/>
+          {isShowTechnicalDesc ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
         </ShowTechnicalDescriptionButton>
+
+
+        {/* @ts-ignore */}
+        <CSSTransition
+          in={isShowTechnicalDesc}
+          classNames="technical-desc"
+          timeout={100}
+          mountOnEnter
+        >
+          <TechnicalDescription css={css`margin-top: 32px`} content={data.technicalDescription}/>
+        </CSSTransition>
       </Content>
     )
   else
@@ -108,6 +124,33 @@ const ShowTechnicalDescriptionButton = styled.button`
   border: none;
   padding: 0;
   ${emphaticLink};
+`
+
+const TechnicalDescription = styled(Body)`
+  &.technical-desc-enter {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  &.technical-desc-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 100ms, transform 100ms;
+  }
+  
+  &.technical-desc-exit {
+    opacity: 1;
+  }
+  
+  &.technical-desc-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 100ms, transform 100ms;
+  }
+  
+  &.technical-desc-exit-done {
+    display: none;
+  }
 `
 
 export default Project
