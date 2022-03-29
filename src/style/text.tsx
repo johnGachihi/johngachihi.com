@@ -41,6 +41,10 @@ const caption = css`
   ${baseText};
   font-size: 12px;
   letter-spacing: 0.4px;
+  
+  @media (min-width: 900px) {
+    font-size: 13px;  
+  }
 `
 
 export { body2, body1, h6, caption, h5, h4 }
