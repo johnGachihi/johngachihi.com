@@ -1,23 +1,15 @@
 import { useMediaQuery } from "@mui/material";
-import { useMemo } from "react";
-import imageUrlFor from "../../util/sanity-image";
 import styled from "@emotion/styled";
 import { Image } from "@sanity/types";
+import useSanityImageUrl from "./useSanityImageUrl";
 
 type Props = {
-  sanityImage: Image | { _type: "image" }
+  sanityImage: Image & { _type: "image" }
 }
 
 function ShowcaseImage({ sanityImage }: Props) {
   const isXs = useMediaQuery("(max-width: 600px)")
-
-  const imageUrl = useMemo(() => {
-    return  imageUrlFor(sanityImage)
-      .width(isXs ? 600 : 800)
-      .auto("format")
-      .quality(50)
-      .url()
-  }, [isXs, sanityImage])
+  const imageUrl = useSanityImageUrl(sanityImage, { width: isXs ? 600 : 800 })
 
   return <Img src={imageUrl} alt="Project showcase"/>
 }

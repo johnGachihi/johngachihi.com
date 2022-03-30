@@ -3,8 +3,20 @@ import { useMemo } from "react";
 import { Block, Image } from "@sanity/types";
 import { PortableText } from "@portabletext/react"
 import styled from "@emotion/styled";
-import { h5, h6, body1 } from "../../style/text";
+import { body1, h5, h6 } from "../../style/text";
 import { css } from "@emotion/react";
+import useSanityImageUrl from "./useSanityImageUrl";
+
+function BodyImage({ asset }: { asset: Image & { _type: "image" } }) {
+  const imageUrl = useSanityImageUrl(asset)
+  return (
+    <img
+      css={css`width: 100%; margin: 24px 0;`}
+      src={imageUrl}
+      alt="Project showcase"
+    />
+  )
+}
 
 type Props = {
   className?: string;
@@ -15,10 +27,17 @@ type Props = {
 function Body({ content, className }: Props) {
   const components = useMemo(() => ({
     block: {
-      h1: ({children}: any) => <Heading4 children={children} />,
-      h2: ({children}: any) => <Heading5 children={children} />,
-      h3: ({children}: any) => <Heading6 children={children} />,
-      normal: ({children}: any) => <Normal children={children} />,
+      h1: ({ children }: any) => <Heading4 children={children}/>,
+      h2: ({ children }: any) => <Heading5 children={children}/>,
+      h3: ({ children }: any) => <Heading6 children={children}/>,
+      normal: ({ children }: any) => <Normal children={children}/>,
+    },
+    types: {
+      image: ({ value }: any) => <BodyImage asset={value}/>
+    },
+    listItem: {
+      bullet: ({ children }: any) => <li css={css`${body1}`}>{children}</li>,
+      number: ({ children }: any) => <li css={css`${body1}`}>{children}</li>
     }
   }), [])
 
