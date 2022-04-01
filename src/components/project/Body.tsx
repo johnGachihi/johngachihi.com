@@ -32,12 +32,15 @@ function Body({ content, className }: Props) {
       h3: ({ children }: any) => <Heading6 children={children}/>,
       normal: ({ children }: any) => <Normal children={children}/>,
     },
+    marks: {
+      code: ({ children }: any) => <code css={css`background: #eee`}>{children}</code>
+    },
     types: {
       image: ({ value }: any) => <BodyImage asset={value}/>
     },
     listItem: {
-      bullet: ({ children }: any) => <li css={css`${body1}`}>{children}</li>,
-      number: ({ children }: any) => <li css={css`${body1}`}>{children}</li>
+      bullet: ({ children }: any) => <ListItem>{children}</ListItem>,
+      number: ({ children }: any) => <ListItem>{children}</ListItem>
     }
   }), [])
 
@@ -74,6 +77,11 @@ const Heading6 = styled.h6`
 const Normal = styled.p`
   ${body1};
   margin: 8px 0 16px 0;
+`
+
+const ListItem = styled.li`
+  ${body1};
+  margin-bottom: 12px;
 `
 
 export default Body
