@@ -6,7 +6,7 @@ type Props = { url: string }
 function ShowcaseVideoPlayer({ url }: Props) {
   return (
     <PlayerWrapper>
-      <Player url={url} width="100%" height="100%" light/>
+      <Player url={url} width="100%" height="100%" controls/>
     </PlayerWrapper>
   )
 }
