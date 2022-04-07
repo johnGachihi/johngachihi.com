@@ -64,7 +64,13 @@ function Project() {
           }
         </div>
 
-        <div css={css`margin-top: 24px`}>
+        <div css={
+          css`
+            margin-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+          `}
+        >
           {data.tags.map(tag =>
             <span css={css`${caption}; margin-right: 8px;`}>#{tag}</span>
           )}
@@ -75,7 +81,7 @@ function Project() {
             margin-top: 24px;
             margin-bottom: 40px;
           `}
-          content={data.shortDescription}
+              content={data.shortDescription}
         />
 
         <ShowTechnicalDescriptionButton
