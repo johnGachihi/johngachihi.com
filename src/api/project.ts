@@ -39,7 +39,11 @@ export type ProjectSummary = {
 }
 
 async function fetchProjects(): Promise<ProjectSummary[]> {
-  const query = `*[_type == "project"]{ _id, title, slug, startedAt, tags }`
+  const query = `
+    *[_type == "project"]  | order(startedAt desc) {
+      _id, title, slug, startedAt, tags 
+    }
+  `
   const rawProjects = await sanityClient.fetch<RawProjectSummary[]>(
     query,
     { tag: "projects" }
