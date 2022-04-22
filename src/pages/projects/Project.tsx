@@ -84,12 +84,14 @@ function Project() {
               content={data.shortDescription}
         />
 
-        <ShowTechnicalDescriptionButton
-          onClick={() => setIsShowTechnicalDesc((desc) => !desc)}
-        >
-          <span css={css`${body1}; margin-right: 4px;`}>Technical Description</span>
-          {isShowTechnicalDesc ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
-        </ShowTechnicalDescriptionButton>
+        {data.technicalDescription &&
+          <ShowTechnicalDescriptionButton
+            onClick={() => setIsShowTechnicalDesc((desc) => !desc)}
+          >
+            <span css={css`${body1}; margin-right: 4px;`}>Technical Description</span>
+            {isShowTechnicalDesc ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+          </ShowTechnicalDescriptionButton>
+        }
 
 
         {/* @ts-ignore */}
