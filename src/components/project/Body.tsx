@@ -1,20 +1,33 @@
 /** @jsxImportSource @emotion/react */
-import { useMemo } from "react";
+import { PropsWithChildren, useMemo } from "react";
 import { Block, Image } from "@sanity/types";
 import { PortableText } from "@portabletext/react"
 import styled from "@emotion/styled";
-import { body1, h5, h6 } from "../../style/text";
+import { body1, caption as captionTypography, h5, h6 } from "../../style/text";
 import { css } from "@emotion/react";
 import useSanityImageUrl from "./useSanityImageUrl";
 
-function BodyImage({ asset }: { asset: Image & { _type: "image" } }) {
+function BodyImage({ asset, alt, caption }: PropsWithChildren<{
+  asset: Image & { _type: "image" },
+  alt?: string,
+  caption?: any
+}>) {
   const imageUrl = useSanityImageUrl(asset)
+
+  const captionComponents = useMemo(() => ({
+    block: {
+      normal: ({ children }: any) =>
+        <span css={captionTypography} children={children}/>
+    }
+  }), [])
+
   return (
-    <img
-      css={css`width: 100%; margin: 24px 0;`}
-      src={imageUrl}
-      alt="Project showcase"
-    />
+    <figure css={css`width: 100%; margin: 40px 0;`}>
+      <img src={imageUrl} alt={alt} css={css`width: 100%`}/>
+      <figcaption>
+        <PortableText value={caption} components={captionComponents}/>
+      </figcaption>
+    </figure>
   )
 }
 
@@ -36,7 +49,9 @@ function Body({ content, className }: Props) {
       code: ({ children }: any) => <code css={css`background: #eee`}>{children}</code>
     },
     types: {
-      image: ({ value }: any) => <BodyImage asset={value}/>
+      captionedImage: ({ value }: any) => (
+        <BodyImage asset={value} caption={value.caption} alt={value.alt}/>
+      )
     },
     listItem: {
       bullet: ({ children }: any) => <ListItem>{children}</ListItem>,
