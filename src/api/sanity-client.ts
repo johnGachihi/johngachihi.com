@@ -5,6 +5,7 @@ const client = sanityClient({
   dataset: process.env.REACT_APP_SANITY_DATASET,
   apiVersion: '2022-03-17',
   useCdn: false,
+  withCredentials: true
 })
 
 export { client as sanityClient }
