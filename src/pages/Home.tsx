@@ -10,7 +10,7 @@ function Home() {
       <div>
         <Title>John Gachihi</Title>
 
-        <NavLink to="#">
+        <NavLink to="/blog">
           <Typography variant="h5">Blog</Typography>
           <ArrowForwardIcon/>
         </NavLink>
@@ -20,7 +20,7 @@ function Home() {
           <ArrowForwardIcon/>
         </NavLink>
 
-        <NavLink to="#">
+        <NavLink to="/other">
           <Typography variant="h5">Other</Typography>
           <ArrowForwardIcon/>
         </NavLink>

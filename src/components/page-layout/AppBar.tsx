@@ -50,9 +50,9 @@ function AppBar() {
           </Title>
 
           <Nav>
-            <NavLink to="/blogs">Blog</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
             <NavLink to="/projects">Projects</NavLink>
-            <NavLink to="/ble">Others</NavLink>
+            <NavLink to="/other">Others</NavLink>
           </Nav>
         </Toolbar>
       </MuiAppBar>
