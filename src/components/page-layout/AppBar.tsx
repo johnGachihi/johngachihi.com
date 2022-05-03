@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar"
 import MenuIcon from "@mui/icons-material/Menu"
 import IconButton from "@mui/material/IconButton"
 import styled from "@emotion/styled"
-import { LinkProps, NavLink, useMatch, useResolvedPath } from "react-router-dom";
+import { Link, LinkProps, NavLink, useMatch, useResolvedPath } from "react-router-dom";
 import { body1, body2 } from "../../style/text"
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -45,7 +45,9 @@ function AppBar() {
             children={<MenuIcon/>}
             onClick={() => setIsDrawerOpen(true)}
           />
-          <Title>John Gachihi</Title>
+          <Title>
+            <Link to="/">John Gachihi</Link>
+          </Title>
 
           <Nav>
             <NavLink to="/blogs">Blog</NavLink>
