@@ -6,6 +6,7 @@ import PageLayout from "./components/page-layout/PageLayout";
 import Projects from "./pages/projects/Projects";
 import Project from "./pages/projects/Project";
 import WorkInProgress from "./pages/WorkInProgress";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="projects" element={<Projects/>}/>
         <Route path="projects/:slug" element={<Project/>}/>
         <Route path="other" element={<WorkInProgress/>}/>
+
+        <Route path="*" element={<NotFound/>}/>
       </Route>
     </Routes>
   );

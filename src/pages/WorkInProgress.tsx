@@ -1,17 +1,7 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { h6 } from "../style/text";
+import FullPageMessage from "../components/FullPageMessage";
 
 function WorkInProgress() {
-  return (
-    <div css={css`
-      height: calc(100vh - 128px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      ${h6}
-    `}>Work in Progress 🛠</div>
-  )
+  return <FullPageMessage>Work in Progress 🛠</FullPageMessage>
 }
 
 export default WorkInProgress
