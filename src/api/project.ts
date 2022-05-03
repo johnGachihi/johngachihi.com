@@ -57,7 +57,7 @@ async function fetchProjects(): Promise<ProjectSummary[]> {
   }))
 }
 
-async function fetchProject(slug: string): Promise<Project> {
+async function fetchProject(slug: string): Promise<Project | null> {
   const query = `
     *[_type == "project" && slug.current == $slug]{
       _id,
@@ -69,18 +69,20 @@ async function fetchProject(slug: string): Promise<Project> {
     }[0]
   `
 
-  const project = await sanityClient.fetch<RawProject>(
+  const project = await sanityClient.fetch<RawProject | null>(
     query,
     { slug },
     { tag: "single-project" }
   )
 
-  return {
-    ...project,
-    id: project._id,
-    slug: project.slug.current,
-    startedAt: formatDate(project.startedAt, "DD MMM YYYY")
-  }
+  return project === null
+    ? null
+    : {
+      ...project,
+      id: project._id,
+      slug: project.slug.current,
+      startedAt: formatDate(project.startedAt, "DD MMM YYYY")
+    }
 }
 
 export { fetchProjects, fetchProject }

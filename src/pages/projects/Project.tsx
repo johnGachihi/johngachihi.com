@@ -16,6 +16,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { body1, caption } from "../../style/text";
 import { emphaticLink } from "../../style/link";
 import { CSSTransition } from "react-transition-group";
+import NotFound from "../NotFound";
 
 function Project() {
   const { slug } = useParams()
@@ -32,8 +33,8 @@ function Project() {
     }
   }, [data])
 
-  if (isSuccess)
-    return (
+  if (isSuccess) {
+    return data === null ? <NotFound/> : (
       <Content>
         <Header
           css={css`margin-bottom: 24px`}
@@ -105,7 +106,7 @@ function Project() {
         </CSSTransition>
       </Content>
     )
-  else
+  } else
     return <div>Loading...</div>
 }
 
