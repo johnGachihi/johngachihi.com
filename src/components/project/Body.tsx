@@ -46,6 +46,8 @@ function Body({ content, className }: Props) {
       normal: ({ children }: any) => <Normal children={children}/>,
     },
     marks: {
+      link: ({ value, children }: any) =>
+        <a css={css`text-decoration: underline`} href={value?.href}>{children}</a>,
       code: ({ children }: any) => <code css={css`background: #eee`}>{children}</code>
     },
     types: {
