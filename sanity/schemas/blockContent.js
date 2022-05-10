@@ -65,5 +65,8 @@ export default {
       type: 'captionedImage',
       options: { hotspot: true },
     },
+    {
+      type: 'codeBlock',
+    }
   ],
 }

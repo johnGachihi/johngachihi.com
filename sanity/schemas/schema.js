@@ -4,6 +4,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import blockContent from './blockContent'
 import captionedImage from './captionedImage'
 import project from './project'
+import codeBlock from './codeBlock'
 
 export default createSchema({
   name: 'default',
@@ -11,6 +12,7 @@ export default createSchema({
     project,
 
     blockContent,
-    captionedImage
+    captionedImage,
+    codeBlock
   ]),
 })
