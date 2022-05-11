@@ -1,15 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {CssBaseline, ThemeProvider} from "@mui/material";
-import {BrowserRouter} from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 import theme from "./theme";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from "react-query/devtools";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 if (process.env.NODE_ENV === "development") {
-  const {worker} = require("./api/mock")
+  const { worker } = require("./api/mock")
   worker.start()
 }
 
@@ -21,7 +21,8 @@ const queryClient = new QueryClient({
   }
 })
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root')!)
+root.render(
   <React.StrictMode>
     <CssBaseline/>
     <ThemeProvider theme={theme}>
@@ -32,8 +33,7 @@ ReactDOM.render(
         </QueryClientProvider>
       </BrowserRouter>
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
