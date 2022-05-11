@@ -6,7 +6,7 @@ import {Skeleton} from "@mui/material";
 type Props = {
   title: string;
   startedAt: string;
-  tags: string[];
+  tags: string[] | null;
   slug: string;
 }
 
@@ -19,9 +19,11 @@ function ListItem({startedAt, title, tags, slug}: Props) {
         <div>
           <Title>{title}</Title>
 
-          <Tags>
-            {tags.map(tag => (<Tag children={"#" + tag} key={tag}/>))}
-          </Tags>
+          {tags &&
+            <Tags>
+              {tags.map(tag => (<Tag children={"#" + tag} key={tag}/>))}
+            </Tags>
+          }
         </div>
       </Container>
     </Link>

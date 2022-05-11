@@ -2,12 +2,13 @@ import { sanityClient } from "./sanity-client"
 import { Block, Image, Slug } from "@sanity/types";
 import { formatDate } from "../util/date";
 
+// TODO: Too much repetition on these types
 interface RawProject {
   _id: string
   title: string
   slug: Slug
   startedAt: string
-  tags: string[]
+  tags: string[] | null // Sanity seems to return null when array is empty
   githubLink?: string
   liveLink?: string
   showcaseMedia?:
@@ -27,7 +28,7 @@ interface RawProjectSummary {
   title: string
   slug: Slug
   startedAt: string
-  tags: string[]
+  tags: string[] | null // Sanity seems to return null when array is empty
 }
 
 export type ProjectSummary = {
@@ -35,7 +36,7 @@ export type ProjectSummary = {
   title: string
   slug: string
   startedAt: string
-  tags: string[]
+  tags: string[] | null // Sanity seems to return null when array is empty
 }
 
 async function fetchProjects(): Promise<ProjectSummary[]> {

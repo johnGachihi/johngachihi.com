@@ -65,17 +65,18 @@ function Project() {
           }
         </div>
 
-        <div css={
-          css`
-            margin-top: 24px;
-            display: flex;
-            flex-wrap: wrap;
-          `}
-        >
-          {data.tags.map(tag =>
-            <span css={css`${caption}; margin-right: 8px;`}>#{tag}</span>
-          )}
-        </div>
+        {data.tags &&
+          <div css={
+            css`
+              margin-top: 24px;
+              display: flex;
+              flex-wrap: wrap;
+            `}
+          >
+            {data.tags.map(tag =>
+              <span css={css`${caption}; margin-right: 8px;`}>#{tag}</span>
+            )}
+          </div>}
 
         <Body css={
           css`
