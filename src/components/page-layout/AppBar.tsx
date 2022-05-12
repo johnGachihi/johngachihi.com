@@ -13,6 +13,7 @@ import { useState } from "react";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import { css } from "@emotion/react";
+import useScrollTrigger from "@mui/material/useScrollTrigger"
 
 function DrawerLink({ to, children }: LinkProps) {
   const resolvedPath = useResolvedPath(to)
@@ -34,9 +35,14 @@ function DrawerLink({ to, children }: LinkProps) {
 function AppBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
+  const isScrolledDown = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
+
   return (
     <>
-      <MuiAppBar color="inherit" elevation={0}>
+      <MuiAppBar color="inherit" elevation={isScrolledDown ? 3 : 0}>
         <Toolbar>
           <IconButton
             sx={{ mr: 1, display: { sm: "none" } }}
