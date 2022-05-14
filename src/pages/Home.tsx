@@ -1,14 +1,21 @@
 import styled from "@emotion/styled";
-import {Typography} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { emphaticLink } from "../style/link";
+import logo from "../assets/logo/logo.svg"
+import logoWrapped from "../assets/logo/logo-wrapped.svg"
 
 function Home() {
+  const isScreenWidthXs = useMediaQuery("(max-width: 599px)")
+
   return (
     <Root>
       <div>
-        <Title>John Gachihi</Title>
+        {isScreenWidthXs
+          ? <Logo src={logoWrapped} style={{ width: 264, height: "auto" }}/>
+          : <Logo src={logo} style={{ width: 422 }}/>}
 
         <NavLink to="/blog">
           <Typography variant="h5">Blog</Typography>
@@ -34,12 +41,12 @@ const Root = styled.div`
     flex-direction: column;
     height: 100vh;
   
-  @media (max-width: 900px) {
+  @media (max-width: 599px) {
     padding-top: 48px;
     margin: 0 32px;
   }
   
-  @media (min-width: 900px) {
+  @media (min-width: 600px) {
     justify-content: center;
     align-items: center;
     padding-bottom: 56px;
@@ -50,11 +57,9 @@ const Root = styled.div`
   } 
 `
 
-const Title = styled.div`
-  font-family: 'Caveat', cursive;
-  font-size: 96px;
-  line-height: 1.3;
-  margin-bottom: 36px
+const Logo = styled.img`
+  margin-top: 8px;
+  margin-bottom: 40px
 `
 
 const NavLink = styled(Link)`

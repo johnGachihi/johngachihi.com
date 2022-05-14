@@ -14,6 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import { css } from "@emotion/react";
 import useScrollTrigger from "@mui/material/useScrollTrigger"
+import { ReactComponent as Logo } from "../../assets/logo/logo.svg"
 
 function DrawerLink({ to, children }: LinkProps) {
   const resolvedPath = useResolvedPath(to)
@@ -51,9 +52,11 @@ function AppBar() {
             children={<MenuIcon/>}
             onClick={() => setIsDrawerOpen(true)}
           />
-          <Title>
-            <Link to="/">John Gachihi</Link>
-          </Title>
+          <div css={css`display: flex; flex-grow: 1`}>
+            <Link to="/">
+              <Logo width={143} height="auto"/>
+            </Link>
+          </div>
 
           <Nav>
             <NavLink to="/blog">Blog</NavLink>
@@ -81,13 +84,6 @@ function AppBar() {
     </>
   )
 }
-
-const Title = styled.span`
-  flex-grow: 1;
-  font-family: 'Caveat', cursive;
-  font-size: 32px;
-  color: black;
-`
 
 const Nav = styled.nav`
   @media (max-width: 600px) {
