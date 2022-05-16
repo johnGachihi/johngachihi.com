@@ -9,7 +9,7 @@ function BlogList() {
   return (
     <FullPageMessage css={css`flex-direction: column`}>
       <span css={css`${h6}; margin-bottom: 8px`}>Work in progress</span>
-      <span css={body2}>First release on 20 May 2022</span>
+      <span css={body2}>First release on 27 May 2022</span>
       <Button
         variant="outlined"
         css={css`margin-top: 24px`}
