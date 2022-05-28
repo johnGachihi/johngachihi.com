@@ -7,14 +7,16 @@ import Projects from "./pages/projects/Projects";
 import Project from "./pages/projects/Project";
 import WorkInProgress from "./pages/WorkInProgress";
 import NotFound from "./pages/NotFound";
-import BlogList from "./pages/blog/BlogList";
+import Articles from "./pages/Articles";
+import Article from "./pages/Article";
 
 function App() {
   return (
     <Routes>
       <Route index element={<Home/>}/>
       <Route element={<PageLayout/>}>
-        <Route path="blog" element={<BlogList/>}/>
+        <Route path="blog" element={<Articles/>}/>
+        <Route path="blog/:slug" element={<Article/>}/>
         <Route path="projects" element={<Projects/>}/>
         <Route path="projects/:slug" element={<Project/>}/>
         <Route path="other" element={<WorkInProgress/>}/>

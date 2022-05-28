@@ -1,12 +1,22 @@
+/** @jsxImportSource @emotion/react */
 import { FallbackProps } from "react-error-boundary";
 import styled from "@emotion/styled";
 import { caption, h6 } from "../style/text";
+import Button from "@mui/material/Button";
+import { css } from "@emotion/react";
 
-function ErrorFallback({ error }: FallbackProps) {
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
     <Content>
       <GeneralMessage>Oh no 😲! Erroooor</GeneralMessage>
       <SpecificMessage>{error.message}</SpecificMessage>
+
+      <Button
+        css={css`margin-top: 24px`}
+        variant="outlined"
+        onClick={resetErrorBoundary}
+        children="Retry"
+      />
     </Content>
   )
 }

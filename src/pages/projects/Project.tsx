@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import ShowcaseVideoPlayer from "../../components/project/ShowcaseVideoPlayer";
 import ShowcaseImage from "../../components/project/ShowcaseImage";
 import Body from "../../components/project/Body";
-import Header from "../../components/project/Header";
+import Header from "../../components/post/Header";
 import { css } from "@emotion/react";
 import ProjectLink from "../../components/project/ProjectLink";
 import GitHub from '@mui/icons-material/GitHub';
@@ -39,7 +39,7 @@ function Project() {
         <Header
           css={css`margin-bottom: 24px`}
           title={data.title}
-          startedOn={data.startedAt}
+          date={data.startedAt}
         />
 
         {showCaseMedia}
@@ -68,15 +68,15 @@ function Project() {
         {data.tags &&
           <div css={
             css`
-              margin-top: 24px;
+              margin: 24px 0;
               display: flex;
               flex-wrap: wrap;
+              gap: 4px 12px;
             `}
           >
-            {data.tags.map(tag =>
-              <span css={css`${caption}; margin-right: 8px;`}>#{tag}</span>
-            )}
-          </div>}
+            {data.tags.map(tag => <span css={css`${caption}`}>#{tag}</span>)}
+          </div>
+        }
 
         <Body css={
           css`

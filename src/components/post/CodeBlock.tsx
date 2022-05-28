@@ -28,7 +28,9 @@ function CodeBlock({ language, code }: Props) {
         padding: 8px 24px;
         margin: 32px 0;
         border: 1px solid #afafaf;
-        border-radius: 7px
+        border-radius: 7px;
+        font-size: 16px;
+        overflow-x: auto;
       `}>
       <pre dangerouslySetInnerHTML={{ __html: highlightedCode.value }}></pre>
     </div>

@@ -3,15 +3,15 @@ import { caption, h5 } from "../../style/text";
 
 type Props = {
   title: string;
-  startedOn: string;
+  date: string;
   className?: string
 }
 
-function Header({ title, startedOn, className }: Props) {
+function Header({ title, date, className }: Props) {
   return (
     <div className={className}>
       <Title>{title}</Title>
-      <StartedOn>{startedOn}</StartedOn>
+      <Date>{date}</Date>
     </div>
   )
 }
@@ -21,7 +21,7 @@ const Title = styled.h5`
   margin: 0;
 `
 
-const StartedOn = styled.span`
+const Date = styled.span`
   ${caption}
 `
 

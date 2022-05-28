@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { body1, caption as captionTypography, h5, h6 } from "../../style/text";
 import { css } from "@emotion/react";
 import useSanityImageUrl from "./useSanityImageUrl";
-import CodeBlock from "./CodeBlock";
+import CodeBlock from "../post/CodeBlock";
 
 function BodyImage({ asset, alt, caption }: PropsWithChildren<{
   asset: Image & { _type: "image" },
@@ -37,7 +37,9 @@ type Props = {
   content: (Block | (Image & { _type: "image" }))[]
 }
 
-// TODO: Better name
+/**
+ * @deprecated
+ */
 function Body({ content, className }: Props) {
   const components = useMemo(() => ({
     block: {

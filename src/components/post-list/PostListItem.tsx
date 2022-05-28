@@ -1,31 +1,31 @@
-import {Link as RouterLink} from "react-router-dom";
+/** @jsxImportSource @emotion/react */
+import { Link as RouterLink } from "react-router-dom";
 import styled from "@emotion/styled";
-import {caption, body2, body1, h6} from "../../style/text";
-import {Skeleton} from "@mui/material";
+import { body1, body2, caption, h6 } from "../../style/text";
+import { css } from "@emotion/react";
+import { Skeleton } from "@mui/material";
 
 type Props = {
-  title: string;
-  startedAt: string;
-  tags: string[] | null;
-  slug: string;
+  title: string
+  date: string
+  tags: string[]
+  slug: string
+  className?: string
 }
 
-/**
- * @deprecated
- */
-function ListItem({startedAt, title, tags, slug}: Props) {
+function PostListItem({ title, date, tags, slug, ...otherProps }: Props) {
   return (
-    <Link to={slug}>
+    <Link to={slug} {...otherProps}>
       <Container>
-        <StartedOn>{startedAt}</StartedOn>
+        <StartedOn>{date}</StartedOn>
 
         <div>
           <Title>{title}</Title>
 
           {tags &&
-            <Tags>
+            <div css={css`display: flex, flex-wrap: wrap`}>
               {tags.map(tag => (<Tag children={"#" + tag} key={tag}/>))}
-            </Tags>
+            </div>
           }
         </div>
       </Container>
@@ -33,12 +33,9 @@ function ListItem({startedAt, title, tags, slug}: Props) {
   )
 }
 
-/**
- * @deprecated
- */
-function LoadingListItem() {
+function PostListItemLoading(props: { className?: string }) {
   return (
-    <Container>
+    <Container {...props}>
       <StartedOn children={<Skeleton width={75}/>} />
 
       <div style={{minWidth: "40%"}}>
@@ -58,6 +55,7 @@ const Link = styled(RouterLink)`
   color: inherit;
   display: block;
 `
+
 const Container = styled.div`
   @media (max-width: 600px) {
     padding: 16px;
@@ -113,4 +111,4 @@ const Tag = styled.span`
   }
 `
 
-export {ListItem as default, LoadingListItem}
+export { PostListItem as default, PostListItemLoading }
