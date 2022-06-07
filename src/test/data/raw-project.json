@@ -1,0 +1,896 @@
+{
+  "_id": "e8098605-5da0-4c2d-9d64-9088f571ff70",
+  "githubLink": "https://github.com/johngachihi",
+  "liveLink": "https://johngachihi.me",
+  "shortDescription": [
+    {
+      "_key": "1b0aae25fef3",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "31a082a48aa1",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "517f0f861211",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "4fbe2ef8006e",
+          "_type": "span",
+          "marks": [],
+          "text": ""
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "8615facae37a",
+      "_type": "codeBlock",
+      "code": "import react from \"react\";\n\nclass MyComponent extends React.component {\n  render() {\n    return <div>This is a component</div>\n  }\n}",
+      "language": "javascript"
+    },
+    {
+      "_key": "77ef7da6060c",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "0a15184e0016",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "329e505758c7",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "4da1f4517410",
+          "_type": "span",
+          "marks": [],
+          "text": "A list of fruits:"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "2bd3b80da225",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "c71177586f430",
+          "_type": "span",
+          "marks": [
+            "strong",
+            "code"
+          ],
+          "text": "visit"
+        },
+        {
+          "_key": "c71177586f431",
+          "_type": "span",
+          "marks": [],
+          "text": ": this is what is begun by an entry event and terminated by an exit event. A "
+        },
+        {
+          "_key": "c71177586f432",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "visit"
+        },
+        {
+          "_key": "c71177586f433",
+          "_type": "span",
+          "marks": [],
+          "text": " that is not terminated is an "
+        },
+        {
+          "_key": "c71177586f434",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "c71177586f435",
+          "_type": "span",
+          "marks": [],
+          "text": ". Only "
+        },
+        {
+          "_key": "c71177586f436",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "c71177586f437",
+          "_type": "span",
+          "marks": [],
+          "text": "s with a parking fee balance of zero can be terminated. Importantly, an "
+        },
+        {
+          "_key": "c71177586f438",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "c71177586f439",
+          "_type": "span",
+          "marks": [],
+          "text": " has a "
+        },
+        {
+          "_key": "c71177586f4310",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "timeOfStay"
+        },
+        {
+          "_key": "c71177586f4311",
+          "_type": "span",
+          "marks": [],
+          "text": " property which is the duration between the "
+        },
+        {
+          "_key": "c71177586f4312",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "c71177586f4313",
+          "_type": "span",
+          "marks": [],
+          "text": "'s entry and the current time."
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "b38827e3a987",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "8b770a1d89810",
+          "_type": "span",
+          "marks": [
+            "strong",
+            "code"
+          ],
+          "text": "payment"
+        },
+        {
+          "_key": "8b770a1d89811",
+          "_type": "span",
+          "marks": [],
+          "text": ": this represents a parking fee payment. Partial payments or over-payment are not allowed. Also, a "
+        },
+        {
+          "_key": "8b770a1d89812",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "payment"
+        },
+        {
+          "_key": "8b770a1d89813",
+          "_type": "span",
+          "marks": [],
+          "text": " for an "
+        },
+        {
+          "_key": "8b770a1d89814",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "8b770a1d89815",
+          "_type": "span",
+          "marks": [],
+          "text": " expires after a specified amount of time elapses since it was made. When the "
+        },
+        {
+          "_key": "8b770a1d89816",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "payment"
+        },
+        {
+          "_key": "8b770a1d89817",
+          "_type": "span",
+          "marks": [],
+          "text": " expires, the "
+        },
+        {
+          "_key": "8b770a1d89818",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "8b770a1d89819",
+          "_type": "span",
+          "marks": [],
+          "text": " it was made for continues to be charged. This is meant to give a person time to exit the parking space while also prompting them to exit soon after making a payment."
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "3360eb89acb3",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "0addbbdfc2760",
+          "_type": "span",
+          "marks": [
+            "strong",
+            "code"
+          ],
+          "text": "parkingRates"
+        },
+        {
+          "_key": "0addbbdfc2761",
+          "_type": "span",
+          "marks": [],
+          "text": ": this is the data used to calculate an "
+        },
+        {
+          "_key": "0addbbdfc2762",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "0addbbdfc2763",
+          "_type": "span",
+          "marks": [],
+          "text": "'s parking fee. It is in the form of multiple adjacent ranges over a time scale, each having a fee. It can be represented as below. An "
+        },
+        {
+          "_key": "0addbbdfc2764",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "ongoingVisit"
+        },
+        {
+          "_key": "0addbbdfc2765",
+          "_type": "span",
+          "marks": [],
+          "text": "'s parking fee is identified by where on the range its "
+        },
+        {
+          "_key": "0addbbdfc2766",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "timeOfStay"
+        },
+        {
+          "_key": "0addbbdfc2767",
+          "_type": "span",
+          "marks": [],
+          "text": " falls (the data structure used to represent this is a list of items with the structure "
+        },
+        {
+          "_key": "0addbbdfc2768",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "{ upperLimit: number, fee: number }"
+        },
+        {
+          "_key": "0addbbdfc2769",
+          "_type": "span",
+          "marks": [],
+          "text": " ordered by "
+        },
+        {
+          "_key": "0addbbdfc27610",
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "upperLimit"
+        },
+        {
+          "_key": "0addbbdfc27611",
+          "_type": "span",
+          "marks": [],
+          "text": ".)"
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "cb024099c7c8",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "97bb1db8e2e3",
+          "_type": "span",
+          "marks": [],
+          "text": "A sequence of things:"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "1d2cd1fe28c8",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "d0e761137d08",
+          "_type": "span",
+          "marks": [],
+          "text": "Thing one"
+        }
+      ],
+      "level": 1,
+      "listItem": "number",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "25b318b52733",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "050b5f329d2b",
+          "_type": "span",
+          "marks": [],
+          "text": "Followed by thing two"
+        }
+      ],
+      "level": 1,
+      "listItem": "number",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "06dd650a82cf",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "e35a95b32889",
+          "_type": "span",
+          "marks": [],
+          "text": "This is a "
+        },
+        {
+          "_key": "fc2c04460bc9",
+          "_type": "span",
+          "marks": [
+            "16ddcdde93aa"
+          ],
+          "text": "link"
+        },
+        {
+          "_key": "f2a6053aece0",
+          "_type": "span",
+          "marks": [],
+          "text": ". Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "16ddcdde93aa",
+          "_type": "link",
+          "href": "https://google.com"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "680c691d179e",
+      "_type": "captionedImage",
+      "asset": {
+        "_ref": "image-58a3356a4960a43d174015f4bc2dc788ad1b51c1-4192x2795-jpg",
+        "_type": "reference"
+      }
+    },
+    {
+      "_key": "7adb5af34320",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "fde3b906bd42",
+          "_type": "span",
+          "marks": [],
+          "text": "This is a "
+        },
+        {
+          "_key": "42e2552adb06",
+          "_type": "span",
+          "marks": [
+            "639c2fc4c3b4"
+          ],
+          "text": "link"
+        },
+        {
+          "_key": "c9f20ebb8ce0",
+          "_type": "span",
+          "marks": [],
+          "text": ". Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "639c2fc4c3b4",
+          "_type": "link",
+          "href": "https://google.com"
+        }
+      ],
+      "style": "normal"
+    }
+  ],
+  "showcaseMedia": {
+    "image": {
+      "_type": "image",
+      "asset": {
+        "_ref": "image-cd7cae498ffaa7d953678e23bc56c4d771689df8-5889x3930-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "kotlin-symbol-processor-ksp-example"
+  },
+  "startedAt": "2022-03-10T16:07:00.000Z",
+  "tags": [
+    "Kotlin",
+    "KSP",
+    "CodeGen"
+  ],
+  "technicalDescription": [
+    {
+      "_key": "615aa8c0712f",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "a6c2ad9fbd77",
+          "_type": "span",
+          "marks": [],
+          "text": "Heading 1"
+        }
+      ],
+      "markDefs": [],
+      "style": "h1"
+    },
+    {
+      "_key": "899f44973834",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "06dfa32e8e42",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum "
+        },
+        {
+          "_key": "be7154aaee8f",
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "dolor sit amet, consectetur"
+        },
+        {
+          "_key": "7974c5529de8",
+          "_type": "span",
+          "marks": [],
+          "text": " adipiscing elit, "
+        },
+        {
+          "_key": "61883a6b1c9f",
+          "_type": "span",
+          "marks": [
+            "0dfeff30a04c"
+          ],
+          "text": "sed do eiusmod"
+        },
+        {
+          "_key": "10bc7201492e",
+          "_type": "span",
+          "marks": [],
+          "text": " tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+        },
+        {
+          "_key": "9797b71d3824",
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Duis aute irure dolor in reprehenderit"
+        },
+        {
+          "_key": "c5511a36167b",
+          "_type": "span",
+          "marks": [],
+          "text": " in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "0dfeff30a04c",
+          "_type": "link",
+          "href": "https://google.com"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "c4cf3b3afa0f",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "504b41c339a9",
+          "_type": "span",
+          "marks": [],
+          "text": "Heading 2"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "f8646c098417",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "b9efef926b5a",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "002fbe74bea4",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "746f06543de0",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "e449a16b9a33",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "29fcf386128a",
+          "_type": "span",
+          "marks": [],
+          "text": ""
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "675174969b11",
+      "_type": "codeBlock",
+      "code": "const playSong = (song) => {\n  console.log(\"Playing a song\");\n}",
+      "language": "javascript"
+    },
+    {
+      "_key": "fc84f97ec574",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "686dfc58aaef",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "ad1c81a882f4",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "a0df2f9df57b",
+          "_type": "span",
+          "marks": [],
+          "text": "Heading 2"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "6a6247258d70",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "4db77aaa715a",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "a58c70155768",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "416890558856",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "7a4517e15ae6",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "8c241bf4056f",
+          "_type": "span",
+          "marks": [],
+          "text": "Heading 3"
+        }
+      ],
+      "markDefs": [],
+      "style": "h3"
+    },
+    {
+      "_key": "d665c3ba3f62",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "9c3351c2e2ed",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "8417e30c054e",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "6573401b0578",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "de3543924e4b",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "e2bcf95abe40",
+          "_type": "span",
+          "marks": [],
+          "text": "A short description with "
+        },
+        {
+          "_key": "d037a3671e54",
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "bold "
+        },
+        {
+          "_key": "e203a1e76b88",
+          "_type": "span",
+          "marks": [],
+          "text": "and some "
+        },
+        {
+          "_key": "da2930d7ffa4",
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "italics"
+        },
+        {
+          "_key": "2b4dd1f41256",
+          "_type": "span",
+          "marks": [],
+          "text": ". Also, a few points:"
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "970032016081",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "c7ccb25b35ac",
+          "_type": "span",
+          "marks": [],
+          "text": "cat"
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "4658982f171d",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "d50b5a6bd798",
+          "_type": "span",
+          "marks": [],
+          "text": "camel"
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "b5116b3c176e",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "2cd4f4b6e259",
+          "_type": "span",
+          "marks": [],
+          "text": "cow"
+        }
+      ],
+      "level": 1,
+      "listItem": "bullet",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "a3e541464408",
+      "_type": "captionedImage",
+      "asset": {
+        "_ref": "image-db94a03fce6c7cabed9ab638aebd68a1b5075c51-5405x3604-jpg",
+        "_type": "reference"
+      },
+      "caption": [
+        {
+          "_key": "56b1759c5366",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2ca846af951d",
+              "_type": "span",
+              "marks": [],
+              "text": "This is a "
+            },
+            {
+              "_key": "bd660e0d1741",
+              "_type": "span",
+              "marks": [
+                "c10c1b8874ef"
+              ],
+              "text": "link"
+            },
+            {
+              "_key": "df9c83e9215c",
+              "_type": "span",
+              "marks": [],
+              "text": ". Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            }
+          ],
+          "markDefs": [
+            {
+              "_key": "c10c1b8874ef",
+              "_type": "link",
+              "href": "https://google.com"
+            }
+          ],
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_key": "39af4ca6a2ed",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "610d0e876301",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "db6044ca9d73",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "66fe1c3a69c3",
+          "_type": "span",
+          "marks": [],
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    }
+  ],
+  "title": "Kotlin Symbol Processor (KSP) Example"
+}

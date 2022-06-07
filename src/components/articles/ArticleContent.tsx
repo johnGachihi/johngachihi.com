@@ -23,7 +23,7 @@ function ArticleContent({ articleSlug, _article }: Props) {
     [_article, data]
   )
 
-  if (!article) return <NotFound />
+  if (!article) return <NotFound/>
 
   return (
     <div css={postContent}>
@@ -32,10 +32,12 @@ function ArticleContent({ articleSlug, _article }: Props) {
         title={article.title}
         date={article.publishedOn}
       />
-      <MainImage
-        css={css`width: 100%; margin-bottom: 32px`}
-        imageAsset={article.mainImage}
-      />
+      {article.mainImage &&
+        <MainImage
+          css={css`width: 100%; margin-bottom: 32px`}
+          imageAsset={article.mainImage}
+        />
+      }
 
       {/* TODO: Refactor (DRY)*/}
       <div

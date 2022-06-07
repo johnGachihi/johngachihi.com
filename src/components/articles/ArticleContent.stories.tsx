@@ -5,7 +5,7 @@ import ArticleContent from './ArticleContent';
 import { createArticle } from "../../test/factory";
 
 export default {
-  title: 'ArticleContent',
+  title: 'Layout/ArticleContent',
   component: ArticleContent,
 } as ComponentMeta<typeof ArticleContent>;
 

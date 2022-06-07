@@ -3,8 +3,8 @@ import "./App.css"
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import PageLayout from "./components/page-layout/PageLayout";
-import Projects from "./pages/projects/Projects";
-import Project from "./pages/projects/Project";
+import Projects from "./pages/Projects";
+import Project from "./pages/Project";
 import WorkInProgress from "./pages/WorkInProgress";
 import NotFound from "./pages/NotFound";
 import Articles from "./pages/Articles";

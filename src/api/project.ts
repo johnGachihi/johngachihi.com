@@ -1,6 +1,7 @@
 import { sanityClient } from "./sanity-client"
 import { Block, Image, Slug } from "@sanity/types";
 import { formatDate } from "../util/date";
+import { CaptionedImage } from "../models/article";
 
 // TODO: Too much repetition on these types
 interface RawProject {
@@ -14,8 +15,8 @@ interface RawProject {
   showcaseMedia?:
     | { youtubeLink: string }
     | { image: Image & { _type: "image" } }
-  shortDescription: (Block | Image & { _type: "image" })[]
-  technicalDescription: (Block | Image & { _type: "image" })[]
+  shortDescription: (Block | CaptionedImage)[]
+  technicalDescription: (Block | CaptionedImage)[]
 }
 
 export interface Project extends Omit<RawProject, "slug" | "_id"> {
