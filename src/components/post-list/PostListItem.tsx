@@ -23,7 +23,7 @@ function PostListItem({ title, date, tags, slug, ...otherProps }: Props) {
           <Title>{title}</Title>
 
           {tags &&
-            <div css={css`display: flex, flex-wrap: wrap`}>
+            <div css={css`display: flex; flex-wrap: wrap`}>
               {tags.map(tag => (<Tag children={"#" + tag} key={tag}/>))}
             </div>
           }
