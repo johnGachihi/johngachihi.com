@@ -74,8 +74,9 @@ async function fetchProject(slug: string): Promise<Project | null> {
   const project = await sanityClient.fetch<RawProject | null>(
     query,
     { slug },
-    { tag: "single-project" }
+    { tag: "project" }
   )
+  console.log(project)
 
   return project === null
     ? null
