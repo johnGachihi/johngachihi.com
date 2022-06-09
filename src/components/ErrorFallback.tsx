@@ -1,22 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { FallbackProps } from "react-error-boundary";
 import styled from "@emotion/styled";
-import { caption, h6 } from "../style/text";
-import Button from "@mui/material/Button";
+import { body2, h6 } from "../style/text";
 import { css } from "@emotion/react";
 
-function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+function ErrorFallback({ error }: FallbackProps) {
   return (
     <Content>
-      <GeneralMessage>Oh no 😲! Erroooor</GeneralMessage>
-      <SpecificMessage>{error.message}</SpecificMessage>
-
-      <Button
-        css={css`margin-top: 24px`}
-        variant="outlined"
-        onClick={resetErrorBoundary}
-        children="Retry"
-      />
+      <div
+        css={css`${h6}; margin-bottom: 8px; text-align: center`}
+      >
+        Oops, there was an error. Try reloading the page
+      </div>
+      <pre css={css`${body2}; text-align: center`}>{error.message}</pre>
     </Content>
   )
 }
@@ -28,14 +24,6 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-const GeneralMessage = styled.div`
-  ${h6}
-  margin-bottom: 8px;
-`
-
-const SpecificMessage = styled.div`
-  ${caption}
 `
 
 export default ErrorFallback

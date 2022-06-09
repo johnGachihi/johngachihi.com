@@ -2,18 +2,12 @@ import AppBar from "./AppBar";
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import React from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "../ErrorFallback";
 
 function PageLayout() {
   return (
     <>
       <AppBar/>
-      <Main>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Outlet/>
-        </ErrorBoundary>
-      </Main>
+      <Main><Outlet/></Main>
     </>
   )
 }
