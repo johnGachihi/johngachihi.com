@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import FullPageMessage from "../../components/FullPageMessage";
-import { body2, h6 } from "../../style/text";
+import FullPageMessage from "../components/FullPageMessage";
+import { body2, h6 } from "../style/text";
 import { css } from "@emotion/react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-function BlogList() {
+function EmptyArticleList() {
   return (
     <FullPageMessage css={css`flex-direction: column`}>
       <span css={css`${h6}; margin-bottom: 8px`}>Work in progress</span>
@@ -22,4 +22,4 @@ function BlogList() {
   )
 }
 
-export default BlogList
+export default EmptyArticleList

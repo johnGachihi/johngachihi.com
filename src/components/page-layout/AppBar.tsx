@@ -59,7 +59,7 @@ function AppBar() {
           </div>
 
           <Nav>
-            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/articles">Articles</NavLink>
             <NavLink to="/projects">Projects</NavLink>
             <NavLink to="/other">Others</NavLink>
           </Nav>
@@ -73,7 +73,7 @@ function AppBar() {
       >
         <List sx={{ width: 250 }}>
           <ListItem disablePadding onClick={() => setIsDrawerOpen(false)}>
-            <DrawerLink to="/blog">Blog</DrawerLink>
+            <DrawerLink to="/articles">Articles</DrawerLink>
           </ListItem>
 
           <ListItem disablePadding onClick={() => setIsDrawerOpen(false)}>

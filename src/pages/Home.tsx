@@ -17,8 +17,8 @@ function Home() {
           ? <Logo src={logoWrapped} style={{ width: 264, height: "auto" }}/>
           : <Logo src={logo} style={{ width: 422 }}/>}
 
-        <NavLink to="/blog">
-          <Typography variant="h5">Blog</Typography>
+        <NavLink to="/articles">
+          <Typography variant="h5">Articles</Typography>
           <ArrowForwardIcon/>
         </NavLink>
 
