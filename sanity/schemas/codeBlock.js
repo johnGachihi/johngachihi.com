@@ -8,7 +8,8 @@ export default {
     languageAlternatives: [
       { title: 'Javascript', value: 'js' },
       { title: 'Python', value: 'python' },
-      { title: 'Kotlin', value: 'kotlin', mode: 'kotlin' }
+      { title: 'Kotlin', value: 'kotlin', mode: 'kotlin' },
+      { title: 'HTML', value: 'html'}
     ]
   }
 }
