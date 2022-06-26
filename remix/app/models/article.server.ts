@@ -1,13 +1,5 @@
-import sanityClient from "@sanity/client";
-
-const createSanityClient = () =>
-  sanityClient({
-    projectId: process.env.SANITY_PROJECT_ID,
-    dataset: process.env.SANITY_DATASET,
-    apiVersion: "2022-03-17",
-    useCdn: false,
-    withCredentials: true,
-  });
+import { Block, Image } from "@sanity/types";
+import { createSanityClient } from "~/utils";
 
 interface ArticleSummary {
   id: string;
@@ -22,23 +14,51 @@ interface RawArticleSummary extends Omit<ArticleSummary, "tags"> {
 }
 
 export async function fetchArticleSummaries() {
-  const sanityClient = createSanityClient();
   const query = `
     *[_type == "article"] | order(publishedOn desc) {
-      "id": _id,
-      title, 
-      "slug": slug.current, 
-      publishedOn,
-      tags
+      "id": _id, title, "slug": slug.current, publishedOn, tags
     }
   `;
-  const rawArticles = await sanityClient.fetch<RawArticleSummary[]>(query, {
-    tag: "articles",
-  });
+  const rawArticles = await createSanityClient().fetch<RawArticleSummary[]>(
+    query
+  );
 
   return rawArticles.map((article) => ({
     ...article,
     tags: article.tags ?? [],
     publishedOn: article.publishedOn,
   }));
+}
+
+interface CaptionedImage extends Image {
+  _type: "captionedImage";
+  alt: string;
+  caption: Block[];
+}
+
+interface Article extends ArticleSummary {
+  mainImage: CaptionedImage;
+  content: (Block | CaptionedImage)[];
+}
+
+interface RawArticle extends Omit<Article, "tags"> {
+  tags: string[] | null;
+}
+
+export async function fetchArticle(slug: string): Promise<Article | null> {
+  const query = `
+    *[_type == "article" && slug.current == $slug] {
+      "id": _id, title, "slug": slug.current,
+      publishedOn, mainImage, content,
+      "tags": select(
+        tags == null => [],
+        tags != null => tags
+      )
+    }[0]
+  `;
+  const rawArticle = await createSanityClient().fetch<RawArticle>(query, {
+    slug,
+  });
+
+  return rawArticle ? { ...rawArticle, tags: rawArticle.tags ?? [] } : null;
 }

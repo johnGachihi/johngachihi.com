@@ -1,5 +1,7 @@
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
+import invariant from "tiny-invariant";
+import PicoSanity from "picosanity";
 
 import type { User } from "~/models/user.server";
 
@@ -69,3 +71,16 @@ export function useUser(): User {
 export function validateEmail(email: unknown): email is string {
   return typeof email === "string" && email.length > 3 && email.includes("@");
 }
+
+export function createSanityClient() {
+  invariant(process.env.SANITY_PROJECT_ID, "SANITY_PROJECT_ID not provided");
+  invariant(process.env.SANITY_DATASET, "SANITY_DATASET not provided");
+
+  return new PicoSanity({
+    projectId: process.env.SANITY_PROJECT_ID,
+    dataset: process.env.SANITY_DATASET,
+    apiVersion: "2022-03-17",
+    useCdn: false,
+    withCredentials: true,
+  });
+};
