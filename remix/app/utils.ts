@@ -2,6 +2,7 @@ import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 import invariant from "tiny-invariant";
 import PicoSanity from "picosanity";
+import dayjs from "dayjs"
 
 import type { User } from "~/models/user.server";
 
@@ -84,3 +85,7 @@ export function createSanityClient() {
     withCredentials: true,
   });
 };
+
+export function formatDate(dateString: string, format: string): string {
+  return dayjs(dateString).format(format)
+}

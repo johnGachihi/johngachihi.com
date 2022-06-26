@@ -1,5 +1,5 @@
 import { Block, Image } from "@sanity/types";
-import { createSanityClient } from "~/utils";
+import { createSanityClient, formatDate } from "~/utils";
 
 interface ArticleSummary {
   id: string;
@@ -9,40 +9,27 @@ interface ArticleSummary {
   tags: string[];
 }
 
-interface RawArticleSummary extends Omit<ArticleSummary, "tags"> {
-  tags: string[] | null; // TODO: Figure out how to return empty array when tags is null using GROQ
-}
-
 export async function fetchArticleSummaries() {
   const query = `
     *[_type == "article"] | order(publishedOn desc) {
-      "id": _id, title, "slug": slug.current, publishedOn, tags
+      "id": _id, title, "slug": slug.current, publishedOn,
+      "tags": select(
+        tags == null => [],
+        tags != null => tags
+      )
     }
   `;
-  const rawArticles = await createSanityClient().fetch<RawArticleSummary[]>(
-    query
-  );
+  const rawArticles = await createSanityClient().fetch<ArticleSummary[]>(query);
 
   return rawArticles.map((article) => ({
     ...article,
-    tags: article.tags ?? [],
-    publishedOn: article.publishedOn,
+    publishedOn: formatDate(article.publishedOn, "DD MMM YYYY"),
   }));
-}
-
-interface CaptionedImage extends Image {
-  _type: "captionedImage";
-  alt: string;
-  caption: Block[];
 }
 
 interface Article extends ArticleSummary {
   mainImage: CaptionedImage;
   content: (Block | CaptionedImage)[];
-}
-
-interface RawArticle extends Omit<Article, "tags"> {
-  tags: string[] | null;
 }
 
 export async function fetchArticle(slug: string): Promise<Article | null> {
@@ -56,9 +43,9 @@ export async function fetchArticle(slug: string): Promise<Article | null> {
       )
     }[0]
   `;
-  const rawArticle = await createSanityClient().fetch<RawArticle>(query, {
+  const rawArticle = await createSanityClient().fetch<Article>(query, {
     slug,
   });
 
-  return rawArticle ? { ...rawArticle, tags: rawArticle.tags ?? [] } : null;
+  return rawArticle ?? null;
 }
