@@ -10,7 +10,7 @@ import NotFound from "./pages/NotFound";
 import Article from "./pages/Article";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/ErrorFallback";
-import EmptyArticleList from "./pages/EmptyArticleList";
+import Articles from "./pages/Articles";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route index element={<Home/>}/>
         <Route element={<PageLayout/>}>
-          <Route path="articles" element={<EmptyArticleList/>}/>
+          <Route path="articles" element={<Articles/>}/>
           <Route path="articles/:slug" element={<Article/>}/>
           <Route path="projects" element={<Projects/>}/>
           <Route path="projects/:slug" element={<Project/>}/>
