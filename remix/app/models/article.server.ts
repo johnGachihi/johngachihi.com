@@ -1,4 +1,5 @@
 import { Block, Image } from "@sanity/types";
+import { CaptionedImage } from "~/sanity.types";
 import { createSanityClient, formatDate } from "~/utils";
 
 interface ArticleSummary {

@@ -2,6 +2,7 @@ import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 import invariant from "tiny-invariant";
 import PicoSanity from "picosanity";
+import imageUrlBuilder from "@sanity/image-url"
 import dayjs from "dayjs"
 
 import type { User } from "~/models/user.server";
@@ -88,4 +89,9 @@ export function createSanityClient() {
 
 export function formatDate(dateString: string, format: string): string {
   return dayjs(dateString).format(format)
+}
+
+export function sanityImageUrlFor(image: any) {
+  const builder = imageUrlBuilder(createSanityClient())
+  return builder.image(image)
 }

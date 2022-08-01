@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "@remix-run/react";
 import styled from "@emotion/styled";
 import { body1, body2, caption, h6 } from "~/styles/text";
 import { Skeleton } from "@mui/material";
