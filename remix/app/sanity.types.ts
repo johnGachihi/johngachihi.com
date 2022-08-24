@@ -5,3 +5,9 @@ export interface CaptionedImage extends Image {
   alt: string;
   caption: Block[];
 }
+
+export interface CodeBlock {
+  _type: "codeBlock";
+  code: string;
+  language: string;
+}

@@ -1,6 +1,7 @@
 import { Block, Image } from "@sanity/types";
-import { CaptionedImage } from "~/sanity.types";
+import { CaptionedImage, CodeBlock } from "~/sanity.types";
 import { createSanityClient, formatDate } from "~/utils";
+import { portableTextToHTML } from "~/utils/portable-text.server";
 
 interface ProjectSummary {
   id: string;
@@ -32,11 +33,40 @@ export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
 interface Project extends ProjectSummary {
   githubLink?: string;
   liveLink?: string;
-  showcaseMedia?:
-    | { youtubeLink: string }
-    | { image: Image & { _type: "image" } };
-  shortDescription: (Block | CaptionedImage)[];
-  technicalDescription: (Block | CaptionedImage)[];
+  showcaseMedia?: { youtubeLink: string } | string;
+  shortDescription: string;
+  technicalDescription: string;
+}
+
+interface RawProject
+  extends Omit<
+    Project,
+    "showcaseMedia" | "shortDescription" | "technicalDescription"
+  > {
+  showcaseMedia?: { youtubeLink: string } | { image: CaptionedImage };
+  shortDescription: (Block | CaptionedImage | CodeBlock)[];
+  technicalDescription: (Block | CaptionedImage | CodeBlock)[];
+}
+
+function processProject(rawProject: RawProject): Project {
+  const {
+    showcaseMedia,
+    shortDescription,
+    technicalDescription,
+    startedAt,
+    ...rest
+  } = rawProject;
+
+  return {
+    showcaseMedia:
+      !!showcaseMedia && "image" in showcaseMedia
+        ? portableTextToHTML([showcaseMedia.image])
+        : showcaseMedia,
+    shortDescription: portableTextToHTML(rawProject.shortDescription),
+    technicalDescription: portableTextToHTML(rawProject.technicalDescription),
+    startedAt: formatDate(startedAt, "DD MMM YYYY"),
+    ...rest,
+  };
 }
 
 export async function fetchProject(slug: string): Promise<Project | null> {
@@ -47,14 +77,9 @@ export async function fetchProject(slug: string): Promise<Project | null> {
       technicalDescription
     }[0]
   `;
-  const project = await createSanityClient().fetch<Project | null>(query, {
+  const project = await createSanityClient().fetch<RawProject | null>(query, {
     slug,
   });
 
-  return project === null
-    ? null
-    : {
-        ...project,
-        startedAt: formatDate(project.startedAt, "DD MMM YYYY"),
-      };
+  return project === null ? null : processProject(project);
 }
