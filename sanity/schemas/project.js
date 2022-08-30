@@ -34,7 +34,7 @@ export default {
                 {
                     name: 'image',
                     title: 'Image',
-                    type: 'image',
+                    type: 'captionedImage',
                     readOnly: ({ parent, value }) => !value && parent?.youtubeLink
                 },
                 {
