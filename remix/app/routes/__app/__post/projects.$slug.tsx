@@ -1,4 +1,3 @@
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -16,7 +15,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Project() {
   const { project } = useLoaderData<LoaderData>();
-  const isXs = useMediaQuery("(max-width: 600px)");
 
   return (
     <div>

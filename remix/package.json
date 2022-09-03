@@ -29,6 +29,7 @@
     "/public/build"
   ],
   "dependencies": {
+    "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
@@ -44,6 +45,7 @@
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.3",
     "dompurify": "^2.3.10",
+    "highlight.js": "^11.6.0",
     "jsdom": "^20.0.0",
     "picosanity": "^4.0.0",
     "react": "^17.0.2",

@@ -1,7 +1,7 @@
 import { Block, Image } from "@sanity/types";
 import { CaptionedImage, CodeBlock } from "~/sanity.types";
 import { createSanityClient, formatDate } from "~/utils";
-import { portableTextToHTML } from "~/utils/portable-text.server";
+import { captionedImageToHtml, postPortableTextToHtml } from "~/utils/portable-text.server";
 
 interface ProjectSummary {
   id: string;
@@ -60,10 +60,10 @@ function processProject(rawProject: RawProject): Project {
   return {
     showcaseMedia:
       !!showcaseMedia && "image" in showcaseMedia
-        ? portableTextToHTML([showcaseMedia.image])
+        ? captionedImageToHtml([showcaseMedia.image])
         : showcaseMedia,
-    shortDescription: portableTextToHTML(rawProject.shortDescription),
-    technicalDescription: portableTextToHTML(rawProject.technicalDescription),
+    shortDescription: postPortableTextToHtml(rawProject.shortDescription),
+    technicalDescription: postPortableTextToHtml(rawProject.technicalDescription),
     startedAt: formatDate(startedAt, "DD MMM YYYY"),
     ...rest,
   };
