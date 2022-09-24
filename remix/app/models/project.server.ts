@@ -72,9 +72,12 @@ function processProject(rawProject: RawProject): Project {
 export async function fetchProject(slug: string): Promise<Project | null> {
   const query = `
     *[_type == "project" && slug.current == $slug]{
-      "id": _id, title, "slug": slug.current, startedAt, tags,
-      githubLink, liveLink, showcaseMedia, shortDescription,
-      technicalDescription
+      "id": _id, title, "slug": slug.current, startedAt, githubLink,
+      liveLink, showcaseMedia, shortDescription, technicalDescription,
+      "tags": select(
+        tags == null => [],
+        tags != null => tags
+      )
     }[0]
   `;
   const project = await createSanityClient().fetch<RawProject | null>(query, {

@@ -10,6 +10,7 @@ import hljs from "highlight.js";
 const purify = DOMPurify(new JSDOM("").window);
 
 export function captionedImageToHtml(
+    // TODO: Why is this not a scalar value
     portableText: (Block | CaptionedImage | CodeBlock)[],
     { withYMargin = true }: { withYMargin?: boolean } = {}
 ): string {

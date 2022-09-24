@@ -12,14 +12,22 @@ import {emphaticLink} from "~/styles/link";
 import {CSSTransition} from "react-transition-group";
 import Icon from '@mdi/react'
 import {mdiChevronUp, mdiChevronDown, mdiGithub, mdiLink} from '@mdi/js'
+import {Response} from "@remix-run/node";
 
 type LoaderData = {
     project: Exclude<Awaited<ReturnType<typeof fetchProject>>, null>;
 };
 
 export const loader: LoaderFunction = async ({params}) => {
-    invariant(params.slug, "Slug param required");
-    return {project: await fetchProject(params.slug)};
+    invariant(params.slug, "slug param required");
+
+    const project = await fetchProject(params.slug)
+
+    if (!project) {
+        throw new Response("Project not found", {status: 404});
+    }
+
+    return {project};
 };
 
 export default function Project() {
