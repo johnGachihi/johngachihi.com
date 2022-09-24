@@ -1,5 +1,5 @@
 import { CacheProvider, withEmotionCache } from "@emotion/react";
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import { createContext, type PropsWithChildren, useContext, useState } from "react";
 import { unstable_useEnhancedEffect as useEnhancedEffect } from "@mui/material";
 import createCache from '@emotion/cache';
 

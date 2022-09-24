@@ -1,20 +1,20 @@
-import { css } from "@emotion/react";
+import {css} from "@emotion/react";
 import styled from "@emotion/styled";
-import { Outlet } from "@remix-run/react";
-import { body1, caption, h5, h6 } from "~/styles/text";
+import {Outlet} from "@remix-run/react";
+import {body1, caption, h5, h6} from "~/styles/text";
 
 import hljsStyle from "highlight.js/styles/intellij-light.css";
 
 export function links() {
-  return [{ rel: "stylesheet", href: hljsStyle }];
+    return [{rel: "stylesheet", href: hljsStyle}];
 }
 
 export default function PostLayout() {
-  return (
-    <Main>
-      <Outlet />
-    </Main>
-  );
+    return (
+        <Post>
+            <Outlet/>
+        </Post>
+    );
 }
 
 const heading = css`
@@ -25,11 +25,11 @@ const heading = css`
   }
 `;
 
-const Main = styled.main`
+const Post = styled.div`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 200px;
+  padding-bottom: 200px;
 
   @media (max-width: 600px) {
     margin-top: 8px;
@@ -50,7 +50,6 @@ const Main = styled.main`
   .caption {
     ${caption}
   }
-
 
   h1 {
     ${h5}
@@ -73,6 +72,27 @@ const Main = styled.main`
   p {
     margin: 8px 0 16px;
   }
+  
+  ul {
+    list-style: disc;
+  }
+  
+  ol {
+    list-style: decimal;
+  }
+  
+  ul, ol {
+    list-style-position: initial;
+    padding-left: 28px;
+  }
+  
+  li {
+    margin-bottom: 12px
+  }
+  
+  code {
+    background: #eee; 
+  }
 
   .code-block-container {
     margin: 32px 0;
@@ -84,6 +104,10 @@ const Main = styled.main`
     pre {
       margin: 24px;
       width: fit-content;
+    }
+    
+    code {
+      background: inherit;
     }
   }
 `;

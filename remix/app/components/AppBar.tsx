@@ -4,7 +4,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import { Link, NavLink } from "@remix-run/react";
 import { css } from "@emotion/react";
 import { body1, body2 } from "~/styles/text";
-import { PropsWithChildren, useState } from "react";
+import { type PropsWithChildren, useState } from "react";
 import {
   Drawer,
   IconButton,

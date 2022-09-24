@@ -4,12 +4,12 @@ import { AppBar } from "~/components/AppBar";
 
 export default function Index() {
   return (
-    <main>
+    <>
       <AppBar />
       <Main>
         <Outlet />
       </Main>
-    </main>
+    </>
   );
 }
 

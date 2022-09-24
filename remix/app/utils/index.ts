@@ -85,7 +85,7 @@ export function createSanityClient() {
     useCdn: false,
     withCredentials: true,
   });
-};
+}
 
 export function formatDate(dateString: string, format: string): string {
   return dayjs(dateString).format(format)

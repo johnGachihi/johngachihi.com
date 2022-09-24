@@ -1,33 +1,35 @@
-import { toHTML } from "@portabletext/to-html";
-import { Block } from "@sanity/types";
-import { CaptionedImage, CodeBlock } from "~/sanity.types";
+import {toHTML} from "@portabletext/to-html";
+import type {Block} from "@sanity/types";
+import type {CaptionedImage, CodeBlock} from "~/sanity.types";
 import DOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
-import { sanityImageUrlFor } from ".";
+import {JSDOM} from "jsdom";
+import {sanityImageUrlFor} from ".";
 import hljs from "highlight.js";
 
 // @ts-ignore
 const purify = DOMPurify(new JSDOM("").window);
 
 export function captionedImageToHtml(
-  portableText: (Block | CaptionedImage | CodeBlock)[]
+    portableText: (Block | CaptionedImage | CodeBlock)[],
+    { withYMargin = true }: { withYMargin?: boolean } = {}
 ): string {
-  const unsanitizedHTML = toHTML(portableText, {
-    components: {
-      block: {
-        normal: ({ children }) => `<span class="caption">${children}</span>`,
-      },
-      types: {
-        captionedImage: ({ value }: { value: CaptionedImage }) => {
-          const imgBuilder = sanityImageUrlFor(value.asset)
-            .auto("format")
-            .quality(50);
-          const imgUrl_600 = imgBuilder.width(600).url();
-          const imgUrl_800 = imgBuilder.width(800).url();
+    const unsanitizedHTML = toHTML(portableText, {
+        components: {
+            block: {
+                normal: ({children}) =>
+                    `<span class="caption">${children}</span>`,
+            },
+            types: {
+                captionedImage: ({value}: { value: CaptionedImage }) => {
+                    const imgBuilder = sanityImageUrlFor(value.asset)
+                        .auto("format")
+                        .quality(50);
+                    const imgUrl_600 = imgBuilder.width(600).url();
+                    const imgUrl_800 = imgBuilder.width(800).url();
 
-          /* TODO: Check whether appropriate image is picked */
-          return `
-            <figure class="m-0">
+                    /* TODO: Check whether appropriate image is picked */
+                    return `
+            <figure class="${withYMargin ? 'my-10' : ''}">
               <img
                 class="w-full"
                 srcset="${imgUrl_600} 600w,
@@ -41,16 +43,16 @@ export function captionedImageToHtml(
               </figcaption>
             </figure>
           `;
+                },
+            },
         },
-      },
-    },
-  });
+    });
 
-  return purify.sanitize(unsanitizedHTML);
+    return purify.sanitize(unsanitizedHTML);
 }
 
 export function postPortableTextToHtml(
-  portableText: (Block | CaptionedImage | CodeBlock)[]
+    portableText: (Block | CaptionedImage | CodeBlock)[]
 ): string {
   const unsanitizedHTML = toHTML(portableText, {
     components: {
@@ -64,7 +66,7 @@ export function postPortableTextToHtml(
           </div>`,
       },
     },
-  });
+});
 
-  return purify.sanitize(unsanitizedHTML);
+    return purify.sanitize(unsanitizedHTML);
 }

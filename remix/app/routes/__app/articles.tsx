@@ -1,4 +1,4 @@
-import { json, LoaderFunction } from "@remix-run/node";
+import { json, type LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import PostListItem from "~/components/post-list-item";
 import PostListLayout from "~/components/post-list-layout";

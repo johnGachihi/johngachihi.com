@@ -1,28 +1,130 @@
-import { LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type {LoaderFunction} from "@remix-run/node";
+import {useLoaderData} from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Header from "~/components/post/header";
-import { fetchProject } from "~/models/project.server";
+import {fetchProject} from "~/models/project.server";
+import {useMemo, useState} from "react";
+import VideoPlayer from "~/components/post/video-player";
+import {ProjectLink} from "~/components/project/project-link";
+import Tag from "~/components/tag";
+import styled from "@emotion/styled";
+import {emphaticLink} from "~/styles/link";
+import {CSSTransition} from "react-transition-group";
+import Icon from '@mdi/react'
+import {mdiChevronUp, mdiChevronDown, mdiGithub, mdiLink} from '@mdi/js'
 
 type LoaderData = {
-  project: Exclude<Awaited<ReturnType<typeof fetchProject>>, null>;
+    project: Exclude<Awaited<ReturnType<typeof fetchProject>>, null>;
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
-  invariant(params.slug, "Slug param required");
-  return { project: await fetchProject(params.slug) };
+export const loader: LoaderFunction = async ({params}) => {
+    invariant(params.slug, "Slug param required");
+    return {project: await fetchProject(params.slug)};
 };
 
 export default function Project() {
-  const { project } = useLoaderData<LoaderData>();
+    const {project} = useLoaderData<LoaderData>();
 
-  return (
-    <div>
-      <Header className="mb-6" title={project.title} date={project.startedAt} />
+    const [isShowTechnicalDesc, setIsShowTechnicalDesc] = useState(false)
 
-      <div dangerouslySetInnerHTML={{ __html: project.showcaseMedia }} />
+    const showcaseMedia = useMemo(() => {
+        if (!project.showcaseMedia) return
 
-      <div dangerouslySetInnerHTML={{ __html: project.technicalDescription }} />
-    </div>
-  );
+        return "youtubeLink" in project.showcaseMedia
+            ? <VideoPlayer url={project.showcaseMedia.youtubeLink}/>
+            : <div dangerouslySetInnerHTML={{__html: project.showcaseMedia.image}}/>
+    }, [project.showcaseMedia])
+
+    return (
+        <div>
+            <Header className="mb-6" title={project.title} date={project.startedAt}/>
+
+            {showcaseMedia}
+
+            <div className="mt-10 flex">
+                {project.githubLink &&
+                    <ProjectLink
+                        className="mr-2"
+                        icon={<Icon path={mdiGithub} className="w-6"/>}
+                        text="GitHub Repo"
+                        link={project.githubLink}
+                    />}
+
+                {project.liveLink &&
+                    <ProjectLink
+                        icon={<Icon path={mdiLink} className="w-6"/>}
+                        text="Live Project"
+                        link={project.liveLink}
+                    />}
+            </div>
+
+            {project.tags.length > 0 &&
+                <div className="mt-6 flex flex-wrap gap-y-1 gap-x-3">
+                    {project.tags.map((tag) => <Tag children={tag} key={tag}/>)}
+                </div>
+            }
+
+            <div className="mt-10 max-w-prose">
+                <div dangerouslySetInnerHTML={{__html: project.shortDescription}}/>
+
+                {project.technicalDescription &&
+                    <ShowTechnicalDescriptionButton
+                        onClick={() => setIsShowTechnicalDesc((desc) => !desc)}
+                    >
+                        <span className="mr-1">Technical Description</span>
+                        {isShowTechnicalDesc
+                            ? <Icon path={mdiChevronUp} size="24px" className="w-6"/>
+                            : <Icon path={mdiChevronDown} size="24px" className="w-6"/>}
+                    </ShowTechnicalDescriptionButton>
+                }
+
+                {/* @ts-ignore */}
+                <CSSTransition
+                    in={isShowTechnicalDesc}
+                    classNames="technical-desc"
+                    timeout={100}
+                    mountOnEnter
+                >
+                    <TechnicalDescription
+                        className="mt-8"
+                        dangerouslySetInnerHTML={{__html: project.technicalDescription}}
+                    />
+                </CSSTransition>
+            </div>
+        </div>
+    );
 }
+
+const ShowTechnicalDescriptionButton = styled.button`
+  border: none;
+  padding: 0;
+  margin-top: 32px;
+  ${emphaticLink};
+`
+
+const TechnicalDescription = styled.div`
+  &.technical-desc-enter {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  &.technical-desc-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 100ms, transform 100ms;
+  }
+  
+  &.technical-desc-exit {
+    opacity: 1;
+  }
+  
+  &.technical-desc-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 100ms, transform 100ms;
+  }
+  
+  &.technical-desc-exit-done {
+    display: none;
+  }
+`

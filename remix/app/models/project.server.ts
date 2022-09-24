@@ -1,5 +1,5 @@
-import { Block, Image } from "@sanity/types";
-import { CaptionedImage, CodeBlock } from "~/sanity.types";
+import type { Block } from "@sanity/types";
+import type { CaptionedImage, CodeBlock } from "~/sanity.types";
 import { createSanityClient, formatDate } from "~/utils";
 import { captionedImageToHtml, postPortableTextToHtml } from "~/utils/portable-text.server";
 
@@ -33,7 +33,7 @@ export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
 interface Project extends ProjectSummary {
   githubLink?: string;
   liveLink?: string;
-  showcaseMedia?: { youtubeLink: string } | string;
+  showcaseMedia?: { youtubeLink: string } | { image: string };
   shortDescription: string;
   technicalDescription: string;
 }
@@ -60,7 +60,7 @@ function processProject(rawProject: RawProject): Project {
   return {
     showcaseMedia:
       !!showcaseMedia && "image" in showcaseMedia
-        ? captionedImageToHtml([showcaseMedia.image])
+        ? { image: captionedImageToHtml([showcaseMedia.image], { withYMargin: false }) }
         : showcaseMedia,
     shortDescription: postPortableTextToHtml(rawProject.shortDescription),
     technicalDescription: postPortableTextToHtml(rawProject.technicalDescription),
