@@ -1,5 +1,5 @@
 import type {LoaderFunction} from "@remix-run/node";
-import {json, Response} from "@remix-run/node";
+import {json, type MetaFunction, Response} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Header from "~/components/post/header";
@@ -10,7 +10,6 @@ import Tag from "~/components/tag";
 type LoaderData = {
     article: Exclude<Awaited<ReturnType<typeof fetchArticle>>, null>;
 };
-
 export const loader: LoaderFunction = async ({params}) => {
     invariant(params.slug, "slug param required");
 
@@ -22,6 +21,17 @@ export const loader: LoaderFunction = async ({params}) => {
 
     return json({article});
 };
+
+export const meta: MetaFunction = ({data}) => {
+    if (!data?.article) {
+        return {
+            title: "Article not found"
+        }
+    }
+    return {
+        title: data.article.title
+    }
+}
 
 export default function Article() {
     const {article} = useLoaderData<LoaderData>();

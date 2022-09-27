@@ -1,4 +1,4 @@
-import { json, type LoaderFunction } from "@remix-run/node";
+import {json, type LoaderFunction, type MetaFunction} from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import PostListItem from "~/components/post-list-item";
 import PostListLayout from "~/components/post-list-layout";
@@ -7,10 +7,16 @@ import { fetchProjectSummaries } from "~/models/project.server";
 type LoaderData = {
   projects: Awaited<ReturnType<typeof fetchProjectSummaries>>;
 };
-
 export const loader: LoaderFunction = async () => {
   return json({ projects: await fetchProjectSummaries() });
 };
+
+export const meta: MetaFunction = () => {
+  return {
+    title: "Projects",
+    description: "Some projects I've worked on"
+  }
+}
 
 export default function Projects() {
   const { projects } = useLoaderData<LoaderData>();
