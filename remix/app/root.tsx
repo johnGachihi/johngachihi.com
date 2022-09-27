@@ -5,12 +5,13 @@ import type {
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration, useCatch, useLocation,
+    Link,
+    Links,
+    LiveReload,
+    Meta,
+    Outlet,
+    Scripts,
+    ScrollRestoration, useCatch, useLocation,
 } from "@remix-run/react";
 import theme from "./styles/mui/theme";
 import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
@@ -18,6 +19,7 @@ import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import {AppBar} from "~/components/AppBar";
+import Button from "@mui/material/Button";
 
 
 export const links: LinksFunction = () => {
@@ -69,6 +71,29 @@ export default function App() {
       </html>
     </MuiDocumentWrapper>
   );
+}
+
+export function ErrorBoundary() {
+    return (
+        <MuiDocumentWrapper>
+          <html lang="en" className="h-full">
+          <head>
+            <Meta />
+            <Links />
+          </head>
+          <body className="flex flex-col h-full">
+          <AppBar />
+          <main className="w-4/5 mx-auto grow flex flex-col items-center justify-center text-center">
+            <span className="text-5xl text-red-800 max-w-2xl mb-10">Ayaya! Something's wrong here</span>
+            <Link to="/">
+              <Button variant="outlined">Back to Home?</Button>
+            </Link>
+          </main>
+          <Scripts />
+          </body>
+          </html>
+        </MuiDocumentWrapper>
+    )
 }
 
 export function CatchBoundary() {
