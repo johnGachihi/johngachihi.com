@@ -48,29 +48,32 @@ export function AppBar() {
 
   return (
     <>
-      <MuiAppBar color="inherit" elevation={isScrolledDown ? 3 : 0}>
-        <Toolbar>
-          <IconButton
-            sx={{ mr: 1, display: { sm: "none" } }}
-            edge="start"
-            color="primary"
-            children={<MenuIcon />}
-            onClick={() => setIsDrawerOpen(true)}
-          />
-          <div className="flex grow">
-            <Link to="/">
-              <img src={Logo} alt="Logo" width={143} />
-            </Link>
-          </div>
+      <header>
+        <MuiAppBar color="inherit" elevation={isScrolledDown ? 3 : 0} component="div">
+          <Toolbar>
+            <IconButton
+                sx={{ mr: 1, display: { sm: "none" } }}
+                edge="start"
+                color="primary"
+                children={<MenuIcon />}
+                onClick={() => setIsDrawerOpen(true)}
+            />
+            <div className="flex grow">
+              <Link to="/">
+                <img src={Logo} alt="Logo" width={143} />
+              </Link>
+            </div>
 
-          <Nav>
-            <NavLink to="/articles">Articles</NavLink>
-            <NavLink to="/projects">Projects</NavLink>
-            <NavLink to="/other">Others</NavLink>
-          </Nav>
-        </Toolbar>
-      </MuiAppBar>
-      <Toolbar /> {/*Offset the content below top-app-bar*/}
+            <Nav>
+              <NavLink to="/articles">Articles</NavLink>
+              <NavLink to="/projects">Projects</NavLink>
+              <NavLink to="/other">Others</NavLink>
+            </Nav>
+          </Toolbar>
+        </MuiAppBar>
+        <Toolbar /> {/*Offset the content below top-app-bar*/}
+      </header>
+
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <List sx={{ width: 250 }}>
           <ListItem disablePadding onClick={() => setIsDrawerOpen(false)}>

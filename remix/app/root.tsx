@@ -10,13 +10,14 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration, useCatch, useLocation,
 } from "@remix-run/react";
 import theme from "./styles/mui/theme";
 import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
+import {AppBar} from "~/components/AppBar";
 
 
 export const links: LinksFunction = () => {
@@ -51,8 +52,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-
-
 export default function App() {
   return (
     <MuiDocumentWrapper>
@@ -70,4 +69,30 @@ export default function App() {
       </html>
     </MuiDocumentWrapper>
   );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+  const location = useLocation();
+
+  if (caught.status === 404)
+    return (
+        <MuiDocumentWrapper>
+          <html lang="en" className="h-full">
+            <head>
+              <Meta />
+              <Links />
+            </head>
+            <body className="flex flex-col h-full">
+              <AppBar />
+              <main className="w-4/5 mx-auto grow flex flex-col items-center justify-center text-center">
+                <span className="text-5xl mb-4">404</span>
+                <span className="text-xl mb-1">This path does not exist </span>
+                <span className="text-xl max-w-full truncate">{location.pathname}</span>
+              </main>
+              <Scripts />
+            </body>
+          </html>
+        </MuiDocumentWrapper>
+    )
 }
