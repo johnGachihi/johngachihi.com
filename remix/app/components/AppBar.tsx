@@ -67,7 +67,7 @@ export function AppBar() {
             <Nav>
               <NavLink to="/articles">Articles</NavLink>
               <NavLink to="/projects">Projects</NavLink>
-              <NavLink to="/other">Others</NavLink>
+              <NavLink to="/contacts">Contacts</NavLink>
             </Nav>
           </Toolbar>
         </MuiAppBar>

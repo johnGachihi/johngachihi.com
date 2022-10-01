@@ -59,7 +59,7 @@ export default function Project() {
 
             {showcaseMedia}
 
-            <div className="mt-10 flex">
+            <div className="mt-6 flex">
                 {project.githubLink &&
                     <ProjectLink
                         className="mr-2"

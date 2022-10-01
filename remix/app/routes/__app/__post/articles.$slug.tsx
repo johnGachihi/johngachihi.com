@@ -45,7 +45,7 @@ export default function Article() {
             />
 
             {article.mainImage &&
-                <div className="mb-10" dangerouslySetInnerHTML={{__html: article.mainImage}}/>}
+                <div className="mb-6" dangerouslySetInnerHTML={{__html: article.mainImage}}/>}
 
             {article.tags.length > 0 &&
                 <div className="flex flex-wrap gap-y-1 gap-x-3">

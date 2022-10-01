@@ -27,8 +27,8 @@ export default function Index() {
           <ArrowForwardIcon/>
         </NavLink>
 
-        <NavLink to="/other">
-          <Typography variant="h5">Other</Typography>
+        <NavLink to="/contacts">
+          <Typography variant="h5">Contacts</Typography>
           <ArrowForwardIcon/>
         </NavLink>
       </div>
