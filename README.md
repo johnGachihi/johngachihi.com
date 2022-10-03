@@ -80,8 +80,8 @@ Prior to your first deployment, you'll need to do a few things:
 - Create two apps on Fly, one for staging and one for production:
 
   ```sh
-  fly create my-remix-app-7eae
-  fly create my-remix-app-7eae-staging
+  fly apps create my-remix-app-7eae
+  fly apps create my-remix-app-7eae-staging
   ```
 
   - Initialize Git.
