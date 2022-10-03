@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 
-describe("smoke tests", () => {
+// Keep only to use as example
+describe.skip("smoke tests", () => {
   afterEach(() => {
     cy.cleanupUser();
   });

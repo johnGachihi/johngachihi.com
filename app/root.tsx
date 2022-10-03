@@ -17,7 +17,6 @@ import theme from "./styles/mui/theme";
 import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
-import { getUser } from "./session.server";
 import {AppBar} from "~/components/AppBar";
 import Button from "@mui/material/Button";
 
@@ -62,16 +61,6 @@ export const meta: MetaFunction = () => ({
   "theme-color": theme.palette.primary.main,
   "emotion-insertion-point": "emotion-insertion-point",
 });
-
-type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
-};
-
-export const loader: LoaderFunction = async ({ request }) => {
-  return json<LoaderData>({
-    user: await getUser(request),
-  });
-};
 
 export default function App() {
   return (

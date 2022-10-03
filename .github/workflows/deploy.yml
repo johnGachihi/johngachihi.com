@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - dev
+      - remix-migrate # Temp
   pull_request: {}
 permissions:
   actions: write
@@ -28,6 +29,12 @@ jobs:
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
+          useLockFile: false
+
+      - name: 📥 Download sanity deps
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: sanity
           useLockFile: false
 
       - name: 🔬 Lint
