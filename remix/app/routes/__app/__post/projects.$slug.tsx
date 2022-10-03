@@ -31,13 +31,9 @@ export const loader: LoaderFunction = async ({params}) => {
 
 export const meta: MetaFunction = ({data}) => {
     if (!data?.project) {
-        return {
-            title: "Project not found"
-        }
+        return {title: "Project not found"}
     }
-    return {
-        title: data.project.title
-    }
+    return {title: data.project.title}
 }
 
 export default function Project() {
@@ -57,27 +53,35 @@ export default function Project() {
         <div>
             <Header className="mb-6" title={project.title} date={project.startedAt}/>
 
-            {showcaseMedia}
+            {showcaseMedia &&
+                <div className="mb-6">
+                    {showcaseMedia}
+                </div>
+            }
 
-            <div className="mt-6 flex">
-                {project.githubLink &&
-                    <ProjectLink
-                        className="mr-2"
-                        icon={<Icon path={mdiGithub} className="w-6"/>}
-                        text="GitHub Repo"
-                        link={project.githubLink}
-                    />}
+            {(project.githubLink || project.liveLink) &&
+                <div className="flex mb-4 md:mb-6">
+                    {project.githubLink &&
+                        <ProjectLink
+                            className="mr-2"
+                            icon={<Icon path={mdiGithub} className="w-6"/>}
+                            text="GitHub Repo"
+                            link={project.githubLink}
+                        />
+                    }
 
-                {project.liveLink &&
-                    <ProjectLink
-                        icon={<Icon path={mdiLink} className="w-6"/>}
-                        text="Live Project"
-                        link={project.liveLink}
-                    />}
-            </div>
+                    {project.liveLink &&
+                        <ProjectLink
+                            icon={<Icon path={mdiLink} className="w-6"/>}
+                            text="Live Project"
+                            link={project.liveLink}
+                        />
+                    }
+                </div>
+            }
 
             {project.tags.length > 0 &&
-                <div className="mt-6 flex flex-wrap gap-y-1 gap-x-3">
+                <div className="flex flex-wrap gap-y-1 gap-x-3">
                     {project.tags.map((tag) => <Tag children={tag} key={tag}/>)}
                 </div>
             }
