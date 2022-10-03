@@ -1,7 +1,5 @@
 # https://www.gitpod.io/docs/config-gitpod-file
 
-workspaceLocation: "/workspace/johngachihi.me/remix"
-
 image:
   file: .gitpod.Dockerfile
 
