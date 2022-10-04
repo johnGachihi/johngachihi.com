@@ -6,7 +6,7 @@ import {
     Meta,
     Outlet,
     Scripts,
-    ScrollRestoration, useCatch, useLocation,
+    ScrollRestoration, useCatch, useLocation, useTransition,
 } from "@remix-run/react";
 import theme from "./styles/mui/theme";
 import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
@@ -14,6 +14,8 @@ import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import {AppBar} from "~/components/AppBar";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import {CircularProgress, SnackbarContent} from "@mui/material";
 
 
 export const links: LinksFunction = () => {
@@ -57,6 +59,23 @@ export const meta: MetaFunction = () => ({
   "emotion-insertion-point": "emotion-insertion-point",
 });
 
+function PageLoadingMessage() {
+    const transition = useTransition()
+
+    return (
+        <Snackbar
+            open={transition.state === "loading"}
+            anchorOrigin={{horizontal: "right", vertical: "bottom"}}
+            message={
+                <div className="flex items-center gap-x-4">
+                    <CircularProgress size={24} color="inherit" />
+                    Page loading...
+                </div>
+            }
+        />
+    )
+}
+
 export default function App() {
   return (
     <MuiDocumentWrapper>
@@ -67,6 +86,8 @@ export default function App() {
         </head>
         <body className="h-full">
           <Outlet />
+          <PageLoadingMessage />
+
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
