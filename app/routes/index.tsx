@@ -10,23 +10,25 @@ export default function Index() {
   return (
     <Root>
       <div>
-        <picture>
-          <source media="(max-width: 640px)" srcSet={logoWrapped}/>
-          <img src={logo} alt="John Gachihi logo" className="mt-2 mb-10 w-[265px] sm:w-[422px]" />
-        </picture>
+        <h1 aria-label="John Gachihi">
+          <picture>
+            <source media="(max-width: 640px)" srcSet={logoWrapped}/>
+            <img src={logo} alt="John Gachihi logo" className="mt-2 mb-10 w-[265px] sm:w-[422px]" aria-hidden />
+          </picture>
+        </h1>
 
         <NavLink to="/articles">
-          <Typography variant="h5">Articles</Typography>
+          <Typography variant="h5" component="span">Articles</Typography>
           <ArrowForwardIcon/>
         </NavLink>
 
         <NavLink to="/projects">
-          <Typography variant="h5">Projects</Typography>
+          <Typography variant="h5" component="span">Projects</Typography>
           <ArrowForwardIcon/>
         </NavLink>
 
         <NavLink to="/contacts">
-          <Typography variant="h5">Contacts</Typography>
+          <Typography variant="h5" component="span">Contacts</Typography>
           <ArrowForwardIcon/>
         </NavLink>
       </div>
