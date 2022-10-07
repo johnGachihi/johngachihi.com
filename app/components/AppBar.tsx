@@ -60,7 +60,9 @@ export function AppBar() {
             />
             <div className="flex grow">
               <Link to="/">
-                <img src={Logo} alt="Logo" width={143} />
+                <h1 aria-label="John Gachihi">
+                  <img src={Logo} alt="John Gachihi" width={143} aria-hidden />
+                </h1>
               </Link>
             </div>
 
