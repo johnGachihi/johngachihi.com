@@ -86,7 +86,7 @@ export default function Project() {
                 </div>
             }
 
-            <div className="mt-10 max-w-prose">
+            <div className="post-content mt-10 max-w-prose">
                 <div dangerouslySetInnerHTML={{__html: project.shortDescription}}/>
 
                 {project.technicalDescription &&

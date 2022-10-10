@@ -53,7 +53,10 @@ export default function Article() {
                 </div>
             }
 
-            <div className="mt-10 max-w-prose" dangerouslySetInnerHTML={{__html: article.content}}/>
+            <div
+                className="post-content mt-10 max-w-prose"
+                dangerouslySetInnerHTML={{__html: article.content}}
+            />
         </>
     );
 }

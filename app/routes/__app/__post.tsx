@@ -42,72 +42,79 @@ const Post = styled.div`
   @media (min-width: 1440px) {
     margin-top: 48px;
   }
-
-  a {
-    text-decoration: underline;
-  }
-
-  .caption {
-    ${caption}
-  }
-
-  h1 {
-    ${h5}
-    ${heading}
-    margin-top: 56px;
-  }
-
-  h2 {
-    ${h6}
-    ${heading}
-    margin-top: 40px;
-  }
-
-  h3 {
-    ${body1}
-    ${heading}
-    margin-top: 24px;
-  }
-
-  p {
-    margin: 8px 0 16px;
-  }
   
-  ul {
-    list-style: disc;
-  }
-  
-  ol {
-    list-style: decimal;
-  }
-  
-  ul, ol {
-    list-style-position: initial;
-    padding-left: 28px;
-  }
-  
-  li {
-    margin-bottom: 12px
-  }
-  
-  code {
-    background: #eee; 
-  }
-
-  .code-block-container {
-    margin: 32px 0;
-    border: 1px solid #afafaf;
-    border-radius: 7px;
-    font-size: 16px;
-    overflow-x: auto;
-
-    pre {
-      margin: 24px;
-      width: fit-content;
+  figure > figcaption {
+    ${caption};
+    margin-top: 6px;
+    line-height: 1.25;
+    a {
+      text-decoration: underline;
     }
+  }
+
+  .post-content {
+    a {
+      text-decoration: underline;
+    }
+
+    h1 {
+      ${h5}
+      ${heading}
+      margin-top: 56px;
+    }
+
+    h2 {
+      ${h6}
+      ${heading}
+      margin-top: 40px;
+    }
+
+    h3 {
+      ${body1}
+      ${heading}
+      margin-top: 24px;
+    }
+
+    p {
+      margin: 8px 0 16px;
+    }
+  
+    ul {
+      list-style: disc;
+    }
+  
+   ol {
+     list-style: decimal;
+   }
+  
+   ul, ol {
+     list-style-position: initial;
+     padding-left: 28px;
+   }
+  
+   li {
+     margin-bottom: 12px
+   }
+  
+   code {
+     background: #eee; 
+   }
+
+   .code-block-container {
+     margin: 32px 0;
+     border: 1px solid #afafaf;
+     border-radius: 7px;
+     font-size: 16px;
+     overflow-x: auto;
+
+     pre {
+       margin: 24px;
+       width: fit-content;
+     }
     
-    code {
-      background: inherit;
+      code {
+        background: inherit;
+      }
     }
   }
 `;
