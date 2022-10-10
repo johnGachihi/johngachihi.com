@@ -16,7 +16,7 @@ export default function Header({ title, date, className }: Props) {
   );
 }
 
-const Title = styled.h5`
+const Title = styled.h2` 
   ${h5};
   margin: 0;
 `;
