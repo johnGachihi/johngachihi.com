@@ -7,7 +7,7 @@ type Props = {
   className?: string;
 };
 
-export default function Header({ title, date, className }: Props) {
+export default function PostTitle({ title, date, className }: Props) {
   return (
     <div className={className}>
       <Title>{title}</Title>

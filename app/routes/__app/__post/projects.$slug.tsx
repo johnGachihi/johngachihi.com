@@ -1,7 +1,7 @@
 import type {LoaderFunction} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
 import invariant from "tiny-invariant";
-import Header from "~/components/post/header";
+import PostTitle from "~/components/post/post-title";
 import {fetchProject} from "~/models/project.server";
 import {useMemo, useState} from "react";
 import VideoPlayer from "~/components/post/video-player";
@@ -50,43 +50,41 @@ export default function Project() {
     }, [project.showcaseMedia])
 
     return (
-        <div>
-            <Header className="mb-6" title={project.title} date={project.startedAt}/>
+        <>
+            <header>
+                <PostTitle className="mb-6" title={project.title} date={project.startedAt}/>
 
-            {showcaseMedia &&
-                <div className="mb-6">
-                    {showcaseMedia}
-                </div>
-            }
+                {showcaseMedia && <div className="mb-6">{showcaseMedia}</div>}
 
-            {(project.githubLink || project.liveLink) &&
-                <div className="flex mb-4 md:mb-6">
-                    {project.githubLink &&
-                        <ProjectLink
-                            className="mr-2"
-                            icon={<Icon path={mdiGithub} className="w-6"/>}
-                            text="GitHub Repo"
-                            link={project.githubLink}
-                        />
-                    }
+                {(project.githubLink || project.liveLink) &&
+                    <div className="flex mb-4 md:mb-6">
+                        {project.githubLink &&
+                            <ProjectLink
+                                className="mr-2"
+                                icon={<Icon path={mdiGithub} className="w-6"/>}
+                                text="GitHub Repo"
+                                link={project.githubLink}
+                            />
+                        }
 
-                    {project.liveLink &&
-                        <ProjectLink
-                            icon={<Icon path={mdiLink} className="w-6"/>}
-                            text="Live Project"
-                            link={project.liveLink}
-                        />
-                    }
-                </div>
-            }
+                        {project.liveLink &&
+                            <ProjectLink
+                                icon={<Icon path={mdiLink} className="w-6"/>}
+                                text="Live Project"
+                                link={project.liveLink}
+                            />
+                        }
+                    </div>
+                }
 
-            {project.tags.length > 0 &&
-                <div className="flex flex-wrap gap-y-1 gap-x-3">
-                    {project.tags.map((tag) => <Tag children={tag} key={tag}/>)}
-                </div>
-            }
+                {project.tags.length > 0 &&
+                    <div className="flex flex-wrap gap-y-1 gap-x-3">
+                        {project.tags.map((tag) => <Tag children={tag} key={tag}/>)}
+                    </div>
+                }
+            </header>
 
-            <div className="post-content mt-10 max-w-prose">
+            <main className="post-content mt-10 max-w-prose">
                 <div dangerouslySetInnerHTML={{__html: project.shortDescription}}/>
 
                 {project.technicalDescription &&
@@ -112,8 +110,8 @@ export default function Project() {
                         dangerouslySetInnerHTML={{__html: project.technicalDescription}}
                     />
                 </CSSTransition>
-            </div>
-        </div>
+            </main>
+        </>
     );
 }
 

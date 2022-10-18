@@ -6,14 +6,14 @@ export default function Index() {
   return (
     <>
       <AppBar />
-      <Main>
+      <ContentContainer>
         <Outlet />
-      </Main>
+      </ContentContainer>
     </>
   );
 }
 
-const Main = styled.main`
+const ContentContainer = styled.div`
   @media (min-width: 0px) {
     margin: 0 16px;
   }

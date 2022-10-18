@@ -7,7 +7,9 @@ type Props = PropsWithChildren<{ title: string }>;
 function PostListLayout({ title, children }: Props) {
   return (
     <>
-      <Title>{title}</Title>
+      <header>
+        <Title>{title}</Title>
+      </header>
       {children}
     </>
   );

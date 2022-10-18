@@ -2,7 +2,7 @@ import type {LoaderFunction} from "@remix-run/node";
 import {json, type MetaFunction, Response} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
 import invariant from "tiny-invariant";
-import Header from "~/components/post/header";
+import PostTitle from "~/components/post/post-title";
 import {fetchArticle} from "~/models/article.server";
 import {formatDate} from "~/utils";
 import Tag from "~/components/tag";
@@ -38,22 +38,24 @@ export default function Article() {
 
     return (
         <>
-            <Header
-                className="mb-6"
-                title={article.title}
-                date={formatDate(article.publishedOn, "DD MMM YYYY")}
-            />
+            <header>
+                <PostTitle
+                    className="mb-6"
+                    title={article.title}
+                    date={formatDate(article.publishedOn, "DD MMM YYYY")}
+                />
 
-            {article.mainImage &&
-                <div className="mb-6" dangerouslySetInnerHTML={{__html: article.mainImage}}/>}
+                {article.mainImage &&
+                    <div className="mb-6" dangerouslySetInnerHTML={{__html: article.mainImage}}/>}
 
-            {article.tags.length > 0 &&
-                <div className="flex flex-wrap gap-y-1 gap-x-3">
-                    {article.tags.map((tag) => <Tag children={tag} key={tag}/>)}
-                </div>
-            }
+                {article.tags.length > 0 &&
+                    <div className="flex flex-wrap gap-y-1 gap-x-3">
+                        {article.tags.map((tag) => <Tag children={tag} key={tag}/>)}
+                    </div>
+                }
+            </header>
 
-            <div
+            <main
                 className="post-content mt-10 max-w-prose"
                 dangerouslySetInnerHTML={{__html: article.content}}
             />

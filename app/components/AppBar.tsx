@@ -48,7 +48,7 @@ export function AppBar() {
 
   return (
     <>
-      <header>
+      <nav>
         <MuiAppBar color="inherit" elevation={isScrolledDown ? 3 : 0} component="div">
           <Toolbar>
             <IconButton
@@ -66,15 +66,21 @@ export function AppBar() {
               </Link>
             </div>
 
-            <Nav>
-              <NavLink to="/articles">Articles</NavLink>
-              <NavLink to="/projects">Projects</NavLink>
-              <NavLink to="/contacts">Contacts</NavLink>
-            </Nav>
+            <LinkList>
+              <li>
+                <NavLink to="/articles">Articles</NavLink>
+              </li>
+              <li>
+                <NavLink to="/projects">Projects</NavLink>
+              </li>
+              <li>
+                <NavLink to="/contacts">Contacts</NavLink>
+              </li>
+            </LinkList>
           </Toolbar>
         </MuiAppBar>
         <Toolbar /> {/*Offset the content below top-app-bar*/}
-      </header>
+      </nav>
 
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <List sx={{ width: 250 }}>
@@ -91,11 +97,12 @@ export function AppBar() {
   );
 }
 
-const Nav = styled.nav`
+const LinkList = styled.ul`
+  display: flex;
   @media (max-width: 600px) {
     display: none;
   }
-  & > a {
+  & > li > a {
     ${body1};
     text-decoration: none;
     color: inherit;
