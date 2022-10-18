@@ -6,7 +6,7 @@ import {fetchProject} from "~/models/project.server";
 import {useMemo, useState} from "react";
 import VideoPlayer from "~/components/post/video-player";
 import {ProjectLink} from "~/components/project/project-link";
-import Tag from "~/components/tag";
+import Tags from "~/components/tags";
 import styled from "@emotion/styled";
 import {emphaticLink} from "~/styles/link";
 import {CSSTransition} from "react-transition-group";
@@ -77,11 +77,7 @@ export default function Project() {
                     </div>
                 }
 
-                {project.tags.length > 0 &&
-                    <div className="flex flex-wrap gap-y-1 gap-x-3">
-                        {project.tags.map((tag) => <Tag children={tag} key={tag}/>)}
-                    </div>
-                }
+                <Tags tags={project.tags}/>
             </header>
 
             <main className="post-content mt-10 max-w-prose">

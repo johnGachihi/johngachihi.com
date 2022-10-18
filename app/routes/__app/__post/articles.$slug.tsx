@@ -5,7 +5,7 @@ import invariant from "tiny-invariant";
 import PostTitle from "~/components/post/post-title";
 import {fetchArticle} from "~/models/article.server";
 import {formatDate} from "~/utils";
-import Tag from "~/components/tag";
+import Tags from "~/components/tags";
 
 type LoaderData = {
     article: Exclude<Awaited<ReturnType<typeof fetchArticle>>, null>;
@@ -48,11 +48,7 @@ export default function Article() {
                 {article.mainImage &&
                     <div className="mb-6" dangerouslySetInnerHTML={{__html: article.mainImage}}/>}
 
-                {article.tags.length > 0 &&
-                    <div className="flex flex-wrap gap-y-1 gap-x-3">
-                        {article.tags.map((tag) => <Tag children={tag} key={tag}/>)}
-                    </div>
-                }
+                <Tags tags={article.tags}/>
             </header>
 
             <main
