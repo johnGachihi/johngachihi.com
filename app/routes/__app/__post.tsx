@@ -57,19 +57,19 @@ const Post = styled.div`
       text-decoration: underline;
     }
 
-    h1 {
+    h3 {
       ${h5}
       ${heading}
       margin-top: 56px;
     }
 
-    h2 {
+    h4 {
       ${h6}
       ${heading}
       margin-top: 40px;
     }
 
-    h3 {
+    h5 {
       ${body1}
       ${heading}
       margin-top: 24px;

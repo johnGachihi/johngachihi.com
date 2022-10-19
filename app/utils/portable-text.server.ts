@@ -12,7 +12,7 @@ const purify = DOMPurify(new JSDOM("").window);
 export function captionedImageToHtml(
     // TODO: Why is this not a scalar value
     portableText: (Block | CaptionedImage | CodeBlock)[],
-    { withYMargin = true }: { withYMargin?: boolean } = {}
+    {withYMargin = true}: { withYMargin?: boolean } = {}
 ): string {
     const unsanitizedHTML = toHTML(portableText, {
         components: {
@@ -30,20 +30,20 @@ export function captionedImageToHtml(
 
                     /* TODO: Check whether appropriate image is picked */
                     return `
-            <figure class="${withYMargin ? 'my-10' : ''}">
-              <img
-                class="w-full"
-                srcset="${imgUrl_600} 600w,
-                        ${imgUrl_800} 800w"
-                sizes="(max-width: 600px) 600px,
-                        800px"
-                alt="${value.alt ?? ""}"
-              />
-              <figcaption>
-                ${captionedImageToHtml(value.caption)}
-              </figcaption>
-            </figure>
-          `;
+                        <figure class="${withYMargin ? 'my-10' : ''}">
+                          <img
+                            class="w-full"
+                            srcset="${imgUrl_600} 600w,
+                                    ${imgUrl_800} 800w"
+                            sizes="(max-width: 600px) 600px,
+                                    800px"
+                            alt="${value.alt ?? ""}"
+                          />
+                          <figcaption>
+                            ${captionedImageToHtml(value.caption)}
+                          </figcaption>
+                        </figure>
+                    `;
                 },
             },
         },
@@ -55,19 +55,25 @@ export function captionedImageToHtml(
 export function postPortableTextToHtml(
     portableText: (Block | CaptionedImage | CodeBlock)[]
 ): string {
-  const unsanitizedHTML = toHTML(portableText, {
-    components: {
-      types: {
-        captionedImage: ({ value }) => captionedImageToHtml(value),
-        codeBlock: ({ value }) =>
-          `<div class="code-block-container">
-            <pre><code>${
-              hljs.highlight(value.code, { language: value.language }).value
-            }</code></pre>
-          </div>`,
-      },
-    },
-});
+    const unsanitizedHTML = toHTML(portableText, {
+        components: {
+            block: {
+                h1: (options) => `<h3>${options.children}</h3>`,
+                h2: (options) => `<h4>${options.children}</h4>`,
+                h3: (options) => `<h5>${options.children}</h5>`
+            },
+            types: {
+                captionedImage: ({value}) => captionedImageToHtml(value),
+                codeBlock: ({value}) => `
+                    <div class="code-block-container">
+                      <pre><code>${
+                        hljs.highlight(value.code, {language: value.language}).value
+                      }</code></pre>
+                    </div>
+                `,
+            },
+        },
+    });
 
     return purify.sanitize(unsanitizedHTML);
 }
