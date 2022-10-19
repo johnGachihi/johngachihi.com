@@ -5,5 +5,5 @@ interface Props {
 }
 
 export default function VideoPlayer({url}: Props) {
-    return <ReactPlayer className="aspect-video" url={url} width="100%" height="100%" controls/>
+    return <ReactPlayer className="aspect-video" url={url} width="100%" height="100%" controls light/>
 }
