@@ -1,13 +1,15 @@
 export default function resolveProductionUrl(document) {
-  const contentType = getContentTypeName(document)
-  return `https://johngachihi.me/${contentType}/${document?.slug?.current}`
+  const resourceName = getUrlResourceName(document)
+  return `https://johngachihi.me/${resourceName}/${document?.slug?.current}`
 }
 
-function getContentTypeName(document) {
+function getUrlResourceName(document) {
   switch (document?._type) {
     case "project":
       return "projects"
+    case "article":
+      return "articles"
     default:
-      return document?.type
+      return document?._type
   }
 }
