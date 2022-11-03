@@ -91,6 +91,10 @@ export function AppBar() {
           <ListItem disablePadding onClick={() => setIsDrawerOpen(false)}>
             <DrawerLink to="/projects">Projects</DrawerLink>
           </ListItem>
+
+          <ListItem disablePadding onClick={() => setIsDrawerOpen(false)}>
+            <DrawerLink to="/contacts">Contacts</DrawerLink>
+          </ListItem>
         </List>
       </Drawer>
     </>
