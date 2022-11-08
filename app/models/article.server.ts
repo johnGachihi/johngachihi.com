@@ -15,10 +15,7 @@ export async function fetchArticleSummaries() {
     const query = `
     *[_type == "article"] | order(publishedOn desc) {
       "id": _id, title, "slug": slug.current, publishedOn,
-      "tags": select(
-        tags == null => [],
-        tags != null => tags
-      )
+      "tags": coalesce(tags, [])
     }
   `;
     const rawArticles = await createSanityClient().fetch<ArticleSummary[]>(query);
@@ -54,10 +51,7 @@ export async function fetchArticle(slug: string): Promise<Article | null> {
     *[_type == "article" && slug.current == $slug] {
       "id": _id, title, "slug": slug.current,
       publishedOn, mainImage, content,
-      "tags": select(
-        tags == null => [],
-        tags != null => tags
-      )
+      "tags": coalesce(tags, [])
     }[0]
   `;
     const rawArticle = await createSanityClient().fetch<RawArticle>(query, {
