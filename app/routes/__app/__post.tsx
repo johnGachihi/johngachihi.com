@@ -83,35 +83,41 @@ const Post = styled.div`
       list-style: disc;
     }
   
-   ol {
-     list-style: decimal;
-   }
+    ol {
+      list-style: decimal;
+    }
   
-   ul, ol {
-     list-style-position: initial;
-     padding-left: 28px;
-     padding-top: 8px;
-   }
+    ul, ol {
+      list-style-position: initial;
+      padding-left: 28px;
+      padding-top: 8px;
+    }
   
-   li {
-     margin-bottom: 12px
-   }
+    li {
+      margin-bottom: 12px
+    }
   
-   code {
-     background: #eee; 
-   }
+    code {
+      background: #eee; 
+    }
 
-   .code-block-container {
-     margin: 32px 0;
-     border: 1px solid #afafaf;
-     border-radius: 7px;
-     font-size: 16px;
-     overflow-x: auto;
+    img {
+      // For portrait images
+      max-height: 500px;
+      object-fit: contain;
+    }
 
-     pre {
-       margin: 24px;
-       width: fit-content;
-     }
+    .code-block-container {
+      margin: 32px 0;
+      border: 1px solid #afafaf;
+      border-radius: 7px;
+      font-size: 16px;
+      overflow-x: auto;
+
+      pre {
+        margin: 24px;
+        width: fit-content;
+      }
     
       code {
         background: inherit;
