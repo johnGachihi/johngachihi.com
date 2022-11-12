@@ -90,7 +90,7 @@ const Post = styled.div`
     ul, ol {
       list-style-position: initial;
       padding-left: 28px;
-      padding-top: 8px;
+      margin-top: 8px;
     }
   
     li {
