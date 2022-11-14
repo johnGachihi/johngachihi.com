@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Outlet } from "@remix-run/react";
 import { AppBar } from "~/components/AppBar";
+import { Footer } from "~/components/footer";
 
 export default function Index() {
   return (
@@ -9,6 +10,7 @@ export default function Index() {
       <ContentContainer>
         <Outlet />
       </ContentContainer>
+      <Footer />
     </>
   );
 }

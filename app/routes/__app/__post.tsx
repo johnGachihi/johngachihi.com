@@ -29,7 +29,6 @@ const Post = styled.div`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 200px;
 
   @media (max-width: 600px) {
     margin-top: 8px;
