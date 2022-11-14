@@ -83,7 +83,7 @@ export function createSanityClient() {
     dataset: process.env.SANITY_DATASET,
     apiVersion: "2022-03-17",
     useCdn: false,
-    withCredentials: true,
+    token: process.env.SANITY_TOKEN
   });
 }
 
