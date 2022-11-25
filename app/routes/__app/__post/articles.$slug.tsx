@@ -29,10 +29,13 @@ export const meta: MetaFunction = ({ data }) => {
 
     return {
         title: data.article.title,
+        description: data.article.description,
 
         "og:url": `https://johngachihi.me/articles/${data.article.slug}`,
         "og:title": data.article.title,
+        "og:description": data.article.description,
         "og:image": data.article.mainImageUrl,
+        "og:type": "article"
     }
 }
 

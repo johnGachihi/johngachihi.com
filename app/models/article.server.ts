@@ -32,6 +32,7 @@ export async function fetchArticleSummaries() {
 interface Article extends ArticleSummary {
   mainImage?: string;
   mainImageUrl?: string;
+  description?: string;
   content: string;
 }
 
@@ -56,7 +57,7 @@ function processArticle(rawArticle: RawArticle): Article {
 export async function fetchArticle(slug: string): Promise<Article | null> {
   const query = `
     *[_type == "article" && slug.current == $slug] {
-      "id": _id, title, "slug": slug.current,
+      "id": _id, title, description, "slug": slug.current,
       publishedOn, mainImage, content,
       "tags": coalesce(tags, [])
     }[0]
