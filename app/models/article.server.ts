@@ -48,8 +48,12 @@ function processArticle(rawArticle: RawArticle): Article {
       ? captionedImageToHtml([rawArticle.mainImage], { withYMargin: false })
       : undefined,
     mainImageUrl: rawArticle.mainImage
-        ? sanityImageUrlFor(rawArticle.mainImage.asset).url()
-        : undefined,
+      ? sanityImageUrlFor(rawArticle.mainImage.asset)
+          .auto("format")
+          .maxWidth(1500)
+          .quality(80)
+          .url()
+      : undefined,
     content: postPortableTextToHtml(rawArticle.content),
   };
 }
