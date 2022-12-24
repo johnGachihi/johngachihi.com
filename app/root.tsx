@@ -15,7 +15,9 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import {AppBar} from "~/components/AppBar";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
-import {CircularProgress, SnackbarContent} from "@mui/material";
+import {CircularProgress} from "@mui/material";
+import { load, trackPageview } from 'fathom-client'
+import { useEffect } from 'react'
 
 
 export const links: LinksFunction = () => {
@@ -59,6 +61,20 @@ export const meta: MetaFunction = () => ({
   "emotion-insertion-point": "emotion-insertion-point",
 });
 
+const Fathom = () => {
+  const location = useLocation()
+
+  useEffect(() => load('RGSIUMNB', {
+    url: "https://fresh-fortunate.johngachihi.me/script.js"
+  }), []);
+
+  useEffect(() => {
+    trackPageview();
+  }, [location.pathname, location.search]);
+
+  return null
+}
+
 function PageLoadingMessage() {
     const transition = useTransition()
 
@@ -91,6 +107,8 @@ export default function App() {
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
+
+          <Fathom />
         </body>
       </html>
     </MuiDocumentWrapper>

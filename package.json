@@ -48,6 +48,7 @@
     "clsx": "^1.2.1",
     "dayjs": "^1.11.3",
     "dompurify": "^2.3.10",
+    "fathom-client": "^3.5.0",
     "highlight.js": "^11.6.0",
     "jsdom": "^20.0.0",
     "picosanity": "^4.0.0",
