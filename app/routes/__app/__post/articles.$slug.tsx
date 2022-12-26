@@ -34,7 +34,7 @@ export const meta: MetaFunction = ({ data }) => {
         "og:url": `https://johngachihi.me/articles/${data.article.slug}`,
         "og:title": data.article.title,
         "og:description": data.article.description,
-        "og:image": data.article.mainImageUrl,
+        "og:image": data.article.socialsImageUrl,
         "og:type": "article"
     }
 }

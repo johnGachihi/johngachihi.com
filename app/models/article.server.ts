@@ -5,6 +5,7 @@ import {
   captionedImageToHtml,
   postPortableTextToHtml,
 } from "~/utils/portable-text.server";
+import { getSocialsImage } from "~/utils/socials-image.server";
 
 interface ArticleSummary {
   id: string;
@@ -32,11 +33,13 @@ export async function fetchArticleSummaries() {
 interface Article extends ArticleSummary {
   mainImage?: string;
   mainImageUrl?: string;
+  socialsImageUrl?: string;
   description?: string;
   content: string;
 }
 
-interface RawArticle extends Omit<Article, "mainImage" | "content"> {
+interface RawArticle
+  extends Omit<Article, "mainImage" | "content" | "socialsImageUrl"> {
   mainImage?: CaptionedImage;
   content: (Block | CaptionedImage | CodeBlock)[];
 }
@@ -53,6 +56,16 @@ function processArticle(rawArticle: RawArticle): Article {
           .maxWidth(1500)
           .quality(80)
           .url()
+      : undefined,
+    socialsImageUrl: rawArticle.mainImage
+      ? getSocialsImage(
+          rawArticle.title,
+          sanityImageUrlFor(rawArticle.mainImage.asset)
+            .auto("format")
+            .width(600)
+            .quality(70)
+            .url()
+        )
       : undefined,
     content: postPortableTextToHtml(rawArticle.content),
   };
