@@ -35,12 +35,17 @@ interface Article extends ArticleSummary {
   mainImageUrl?: string;
   socialsImageUrl?: string;
   description?: string;
+  preContent?: string;
   content: string;
 }
 
 interface RawArticle
-  extends Omit<Article, "mainImage" | "content" | "socialsImageUrl"> {
+  extends Omit<
+    Article,
+    "mainImage" | "preContent" | "content" | "socialsImageUrl"
+  > {
   mainImage?: CaptionedImage;
+  preContent?: (Block | CaptionedImage | CodeBlock)[];
   content: (Block | CaptionedImage | CodeBlock)[];
 }
 
@@ -67,6 +72,9 @@ function processArticle(rawArticle: RawArticle): Article {
             .url()
         )
       : undefined,
+    preContent: rawArticle.preContent
+      ? postPortableTextToHtml(rawArticle.preContent)
+      : undefined,
     content: postPortableTextToHtml(rawArticle.content),
   };
 }
@@ -75,7 +83,7 @@ export async function fetchArticle(slug: string): Promise<Article | null> {
   const query = `
     *[_type == "article" && slug.current == $slug] {
       "id": _id, title, description, "slug": slug.current,
-      publishedOn, mainImage, content,
+      publishedOn, mainImage, preContent, content,
       "tags": coalesce(tags, [])
     }[0]
   `;

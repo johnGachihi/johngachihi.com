@@ -1,7 +1,7 @@
 import {css} from "@emotion/react";
 import styled from "@emotion/styled";
 import {Outlet} from "@remix-run/react";
-import {body1, caption, h5, h6} from "~/styles/text";
+import {body1, body2, caption, h5, h6} from "~/styles/text";
 
 import hljsStyle from "highlight.js/styles/intellij-light.css";
 
@@ -51,7 +51,14 @@ const Post = styled.div`
     }
   }
 
-  .post-content {
+  .pre-content {
+    ${body2};
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .content {
     a {
       text-decoration: underline;
     }

@@ -57,10 +57,20 @@ export default function Article() {
                 <Tags tags={article.tags} />
             </header>
 
-            <main
-                className="post-content mt-10 max-w-prose"
-                dangerouslySetInnerHTML={{ __html: article.content }}
-            />
+            <main className="mt-10 max-w-prose">
+                {article.preContent &&
+                    <div
+                        className="pre-content mb-5 italic"
+                        dangerouslySetInnerHTML={{ __html: article.preContent }}
+                    />
+                }
+
+                <div
+                    className="content"
+                    dangerouslySetInnerHTML={{ __html: article.content }}
+                />
+            </main>
+
         </>
     );
 }
