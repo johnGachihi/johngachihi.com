@@ -45,6 +45,12 @@ export default {
       of: [{ type: 'string' }]
     },
     {
+      name: 'preContent',
+      title: 'Pre Content',
+      type: 'blockContent',
+      description: 'Content that will appear before the article content. For acknowledgements, etc.'
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'blockContent'
