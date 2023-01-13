@@ -35,7 +35,15 @@ export const meta: MetaFunction = ({ data }) => {
         "og:title": data.article.title,
         "og:description": data.article.description,
         "og:image": data.article.socialsImageUrl,
-        "og:type": "article"
+        "og:type": "article",
+
+        "twitter:card": "summary_large_image",
+        "twitter:title": data.article.title,
+        "twitter:description": data.article.description,
+        "twitter:site": "@j_gachihi",
+        "twitter:image": data.article.socialsImageUrl,
+        "twitter:creator": "@j_gachihi",
+
     }
 }
 
