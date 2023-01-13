@@ -14,7 +14,7 @@ export default function Index() {
           <h1 aria-label="John Gachihi">
             <picture>
               <source media="(max-width: 640px)" srcSet={logoWrapped}/>
-              <img src={logo} alt="John Gachihi logo" className="mt-2 mb-10 w-[265px] sm:w-[422px]" aria-hidden />
+              <img src={logo} alt="John Gachihi logo" className="mt-2 mb-10 w-[265px] h-[194px] sm:w-[422px] sm:h-[82px]" aria-hidden />
             </picture>
           </h1>
         </header>
