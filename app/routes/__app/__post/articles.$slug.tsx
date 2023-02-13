@@ -6,6 +6,7 @@ import PostTitle from "~/components/post/post-title";
 import { fetchArticle } from "~/models/article.server";
 import { formatDate } from "~/utils";
 import Tags from "~/components/tags";
+import style from "./article.css"
 
 type LoaderData = {
     article: Exclude<Awaited<ReturnType<typeof fetchArticle>>, null>;
@@ -43,8 +44,11 @@ export const meta: MetaFunction = ({ data }) => {
         "twitter:site": "@j_gachihi",
         "twitter:image": data.article.socialsImageUrl,
         "twitter:creator": "@j_gachihi",
-
     }
+}
+
+export function links() {
+    return [{ rel: "stylesheet", href: style }]
 }
 
 export default function Article() {
@@ -71,6 +75,13 @@ export default function Article() {
                         className="pre-content mb-5 italic"
                         dangerouslySetInnerHTML={{ __html: article.preContent }}
                     />
+                }
+
+                {article.startQuote &&
+                    <div className="mt-20 mb-20">
+                        <blockquote className="quote text-xl text-gray-500">{article.startQuote.quote}</blockquote>
+                        <div className="text-sm mt-4">— {article.startQuote.source}</div>
+                    </div>
                 }
 
                 <div

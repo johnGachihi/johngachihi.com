@@ -36,7 +36,13 @@ interface Article extends ArticleSummary {
   socialsImageUrl?: string;
   description?: string;
   preContent?: string;
+  startQuote?: Quote;
   content: string;
+}
+
+interface Quote {
+  quote: string;
+  source: string;
 }
 
 interface RawArticle
@@ -83,7 +89,7 @@ export async function fetchArticle(slug: string): Promise<Article | null> {
   const query = `
     *[_type == "article" && slug.current == $slug] {
       "id": _id, title, description, "slug": slug.current,
-      publishedOn, mainImage, preContent, content,
+      publishedOn, mainImage, preContent, startQuote, content,
       "tags": coalesce(tags, [])
     }[0]
   `;

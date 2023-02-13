@@ -51,6 +51,11 @@ export default {
       description: 'Content that will appear before the article content. For acknowledgements, etc.'
     },
     {
+      name: 'startQuote',
+      title: 'Start Quote',
+      type: 'quote',
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'blockContent'

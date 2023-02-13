@@ -1,0 +1,12 @@
+.quote::before {
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  content: open-quote;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+.quote::after {
+  content: no-close-quote;
+}

@@ -6,6 +6,7 @@ import captionedImage from './captionedImage'
 import project from './project'
 import article from './article'
 import codeBlock from './codeBlock'
+import quote from './quote'
 
 export default createSchema({
   name: 'default',
@@ -15,6 +16,7 @@ export default createSchema({
 
     blockContent,
     captionedImage,
-    codeBlock
+    codeBlock,
+    quote,
   ]),
 })
