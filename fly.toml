@@ -55,4 +55,4 @@ script_checks = [ ]
   protocol = "http"
   timeout = "2s"
   tls_skip_verify = false
-  headers = { }
+  [services.http_checks.headers]
