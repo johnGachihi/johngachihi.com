@@ -80,7 +80,7 @@ export default function Project() {
                 <Tags tags={project.tags}/>
             </header>
 
-            <main className="post-content mt-10 max-w-prose">
+            <main className="content mt-10 max-w-prose">
                 <div dangerouslySetInnerHTML={{__html: project.shortDescription}}/>
 
                 {project.technicalDescription &&
