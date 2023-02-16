@@ -12,6 +12,13 @@ app.use(
     metricsPath: "/metrics",
     collectDefaultMetrics: true,
     metricsApp,
+
+    customLabels: ["referrer"],
+    transformLabels: (labels, req) => {
+      if (req.query._ref && typeof req.query._ref === "string") {
+        labels.referrer = req.query._ref;
+      }
+    },
   })
 );
 
