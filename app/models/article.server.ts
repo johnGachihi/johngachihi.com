@@ -22,7 +22,10 @@ export async function fetchArticleSummaries() {
       "tags": coalesce(tags, [])
     }
   `;
-  const rawArticles = await createSanityClient().fetch<ArticleSummary[]>(query);
+  const rawArticles = await createSanityClient().fetch<ArticleSummary[]>(
+    query,
+    { tag: "article-summaries" }
+  );
 
   return rawArticles.map((article) => ({
     ...article,
@@ -95,6 +98,7 @@ export async function fetchArticle(slug: string): Promise<Article | null> {
   `;
   const rawArticle = await createSanityClient().fetch<RawArticle>(query, {
     slug,
+    tag: "article",
   });
 
   return rawArticle ? processArticle(rawArticle) : null;

@@ -1,7 +1,10 @@
 import type { Block } from "@sanity/types";
 import type { CaptionedImage, CodeBlock } from "~/sanity.types";
 import { createSanityClient, formatDate } from "~/utils";
-import { captionedImageToHtml, postPortableTextToHtml } from "~/utils/portable-text.server";
+import {
+  captionedImageToHtml,
+  postPortableTextToHtml,
+} from "~/utils/portable-text.server";
 
 interface ProjectSummary {
   id: string;
@@ -18,7 +21,10 @@ export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
       "tags": coalesce(tags, [])
     }
   `;
-  const rawProjects = await createSanityClient().fetch<ProjectSummary[]>(query);
+  const rawProjects = await createSanityClient().fetch<ProjectSummary[]>(
+    query,
+    { tag: "project-summaries" }
+  );
 
   return rawProjects.map((project) => ({
     ...project,
@@ -57,10 +63,16 @@ function processProject(rawProject: RawProject): Project {
   return {
     showcaseMedia:
       !!showcaseMedia && "image" in showcaseMedia
-        ? { image: captionedImageToHtml([showcaseMedia.image], { withYMargin: false }) }
+        ? {
+            image: captionedImageToHtml([showcaseMedia.image], {
+              withYMargin: false,
+            }),
+          }
         : showcaseMedia,
     shortDescription: postPortableTextToHtml(rawProject.shortDescription),
-    technicalDescription: postPortableTextToHtml(rawProject.technicalDescription),
+    technicalDescription: postPortableTextToHtml(
+      rawProject.technicalDescription
+    ),
     startedAt: formatDate(startedAt, "DD MMM YYYY"),
     ...rest,
   };
@@ -76,6 +88,7 @@ export async function fetchProject(slug: string): Promise<Project | null> {
   `;
   const project = await createSanityClient().fetch<RawProject | null>(query, {
     slug,
+    tag: "project",
   });
 
   return project === null ? null : processProject(project);
