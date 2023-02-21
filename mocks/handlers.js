@@ -4,12 +4,9 @@ const articleSummaries = require('./data/article-summaries.json')
 const project = require('./data/project.json')
 const projectSummaries = require('./data/project-summaries.json')
 
-const sanityProjectId = process.env.SANITY_PROJECT_ID
-const sanityUrl = `https://${sanityProjectId}.api.sanity.io*`
-
 exports.handlers = [
   // For Sanity API
-  rest.get(sanityUrl, async (req, res, ctx) => {
+  rest.get(/.+\.api.sanity.io.*/i, async (req, res, ctx) => {
     if (req.url.searchParams.get("$tag") === `"article-summaries"`) {
       return res(ctx.json(articleSummaries))
     } else if (req.url.searchParams.get("$tag") === `"article"`) {
