@@ -7,3 +7,5 @@ dist
 schemas/author.js
 schemas/category.js
 schemas/post.js
+
+yarn-error.log

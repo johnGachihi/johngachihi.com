@@ -7,7 +7,6 @@ export default {
       name: "alt",
       title: "Alt",
       type: "string",
-      options: { isHighlighted: true },
     },
     {
       name: "caption",
@@ -23,7 +22,6 @@ export default {
           },
         },
       ],
-      options: { isHighlighted: true },
     }
   ]
 }

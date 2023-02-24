@@ -1,5 +1,3 @@
-import 'ace-builds/src-noconflict/mode-kotlin'
-
 export default {
   name: "codeBlock",
   title: "Code Block",
