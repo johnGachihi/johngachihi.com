@@ -4,7 +4,7 @@ export default {
   type: "code",
   options: {
     languageAlternatives: [
-      { title: 'Javascript', value: 'js' },
+      { title: 'Javascript', value: 'javascript' },
       { title: 'Python', value: 'python' },
       { title: 'Kotlin', value: 'kotlin', mode: 'kotlin' },
       { title: 'HTML', value: 'html' },

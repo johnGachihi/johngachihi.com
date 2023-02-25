@@ -8,7 +8,7 @@ import schemas from './schemas/schema'
 export default defineConfig({
   title: "johngachihi.me",
   projectId: "kbldwfkp",
-  dataset: "production",
+  dataset: "development",
   plugins: [
     deskTool(),
     visionTool(),
