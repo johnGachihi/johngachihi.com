@@ -1,27 +1,35 @@
 import type { Block } from "@sanity/types";
 import type { CaptionedImage, CodeBlock } from "~/sanity.types";
-import { createSanityClient, formatDate } from "~/utils";
+import { createSanityClient, formatDate, sanityImageUrlFor } from "~/utils";
 import {
   captionedImageToHtml,
   postPortableTextToHtml,
 } from "~/utils/portable-text.server";
 
-interface ProjectSummary {
+export interface ProjectSummary {
   id: string;
+  showcaseMedia?: {
+    type: "image" | "youtube";
+    src: string;
+  };
   title: string;
   slug: string;
   startedAt: string;
   tags: string[];
 }
 
+interface RawProjectSummary extends Omit<ProjectSummary, "showcaseMedia"> {
+  showcaseMedia?: { youtubeLink: string } | { image: CaptionedImage };
+}
+
 export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
   const query = `
     *[_type == "project"]  | order(startedAt desc) {
       "id": _id, title, "slug": slug.current, startedAt,
-      "tags": coalesce(tags, [])
+      showcaseMedia, "tags": coalesce(tags, [])
     }
   `;
-  const rawProjects = await createSanityClient().fetch<ProjectSummary[]>(
+  const rawProjects = await createSanityClient().fetch<RawProjectSummary[]>(
     query,
     { tag: "project-summaries" }
   );
@@ -30,13 +38,30 @@ export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
     ...project,
     // TODO: Is it possible to format date in GROQ?
     startedAt: formatDate(project.startedAt, "DD MMM YYYY"),
+    showcaseMedia: project.showcaseMedia
+      ? processShowcaseMedia(project.showcaseMedia)
+      : undefined,
   }));
 }
 
-interface Project extends ProjectSummary {
+function processShowcaseMedia(
+  showcaseMedia: NonNullable<RawProjectSummary["showcaseMedia"]>
+): NonNullable<ProjectSummary["showcaseMedia"]> {
+  return "image" in showcaseMedia
+    ? {
+        type: "image",
+        src: sanityImageUrlFor(showcaseMedia.image).width(300).url(),
+      }
+    : {
+        type: "youtube",
+        src: showcaseMedia.youtubeLink,
+      };
+}
+
+interface Project extends Omit<ProjectSummary, "showcaseMedia"> {
+  showcaseMedia?: { youtubeLink: string } | { image: string }
   githubLink?: string;
   liveLink?: string;
-  showcaseMedia?: { youtubeLink: string } | { image: string };
   shortDescription: string;
   technicalDescription: string;
 }
