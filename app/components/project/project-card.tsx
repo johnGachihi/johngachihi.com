@@ -1,12 +1,11 @@
-import styled from "@emotion/styled";
-import MuxPlayer from "@mux/mux-player-react";
 import clsx from "clsx";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ProjectSummary } from "~/models/project.server";
-import { body1, body2, caption, h6 } from "~/styles/text";
 import style from "./project-card.css";
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { Link } from "@remix-run/react";
+import { VideoPlayer2 } from "../post/video-player";
 
 export function links() {
   return [{ rel: "stylesheet", href: style }]
@@ -14,6 +13,7 @@ export function links() {
 
 export function ProjectCard({ project, className }: { project: ProjectSummary, className?: string }) {
   const [isLongHovered, isHovered, onMouseEnter, onMouseLeave] = useLongHover();
+  const [videoWatchProgress, setVideoWatchProgress] = useState(0);
 
   const showcaseMedia = useMemo(() => {
     if (project.showcaseMedia) {
@@ -22,30 +22,54 @@ export function ProjectCard({ project, className }: { project: ProjectSummary, c
           <img
             className="w-full h-full object-cover rounded-[inherit]"
             src={project.showcaseMedia.src}
-            alt="project.title" />
+            alt={project.title} />
         )
-        : <VideoThumbnail isCardLongHovered={isLongHovered} isCardHovered={isHovered} />
+        : (
+          <VideoThumbnail
+            src={project.showcaseMedia.src}
+            title={project.title}
+            id={project.slug}
+            isCardLongHovered={isLongHovered}
+            isCardHovered={isHovered}
+            onTimeUpdate={(time) => setVideoWatchProgress(time)}
+          />
+        )
     }
-  }, [isHovered, isLongHovered, project.showcaseMedia])
+  }, [isHovered, isLongHovered, project.showcaseMedia, project.slug, project.title])
+
+  // TODO: Is this necessary?
+  const videoProgressUrlQuery = useMemo(() => {
+    return videoWatchProgress > /* TODO: Eeh? */ 7
+      ? `?v=${videoWatchProgress}`
+      : undefined
+  }, [videoWatchProgress])
 
   return (
-    <div className={clsx("group", className)} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} >
-      <div className="aspect-video rounded-lg group-hover:ring-2 ring-gray-500 ring-offset-8 transition duration-300">
+    <Link
+      to={{
+        pathname: project.slug,
+        search: videoProgressUrlQuery
+      }}
+      className={clsx("group", className)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="aspect-video rounded-lg group-hover:ring-2 ring-gray-400 ring-offset-8 transition duration-300">
         {showcaseMedia}
       </div>
 
       <div className="px-2 pt-4 pb-4">
-        <StartedOn>{project.startedAt}</StartedOn>
-        <Title>{project.title}</Title>
+        <div className="caption lg:body2">{project.startedAt}</div>
+        <div className="h6">{project.title}</div>
         {project.tags && (
           <div className="flex flex-wrap mt-2">
             {project.tags.map((tag) => (
-              <Tag className="text-gray-500" children={"#" + tag} key={tag} />
+              <div className="caption lg:body2 text-gray-500 mr-2" children={"#" + tag} key={tag} />
             ))}
           </div>
         )}
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -70,107 +94,89 @@ function useLongHover() {
   return [isLongHovered, isHovered, onMouseEnter, onMouseLeave] as const;
 }
 
-function VideoThumbnail({ isCardLongHovered, isCardHovered }: {
+function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTimeUpdate }: {
+  src: string,
+  title: string,
+  id: string,
   isCardLongHovered: boolean,
-  isCardHovered: boolean
+  isCardHovered: boolean,
+  onTimeUpdate: (time: number) => void
 }) {
   const shouldPlay = useMemo(() => isCardLongHovered, [isCardLongHovered])
-  const [videoPlaying, setVideoPlaying] = useState(false)
-  const [videoMuted, setVideoMuted] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
 
-  const videoOverlayRef = useRef<any>(null)
-
-  useEffect(() => {
-    if (shouldPlay) {
-      videoOverlayRef.current?.play()
-    } else {
-      videoOverlayRef.current?.pause()
-    }
-  }, [shouldPlay])
+  const handleTimeUpdate = debounce((time: number) => {
+    onTimeUpdate(time)
+  }, 500)
 
   return (
     <div className={clsx("relative w-full h-full rounded-[inherit]")}>
-      <div className="absolute inset-0 z-10 flex flex-col justify-between items-end p-1">
+      <div className="absolute inset-0 flex flex-col justify-between items-end p-2">
         <div
           className={clsx(
-            { "opacity-0": !videoPlaying },
-            "bg-gray-600/40 hover:bg-gray-600/75 text-white p-1.5 rounded transition duration-300"
+            { "opacity-0": !isPlaying },
+            "z-10 bg-gray-600/40 hover:bg-gray-600/75 text-white p-1.5 rounded transition duration-300"
           )}
         >
           <div
-            onClick={() => setVideoMuted(videoMuted => !videoMuted)}
-            title={videoMuted ? "Unmute" : "Mute"}
+            onClick={(e) => {
+              setIsMuted(isMuted => !isMuted);
+              e.preventDefault();
+            }}
+            title={isMuted ? "Unmute" : "Mute"}
           >
-            {videoMuted
+            {isMuted
               ? <VolumeUpIcon color="inherit" />
               : <VolumeOffIcon color="inherit" />
             }
           </div>
         </div>
 
-        <div className={clsx(videoPlaying ? "opacity-0" : "opacity-100", "text-xs text-white bg-gray-600/75 p-1 rounded  transition duration-300")}>
+        <div
+          className={clsx(
+            isPlaying ? "opacity-0" : "opacity-100",
+            "z-10 text-xs text-white bg-gray-600/75 p-1 rounded  transition duration-300"
+          )}>
           {isCardHovered ? "Keep hovering to play" : "Video"}
         </div>
       </div>
-      <MuxPlayer
-        ref={videoOverlayRef}
-        streamType="on-demand"
-        playbackId="Ff7MTdfXRZ15H71OxA5aemolT72EB4v2ySjSgRZVKAg"
-        onPlaying={() => setVideoPlaying(true)}
-        onPause={() => setVideoPlaying(false)}
-        muted={videoMuted}
-        metadata={{
-          video_id: "video-id",
-          video_title: "video title",
-        }}
+
+      <VideoPlayer2
         className="absolute inset-0 rounded-[inherit] overflow-clip"
-        primaryColor="#000"
-        secondaryColor="#fff"
+        src={src}
+        shouldPlay={shouldPlay}
+        isMuted={isMuted}
+        onPlaying={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onTimeUpdate={handleTimeUpdate}
+        meta={{ id, title }}
       />
     </div>
   )
 }
 
-const StartedOn = styled.div`
-  ${caption};
+function debounce(fn: (time: number) => void, ms: number) {
+  let isDebouncing = false;
+  let lastCallArg: number | null = null;
 
-  @media (min-width: 600px) {
-    margin-right: 16px;
+  const f = (time: number) => {
+    if (!isDebouncing) {
+      fn(time);
+
+      isDebouncing = true;
+
+      setTimeout(() => {
+        isDebouncing = false;
+        if (lastCallArg) {
+          f(lastCallArg);
+          lastCallArg = null;
+        }
+      }, ms);
+    } else {
+      lastCallArg = time;
+    }
   }
 
-  @media (min-width: 900px) {
-    ${body2};
-  }
-`;
-
-const Title = styled.span`
-  font-weight: 500;
-  display: block;
-  ${body1};
-
-  @media (max-width: 600px) {
-    margin-bottom: 8px;
-  }
-
-  @media (min-width: 900px) {
-    ${h6};
-  }
-
-  /* &:hover {
-    text-decoration: underline;
-  } */
-`;
-
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Tag = styled.span`
-  margin-right: 8px;
-  ${caption};
-
-  @media (min-width: 900px) {
-    ${body2};
-  }
-`;
+  return f;
+}

@@ -8,8 +8,9 @@ import {
 
 export interface ProjectSummary {
   id: string;
+  // TODO: Eeeh?
   showcaseMedia?: {
-    type: "image" | "youtube";
+    type: "image" | "youtube" | "muxVideo";
     src: string;
   };
   title: string;
@@ -19,7 +20,10 @@ export interface ProjectSummary {
 }
 
 interface RawProjectSummary extends Omit<ProjectSummary, "showcaseMedia"> {
-  showcaseMedia?: { youtubeLink: string } | { image: CaptionedImage };
+  showcaseMedia?:
+    | { youtubeLink: string }
+    | { image: CaptionedImage }
+    | { muxVideo: { playbackId: string } };
 }
 
 export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
@@ -47,19 +51,29 @@ export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
 function processShowcaseMedia(
   showcaseMedia: NonNullable<RawProjectSummary["showcaseMedia"]>
 ): NonNullable<ProjectSummary["showcaseMedia"]> {
-  return "image" in showcaseMedia
-    ? {
-        type: "image",
-        src: sanityImageUrlFor(showcaseMedia.image).width(300).url(),
-      }
-    : {
-        type: "youtube",
-        src: showcaseMedia.youtubeLink,
-      };
+  if ("image" in showcaseMedia) {
+    return {
+      type: "image",
+      src: sanityImageUrlFor(showcaseMedia.image).width(300).url(),
+    };
+  } else if ("youtubeLink" in showcaseMedia) {
+    return {
+      type: "youtube",
+      src: showcaseMedia.youtubeLink,
+    };
+  } else {
+    return {
+      type: "muxVideo",
+      src: showcaseMedia.muxVideo.playbackId,
+    };
+  }
 }
 
 interface Project extends Omit<ProjectSummary, "showcaseMedia"> {
-  showcaseMedia?: { youtubeLink: string } | { image: string }
+  showcaseMedia?:
+    | { youtubeLink: string }
+    | { image: string }
+    | { muxVideo: { playbackId: string } };
   githubLink?: string;
   liveLink?: string;
   shortDescription: string;
@@ -71,7 +85,10 @@ interface RawProject
     Project,
     "showcaseMedia" | "shortDescription" | "technicalDescription"
   > {
-  showcaseMedia?: { youtubeLink: string } | { image: CaptionedImage };
+  showcaseMedia?:
+    | { youtubeLink: string }
+    | { image: CaptionedImage }
+    | { muxVideo: { playbackId: string } };
   shortDescription: (Block | CaptionedImage | CodeBlock)[];
   technicalDescription: (Block | CaptionedImage | CodeBlock)[];
 }

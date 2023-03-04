@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .caption {
+    @apply text-xs lg:text-[13px] tracking-[0.4px];
+  }
+  .body1 {
+    @apply text-base tracking-[0.5px];
+  }
+  .body2 {
+    @apply text-sm tracking-[0.25px];
+  }
+  .h6 {
+    @apply text-xl font-medium tracking-[0.15px];
+  }
+  .h5 {
+    @apply text-[24px] tracking-normal;
+  }
+  .h4 {
+    @apply text-[34px] tracking-[0.25px];
+  }
+}

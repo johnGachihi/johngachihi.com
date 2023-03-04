@@ -1,6 +1,5 @@
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import PostListItem from "~/components/post-list-item";
 import PostListLayout from "~/components/post-list-layout";
 import { ProjectCard, links as projectCardLinks } from "~/components/project/project-card";
 import { fetchProjectSummaries } from "~/models/project.server";
@@ -33,15 +32,6 @@ export default function Projects() {
           <ProjectCard className="col-span-4 mb-10" project={project} key={project.id} />
         ))}
       </div>
-
-      {projects?.map(({ startedAt, ...project }) => (
-        <PostListItem
-          className="mb-4"
-          {...project}
-          key={project.id}
-          date={startedAt}
-        />
-      ))}
     </PostListLayout>
   );
 }

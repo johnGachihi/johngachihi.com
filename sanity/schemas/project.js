@@ -35,14 +35,31 @@ export default {
                     name: 'image',
                     title: 'Image',
                     type: 'captionedImage',
-                    readOnly: ({ parent, value }) => !value && parent?.youtubeLink
+                    readOnly: ({ parent, value }) =>
+                        !value && (!!parent?.youtubeLink || !!parent?.muxVideo)
                 },
                 {
                     name: 'youtubeLink',
                     type: 'url',
                     title: 'Youtube Link',
-                    readOnly: ({ parent, value }) => !value && parent?.image,
+                    readOnly: ({ parent, value }) =>
+                        !value && (!!parent?.image || !!parent?.muxVideo),
                 },
+                {
+                    name: 'muxVideo',
+                    type: 'object',
+                    title: 'Mux Video',
+                    fields: [
+                        {
+                            name: 'playbackId',
+                            type: 'string',
+                            title: 'Playback ID',
+                            validation: Rule => Rule.required()
+                        },
+                    ],
+                    readOnly: ({ parent, value }) =>
+                        !value && (!!parent?.image || !!parent?.youtubeLink),
+                }
             ]
         },
         {
