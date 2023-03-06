@@ -112,7 +112,7 @@ function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTi
 
   return (
     <div className={clsx("relative w-full h-full rounded-[inherit]")}>
-      <div className="absolute inset-0 flex flex-col justify-between items-end p-2">
+      <div className="absolute inset-0 hidden lg:flex flex-col justify-between items-end p-2">
         <div
           className={clsx(
             { "opacity-0 invisible": !isPlaying },
