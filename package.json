@@ -36,7 +36,6 @@
     "@isaacs/express-prometheus-middleware": "^1.2.1",
     "@mdi/js": "^7.0.96",
     "@mdi/react": "^1.6.1",
-    "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "@mux/mux-player-react": "^1.8.0",
     "@portabletext/to-html": "^1.0.3",

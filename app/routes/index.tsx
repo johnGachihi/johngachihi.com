@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Icon from '@mdi/react';
+import { mdiArrowRight } from '@mdi/js';
 import { Link } from "@remix-run/react";
 import { emphaticLink } from "~/styles/link";
 import logo from "../../public/images/logo.svg"
@@ -21,17 +22,17 @@ export default function Index() {
 
         <NavLink to="/articles">
           <Typography variant="h5" component="span">Articles</Typography>
-          <ArrowForwardIcon/>
+          <Icon path={mdiArrowRight} size={1} />
         </NavLink>
 
         <NavLink to="/projects">
           <Typography variant="h5" component="span">Projects</Typography>
-          <ArrowForwardIcon/>
+          <Icon path={mdiArrowRight} size={1} />
         </NavLink>
 
         <NavLink to="/contacts">
           <Typography variant="h5" component="span">Contacts</Typography>
-          <ArrowForwardIcon/>
+          <Icon path={mdiArrowRight} size={1} />
         </NavLink>
       </div>
     </Root>

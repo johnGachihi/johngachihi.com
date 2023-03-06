@@ -13,7 +13,8 @@ import {
   Toolbar,
   useScrollTrigger,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { mdiMenu } from "@mdi/js";
+import Icon from "@mdi/react";
 import MuiAppBar from "@mui/material/AppBar";
 import styled from "@emotion/styled";
 import Logo from "../../public/images/logo.svg";
@@ -52,11 +53,11 @@ export function AppBar() {
         <MuiAppBar color="inherit" elevation={isScrolledDown ? 3 : 0} component="div">
           <Toolbar>
             <IconButton
-                sx={{ mr: 1, display: { sm: "none" } }}
-                edge="start"
-                color="primary"
-                children={<MenuIcon />}
-                onClick={() => setIsDrawerOpen(true)}
+              sx={{ mr: 1, display: { sm: "none" } }}
+              edge="start"
+              color="primary"
+              children={<Icon path={mdiMenu} size={1} />}
+              onClick={() => setIsDrawerOpen(true)}
             />
             <div className="flex grow">
               <Link to="/">

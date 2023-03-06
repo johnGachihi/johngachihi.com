@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { ProjectSummary } from "~/models/project.server";
 import style from "./project-card.css";
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { mdiVolumeHigh, mdiVolumeOff } from "@mdi/js";
+import Icon from "@mdi/react";
 import { Link } from "@remix-run/react";
 import { VideoPlayer2 } from "../post/video-player";
 
@@ -115,8 +115,8 @@ function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTi
       <div className="absolute inset-0 flex flex-col justify-between items-end p-2">
         <div
           className={clsx(
-            { "opacity-0": !isPlaying },
-            "z-10 bg-gray-600/40 hover:bg-gray-600/75 text-white p-1.5 rounded transition duration-300"
+            { "opacity-0 invisible": !isPlaying },
+            "z-10 visible bg-gray-600/40 hover:bg-gray-600/75 p-1.5 rounded transition duration-300"
           )}
         >
           <div
@@ -125,17 +125,18 @@ function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTi
               e.preventDefault();
             }}
             title={isMuted ? "Unmute" : "Mute"}
+            className="text-white"
           >
             {isMuted
-              ? <VolumeUpIcon color="inherit" />
-              : <VolumeOffIcon color="inherit" />
+              ? <Icon path={mdiVolumeHigh} size={1} />
+              : <Icon path={mdiVolumeOff} size={1} />
             }
           </div>
         </div>
 
         <div
           className={clsx(
-            isPlaying ? "opacity-0" : "opacity-100",
+            isPlaying ? "opacity-0 invisible" : "opacity-100 visible",
             "z-10 text-xs text-white bg-gray-600/75 p-1 rounded  transition duration-300"
           )}>
           {isCardHovered ? "Keep hovering to play" : "Video"}
