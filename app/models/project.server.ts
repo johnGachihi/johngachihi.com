@@ -54,7 +54,7 @@ function processShowcaseMedia(
   if ("image" in showcaseMedia) {
     return {
       type: "image",
-      src: sanityImageUrlFor(showcaseMedia.image).width(300).url(),
+      src: sanityImageUrlFor(showcaseMedia.image).width(600).url(),
     };
   } else if ("youtubeLink" in showcaseMedia) {
     return {
