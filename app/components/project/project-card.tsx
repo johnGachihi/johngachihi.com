@@ -6,56 +6,74 @@ import { mdiVolumeHigh, mdiVolumeOff } from "@mdi/js";
 import Icon from "@mdi/react";
 import { Link } from "@remix-run/react";
 import { VideoPlayer2 } from "../post/video-player";
+import React from "react";
 
 export function links() {
   return [{ rel: "stylesheet", href: style }]
 }
 
-export function ProjectCard({ project, className }: { project: ProjectSummary, className?: string }) {
-  const [isLongHovered, isHovered, onMouseEnter, onMouseLeave] = useLongHover();
+export const BaseProjectCard = React.forwardRef(function BaseProjectCard(
+  {
+    project,
+    onSpotlight,
+    className,
+    onMouseEnter,
+    onMouseLeave,
+    ...props
+  }: {
+    project: ProjectSummary,
+    onSpotlight: boolean,
+    className?: string,
+    onMouseEnter?: () => void,
+    onMouseLeave?: () => void,
+  },
+  ref: React.ForwardedRef<any>
+) {
+  const [isHovered, setIsHovered] = useState(false)
+
   const [videoWatchProgress, setVideoWatchProgress] = useState(0);
 
-  const showcaseMedia = useMemo(() => {
-    if (project.showcaseMedia) {
-      return project.showcaseMedia.type === "image"
-        ? (
-          <img
-            className="w-full h-full object-cover rounded-[inherit]"
-            src={project.showcaseMedia.src}
-            alt={project.title} />
-        )
-        : (
-          <VideoThumbnail
-            src={project.showcaseMedia.src}
-            title={project.title}
-            id={project.slug}
-            isCardLongHovered={isLongHovered}
-            isCardHovered={isHovered}
-            onTimeUpdate={(time) => setVideoWatchProgress(time)}
-          />
-        )
-    }
-  }, [isHovered, isLongHovered, project.showcaseMedia, project.slug, project.title])
-
   // TODO: Is this necessary?
-  const videoProgressUrlQuery = useMemo(() => {
-    return videoWatchProgress > /* TODO: Eeh? */ 7
-      ? `?v=${videoWatchProgress}`
-      : undefined
-  }, [videoWatchProgress])
+  const videoProgressUrlQuery = useMemo(() =>
+    videoWatchProgress > /* TODO: Eeh? */ 7 ? `?v=${videoWatchProgress}` : undefined,
+    [videoWatchProgress])
 
   return (
     <Link
-      to={{
-        pathname: project.slug,
-        search: videoProgressUrlQuery
-      }}
+      to={{ pathname: project.slug, search: videoProgressUrlQuery }}
       className={clsx("group", className)}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        onMouseEnter?.();
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        onMouseLeave?.();
+      }}
+      ref={ref}
+      {...props}
     >
-      <div className="aspect-video rounded-lg group-hover:ring-2 ring-gray-400 ring-offset-8 transition duration-300">
-        {showcaseMedia}
+      <div className={clsx(
+        "aspect-video rounded-lg ring-gray-400 ring-offset-8 transition duration-300",
+        { "ring-2": onSpotlight },
+      )}>
+        {project.showcaseMedia && (project.showcaseMedia.type === "image"
+          ? (
+            <img
+              className="w-full h-full object-cover rounded-[inherit]"
+              src={project.showcaseMedia.src}
+              alt={project.title} />
+          )
+          : (
+            <VideoThumbnail
+              src={project.showcaseMedia.src}
+              title={project.title}
+              id={project.slug}
+              shouldPlay={onSpotlight}
+              isCardHovered={isHovered}
+              onTimeUpdate={(time) => setVideoWatchProgress(time)}
+            />
+          ))}
       </div>
 
       <div className="px-2 pt-4 pb-4">
@@ -71,38 +89,46 @@ export function ProjectCard({ project, className }: { project: ProjectSummary, c
       </div>
     </Link>
   )
+})
+
+export function SpotlightOnLongHoverProjectCard({ ...props }: { project: ProjectSummary, className?: string }) {
+  const { isLongHovered, ...hoverCallbacks } = useLongHover();
+
+  return (
+    <BaseProjectCard
+      {...props}
+      {...hoverCallbacks}
+      onSpotlight={isLongHovered}
+    />
+  )
 }
 
 function useLongHover() {
-  const [isHovered, setIsHovered] = useState(false);
   const [isLongHovered, setIsLongHovered] = useState(false);
   const timeoutRef = useRef<any>(null);
 
   const onMouseEnter = () => {
-    setIsHovered(true);
     timeoutRef.current = setTimeout(() => {
       setIsLongHovered(true);
     }, 2000);
   };
 
   const onMouseLeave = () => {
-    setIsHovered(false);
     clearTimeout(timeoutRef.current);
     setIsLongHovered(false);
   };
 
-  return [isLongHovered, isHovered, onMouseEnter, onMouseLeave] as const;
+  return { isLongHovered, onMouseEnter, onMouseLeave };
 }
 
-function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTimeUpdate }: {
+function VideoThumbnail({ src, title, id, shouldPlay, isCardHovered, onTimeUpdate }: {
   src: string,
   title: string,
   id: string,
-  isCardLongHovered: boolean,
+  shouldPlay: boolean,
   isCardHovered: boolean,
   onTimeUpdate: (time: number) => void
 }) {
-  const shouldPlay = useMemo(() => isCardLongHovered, [isCardLongHovered])
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
 
@@ -112,7 +138,7 @@ function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTi
 
   return (
     <div className={clsx("relative w-full h-full rounded-[inherit]")}>
-      <div className="absolute inset-0 hidden lg:flex flex-col justify-between items-end p-2">
+      <div className="absolute inset-0 flex flex-col justify-between items-end p-2">
         <div
           className={clsx(
             { "opacity-0 invisible": !isPlaying },
@@ -134,12 +160,14 @@ function VideoThumbnail({ src, title, id, isCardLongHovered, isCardHovered, onTi
           </div>
         </div>
 
-        <div
-          className={clsx(
-            isPlaying ? "opacity-0 invisible" : "opacity-100 visible",
-            "z-10 text-xs text-white bg-gray-600/75 p-1 rounded  transition duration-300"
-          )}>
-          {isCardHovered ? "Keep hovering to play" : "Video"}
+        <div className={clsx(
+          "z-10 text-xs text-white bg-gray-600/75 p-1 rounded transition duration-300",
+          isPlaying ? "opacity-0 invisible" : "opacity-100 visible",
+        )}>
+          <span className="hidden lg:block">
+            {isCardHovered ? "Keep hovering to play" : "Video"}
+          </span>
+          <span className="lg:hidden">Video</span>
         </div>
       </div>
 

@@ -1,7 +1,9 @@
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useMemo } from "react"
 import PostListLayout from "~/components/post-list-layout";
-import { ProjectCard, links as projectCardLinks } from "~/components/project/project-card";
+import { InViewObservingProjectList } from "~/components/project/in-view-observing-project-list";
+import { links as projectCardLinks, SpotlightOnLongHoverProjectCard } from "~/components/project/project-card";
 import { fetchProjectSummaries } from "~/models/project.server";
 
 type LoaderData = {
@@ -25,12 +27,31 @@ export function links() {
 export default function Projects() {
   const { projects } = useLoaderData<LoaderData>();
 
+  const isLargeScreen = useMemo(() => {
+    return window.matchMedia('(min-width: 1024px)').matches
+  }, [])
+
   return (
     <PostListLayout title="Projects">
       <div className="grid grid-cols-4 md:grid-cols-8 gap-x-8">
-        {projects?.map((project) => (
-          <ProjectCard className="col-span-4 mb-10" project={project} key={project.id} />
-        ))}
+        {isLargeScreen
+          ? (
+            <>
+              {projects?.map((project) => (
+                <SpotlightOnLongHoverProjectCard
+                  className="col-span-4 mb-10"
+                  project={project}
+                  key={project.id}
+                />
+              ))}
+            </>
+          ) : (
+            <InViewObservingProjectList
+              projects={projects}
+              projectClassName="col-span-4 mb-10"
+            />
+          )
+        }
       </div>
     </PostListLayout>
   );
