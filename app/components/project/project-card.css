@@ -1,12 +1,3 @@
 mux-player {
-  --play-button: none;
-  --mute-button: none;
-  --pip-button: none;
-  --fullscreen-button: none;
-  --playback-rate-button: none;
-  --volume-range: none;
-  --seek-backward-button: none;
-  --seek-forward-button: none;
-  --time-display: none;
-  --duration-display: none;
+  --controls: none;
 }
