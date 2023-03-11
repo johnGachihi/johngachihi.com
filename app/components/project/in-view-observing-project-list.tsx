@@ -57,7 +57,7 @@ export function InViewObservingProjectList({ projects, projectClassName }: {
           clearTimeout(setInViewTimer.current)
           setInViewTimer.current = setTimeout(() => {
             setSpotlighted(sortedList.current?.[0]?.position ?? null)
-          }, 3000)
+          }, 2000)
         },
         {
           root: null,

@@ -42,7 +42,7 @@ export default function Projects() {
             <>
               {projects?.map((project) => (
                 <SpotlightOnLongHoverProjectCard
-                  className="col-span-4 mb-10"
+                  className="col-span-4 mb-5"
                   project={project}
                   key={project.id}
                 />
@@ -51,7 +51,7 @@ export default function Projects() {
           ) : (
             <InViewObservingProjectList
               projects={projects}
-              projectClassName="col-span-4 mb-10"
+              projectClassName="col-span-4 mb-6 md:mb-10"
             />
           )
         }
