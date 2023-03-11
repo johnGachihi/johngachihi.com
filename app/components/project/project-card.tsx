@@ -78,7 +78,7 @@ export const BaseProjectCard = React.forwardRef(function BaseProjectCard(
 
       <div className="px-2 pt-4 pb-4">
         <div className="caption lg:body2">{project.startedAt}</div>
-        <div className="h6">{project.title}</div>
+        <div className="body1 lg:h6 font-medium">{project.title}</div>
         {project.tags && (
           <div className="flex flex-wrap mt-2">
             {project.tags.map((tag) => (
