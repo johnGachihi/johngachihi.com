@@ -55,7 +55,7 @@ export const BaseProjectCard = React.forwardRef(function BaseProjectCard(
     >
       <div className={clsx(
         "aspect-video transition duration-300",
-        { "shadow-[8px_8px_1px_#b6b6b6] lg:shadow-[10px_10px_1px_#b6b6b6]": onSpotlight },
+        { "shadow-[8px_8px_#242424] lg:shadow-[10px_10px_#242424] border border-gray-200": onSpotlight },
       )}>
         {project.showcaseMedia && (project.showcaseMedia.type === "image"
           ? (
