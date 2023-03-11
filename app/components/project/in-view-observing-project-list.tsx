@@ -3,7 +3,7 @@ import type { ProjectSummary } from "~/models/project.server"
 import { BaseProjectCard } from "./project-card"
 
 /**
- * TODO: Improve algo and DS for getting inView Project
+ * TODO: Improve algo and DS for getting inView Project, and code
  */
 
 type View = {
@@ -36,32 +36,35 @@ export function InViewObservingProjectList({ projects, projectClassName }: {
 
   const setInViewTimer = useRef<NodeJS.Timeout>()
 
-  const intersectionObserver = useRef(
-    new IntersectionObserver(
-      (entries) => {
-        if (sortedList.current == null) {
-          sortedList.current = entries.map(ioeToView).sort(compareViews)
-        } else {
-          sortedList.current = sortedList.current.map<View>(item => {
-            const entry = entries.find(entry =>
-              ioeToView(entry).position === item.position)
-            return entry
-              ? { ...item, visibleAreaRatio: entry.intersectionRatio }
-              : item
-          }).sort(compareViews)
-        }
+  const intersectionObserver = useRef((() => {
+    // Remix manenos
+    // https://remix.run/docs/en/1.14.1/guides/constraints#md-document-guard
+    if (typeof document !== "undefined")
+      return new IntersectionObserver(
+        (entries) => {
+          if (sortedList.current == null) {
+            sortedList.current = entries.map(ioeToView).sort(compareViews)
+          } else {
+            sortedList.current = sortedList.current.map<View>(item => {
+              const entry = entries.find(entry =>
+                ioeToView(entry).position === item.position)
+              return entry
+                ? { ...item, visibleAreaRatio: entry.intersectionRatio }
+                : item
+            }).sort(compareViews)
+          }
 
-        clearTimeout(setInViewTimer.current)
-        setInViewTimer.current = setTimeout(() => {
-          setSpotlighted(sortedList.current?.[0]?.position ?? null)
-        }, 3000)
-      },
-      {
-        root: null,
-        threshold: [0, 0.25, 0.75, 1]
-      }
-    )
-  )
+          clearTimeout(setInViewTimer.current)
+          setInViewTimer.current = setTimeout(() => {
+            setSpotlighted(sortedList.current?.[0]?.position ?? null)
+          }, 3000)
+        },
+        {
+          root: null,
+          threshold: [0, 0.25, 0.75, 1]
+        }
+      )
+  })())
 
   return (
     <>
@@ -83,7 +86,7 @@ function ProjectCard(
   { intersectionObserver, inView, ...props }: {
     project: ProjectSummary,
     inView: boolean,
-    intersectionObserver: IntersectionObserver,
+    intersectionObserver?: IntersectionObserver,
     className?: string
   }) {
   const cardEl = useRef(null);

@@ -28,7 +28,10 @@ export default function Projects() {
   const { projects } = useLoaderData<LoaderData>();
 
   const isLargeScreen = useMemo(() => {
-    return window.matchMedia('(min-width: 1024px)').matches
+    // Remix manenos
+    // https://remix.run/docs/en/1.14.1/guides/constraints#md-document-guard
+    if (typeof document !== "undefined")
+      return window.matchMedia('(min-width: 1024px)').matches
   }, [])
 
   return (
