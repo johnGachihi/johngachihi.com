@@ -1,22 +1,7 @@
 import MuxPlayer from "@mux/mux-player-react";
 import { useEffect, useRef } from "react";
-import ReactPlayer from "react-player/youtube";
 
-interface Props {
-  url: string
-  width?: string
-  height?: string
-}
-
-/**
- * @deprecated
- */
-export default function VideoPlayer({ url, width = "100%", height = "100%" }: Props) {
-  return <ReactPlayer className="aspect-video" url={url} width={width} height={height} controls light />
-}
-
-
-export function VideoPlayer2(
+export default function VideoPlayer(
   {
     className,
     src,

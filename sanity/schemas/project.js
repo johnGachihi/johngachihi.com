@@ -28,22 +28,14 @@ export default {
         {
             name: 'showcaseMedia',
             title: 'Showcase Media',
-            description: 'Can only take one - image or youtube link',
+            description: 'Can only take one - image or mux playback-id',
             type: 'object',
             fields: [
                 {
                     name: 'image',
                     title: 'Image',
                     type: 'captionedImage',
-                    readOnly: ({ parent, value }) =>
-                        !value && (!!parent?.youtubeLink || !!parent?.muxVideo)
-                },
-                {
-                    name: 'youtubeLink',
-                    type: 'url',
-                    title: 'Youtube Link',
-                    readOnly: ({ parent, value }) =>
-                        !value && (!!parent?.image || !!parent?.muxVideo),
+                    readOnly: ({ parent, value }) => !value && !!parent?.muxVideo
                 },
                 {
                     name: 'muxVideo',
@@ -57,8 +49,7 @@ export default {
                             validation: Rule => Rule.required()
                         },
                     ],
-                    readOnly: ({ parent, value }) =>
-                        !value && (!!parent?.image || !!parent?.youtubeLink),
+                    readOnly: ({ parent, value }) => !value && !!parent?.image,
                 }
             ]
         },

@@ -4,7 +4,7 @@ import invariant from "tiny-invariant";
 import PostTitle from "~/components/post/post-title";
 import { fetchProject } from "~/models/project.server";
 import { useMemo, useState } from "react";
-import VideoPlayer, { VideoPlayer2 } from "~/components/post/video-player";
+import VideoPlayer from "~/components/post/video-player";
 import { ProjectLink } from "~/components/project/project-link";
 import Tags from "~/components/tags";
 import styled from "@emotion/styled";
@@ -56,13 +56,11 @@ export default function Project() {
   const showcaseMedia = useMemo(() => {
     if (!project.showcaseMedia) return
 
-    if ("youtubeLink" in project.showcaseMedia) {
-      return <VideoPlayer url={project.showcaseMedia.youtubeLink} />
-    } else if ("image" in project.showcaseMedia) {
+    if ("image" in project.showcaseMedia) {
       return <div dangerouslySetInnerHTML={{ __html: project.showcaseMedia.image }} />
     } else {
       return (
-        <VideoPlayer2
+        <VideoPlayer
           className="aspect-video"
           src={project.showcaseMedia.muxVideo.playbackId}
           shouldPlay={false}

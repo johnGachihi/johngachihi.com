@@ -10,7 +10,7 @@ export interface ProjectSummary {
   id: string;
   // TODO: Eeeh?
   showcaseMedia?: {
-    type: "image" | "youtube" | "muxVideo";
+    type: "image" | "muxVideo";
     src: string;
   };
   title: string;
@@ -21,7 +21,6 @@ export interface ProjectSummary {
 
 interface RawProjectSummary extends Omit<ProjectSummary, "showcaseMedia"> {
   showcaseMedia?:
-    | { youtubeLink: string }
     | { image: CaptionedImage }
     | { muxVideo: { playbackId: string } };
 }
@@ -56,11 +55,6 @@ function processShowcaseMedia(
       type: "image",
       src: sanityImageUrlFor(showcaseMedia.image).width(600).url(),
     };
-  } else if ("youtubeLink" in showcaseMedia) {
-    return {
-      type: "youtube",
-      src: showcaseMedia.youtubeLink,
-    };
   } else {
     return {
       type: "muxVideo",
@@ -71,7 +65,6 @@ function processShowcaseMedia(
 
 interface Project extends Omit<ProjectSummary, "showcaseMedia"> {
   showcaseMedia?:
-    | { youtubeLink: string }
     | { image: string }
     | { muxVideo: { playbackId: string } };
   githubLink?: string;
@@ -86,7 +79,6 @@ interface RawProject
     "showcaseMedia" | "shortDescription" | "technicalDescription"
   > {
   showcaseMedia?:
-    | { youtubeLink: string }
     | { image: CaptionedImage }
     | { muxVideo: { playbackId: string } };
   shortDescription: (Block | CaptionedImage | CodeBlock)[];

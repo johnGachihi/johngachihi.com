@@ -5,7 +5,7 @@ import style from "./project-card.css";
 import { mdiVolumeHigh, mdiVolumeOff } from "@mdi/js";
 import Icon from "@mdi/react";
 import { Link } from "@remix-run/react";
-import { VideoPlayer2 } from "../post/video-player";
+import VideoPlayer from "../post/video-player";
 import React from "react";
 
 export function links() {
@@ -171,7 +171,7 @@ function VideoThumbnail({ src, title, id, shouldPlay, isCardHovered, onTimeUpdat
         </div>
       </div>
 
-      <VideoPlayer2
+      <VideoPlayer
         className="absolute inset-0 rounded-[inherit] overflow-clip"
         src={src}
         shouldPlay={shouldPlay}
