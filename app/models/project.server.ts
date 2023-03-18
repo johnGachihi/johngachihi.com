@@ -8,11 +8,7 @@ import {
 
 export interface ProjectSummary {
   id: string;
-  // TODO: Eeeh?
-  showcaseMedia?: {
-    type: "image" | "muxVideo";
-    src: string;
-  };
+  showcaseMedia: { image: string } | { muxVideoPlaybackId: string };
   title: string;
   slug: string;
   startedAt: string;
@@ -20,9 +16,7 @@ export interface ProjectSummary {
 }
 
 interface RawProjectSummary extends Omit<ProjectSummary, "showcaseMedia"> {
-  showcaseMedia?:
-    | { image: CaptionedImage }
-    | { muxVideo: { playbackId: string } };
+  showcaseMedia: { image: CaptionedImage } | { muxVideoPlaybackId: string };
 }
 
 export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
@@ -41,32 +35,20 @@ export async function fetchProjectSummaries(): Promise<ProjectSummary[]> {
     ...project,
     // TODO: Is it possible to format date in GROQ?
     startedAt: formatDate(project.startedAt, "DD MMM YYYY"),
-    showcaseMedia: project.showcaseMedia
-      ? processShowcaseMedia(project.showcaseMedia)
-      : undefined,
+    showcaseMedia: processShowcaseMedia(project.showcaseMedia),
   }));
 }
 
 function processShowcaseMedia(
   showcaseMedia: NonNullable<RawProjectSummary["showcaseMedia"]>
 ): NonNullable<ProjectSummary["showcaseMedia"]> {
-  if ("image" in showcaseMedia) {
-    return {
-      type: "image",
-      src: sanityImageUrlFor(showcaseMedia.image).width(600).url(),
-    };
-  } else {
-    return {
-      type: "muxVideo",
-      src: showcaseMedia.muxVideo.playbackId,
-    };
-  }
+  return "image" in showcaseMedia
+    ? { image: sanityImageUrlFor(showcaseMedia.image).width(600).url() }
+    : showcaseMedia;
 }
 
 interface Project extends Omit<ProjectSummary, "showcaseMedia"> {
-  showcaseMedia?:
-    | { image: string }
-    | { muxVideo: { playbackId: string } };
+  showcaseMedia: { image: string } | { muxVideoPlaybackId: string };
   githubLink?: string;
   liveLink?: string;
   shortDescription: string;
@@ -78,9 +60,7 @@ interface RawProject
     Project,
     "showcaseMedia" | "shortDescription" | "technicalDescription"
   > {
-  showcaseMedia?:
-    | { image: CaptionedImage }
-    | { muxVideo: { playbackId: string } };
+  showcaseMedia: { image: CaptionedImage } | { muxVideoPlaybackId: string };
   shortDescription: (Block | CaptionedImage | CodeBlock)[];
   technicalDescription: (Block | CaptionedImage | CodeBlock)[];
 }
@@ -96,7 +76,7 @@ function processProject(rawProject: RawProject): Project {
 
   return {
     showcaseMedia:
-      !!showcaseMedia && "image" in showcaseMedia
+      "image" in showcaseMedia
         ? {
             image: captionedImageToHtml([showcaseMedia.image], {
               withYMargin: false,

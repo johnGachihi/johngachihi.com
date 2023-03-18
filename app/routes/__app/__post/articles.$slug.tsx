@@ -63,8 +63,7 @@ export default function Article() {
                     date={formatDate(article.publishedOn, "DD MMM YYYY")}
                 />
 
-                {article.mainImage &&
-                    <div className="mb-6" dangerouslySetInnerHTML={{ __html: article.mainImage }} />}
+                <div className="mb-6" dangerouslySetInnerHTML={{ __html: article.mainImage }} />
 
                 <Tags tags={article.tags} />
             </header>

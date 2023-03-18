@@ -54,15 +54,13 @@ export default function Project() {
   }, [searchParams])
 
   const showcaseMedia = useMemo(() => {
-    if (!project.showcaseMedia) return
-
     if ("image" in project.showcaseMedia) {
       return <div dangerouslySetInnerHTML={{ __html: project.showcaseMedia.image }} />
     } else {
       return (
         <VideoPlayer
           className="aspect-video"
-          src={project.showcaseMedia.muxVideo.playbackId}
+          src={project.showcaseMedia.muxVideoPlaybackId}
           shouldPlay={false}
           meta={{ title: project.title, id: project.slug }}
           startTime={videoStartTime}

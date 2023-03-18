@@ -35,23 +35,16 @@ export default {
                     name: 'image',
                     title: 'Image',
                     type: 'captionedImage',
-                    readOnly: ({ parent, value }) => !value && !!parent?.muxVideo
+                    readOnly: ({ parent, value }) => !value && !!parent?.muxVideoPlaybackId
                 },
                 {
-                    name: 'muxVideo',
-                    type: 'object',
-                    title: 'Mux Video',
-                    fields: [
-                        {
-                            name: 'playbackId',
-                            type: 'string',
-                            title: 'Playback ID',
-                            validation: Rule => Rule.required()
-                        },
-                    ],
-                    readOnly: ({ parent, value }) => !value && !!parent?.image,
+                    name: 'muxVideoPlaybackId',
+                    type: 'string',
+                    title: 'Mux Video Playback ID',
+                    readOnly: ({ parent, value }) => !value && !!parent?.image
                 }
-            ]
+            ],
+            validation: Rule => Rule.required()
         },
         {
             name: 'githubLink',

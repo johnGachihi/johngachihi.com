@@ -34,8 +34,8 @@ export async function fetchArticleSummaries() {
 }
 
 interface Article extends ArticleSummary {
-  mainImage?: string;
-  mainImageUrl?: string;
+  mainImage: string;
+  mainImageUrl: string;
   socialsImageUrl?: string;
   description?: string;
   preContent?: string;
@@ -53,7 +53,7 @@ interface RawArticle
     Article,
     "mainImage" | "preContent" | "content" | "socialsImageUrl"
   > {
-  mainImage?: CaptionedImage;
+  mainImage: CaptionedImage;
   preContent?: (Block | CaptionedImage | CodeBlock)[];
   content: (Block | CaptionedImage | CodeBlock)[];
 }
@@ -61,16 +61,14 @@ interface RawArticle
 function processArticle(rawArticle: RawArticle): Article {
   return {
     ...rawArticle,
-    mainImage: rawArticle.mainImage
-      ? captionedImageToHtml([rawArticle.mainImage], { withYMargin: false })
-      : undefined,
-    mainImageUrl: rawArticle.mainImage
-      ? sanityImageUrlFor(rawArticle.mainImage.asset)
-          .auto("format")
-          .maxWidth(1500)
-          .quality(80)
-          .url()
-      : undefined,
+    mainImage: captionedImageToHtml([rawArticle.mainImage], {
+      withYMargin: false,
+    }),
+    mainImageUrl: sanityImageUrlFor(rawArticle.mainImage.asset)
+      .auto("format")
+      .maxWidth(1500)
+      .quality(80)
+      .url(),
     socialsImageUrl: rawArticle.mainImage
       ? getSocialsImage(
           rawArticle.title,

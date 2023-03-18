@@ -57,23 +57,24 @@ export const BaseProjectCard = React.forwardRef(function BaseProjectCard(
         "aspect-video transition duration-300",
         { "shadow-[8px_8px_#242424] lg:shadow-[10px_10px_#242424] border border-gray-200": onSpotlight },
       )}>
-        {project.showcaseMedia && (project.showcaseMedia.type === "image"
+        {"image" in project.showcaseMedia
           ? (
             <img
               className="w-full h-full object-cover rounded-[inherit]"
-              src={project.showcaseMedia.src}
+              src={project.showcaseMedia.image}
               alt={project.title} />
           )
           : (
             <VideoThumbnail
-              src={project.showcaseMedia.src}
+              src={project.showcaseMedia.muxVideoPlaybackId}
               title={project.title}
               id={project.slug}
               shouldPlay={onSpotlight}
               isCardHovered={isHovered}
               onTimeUpdate={(time) => setVideoWatchProgress(time)}
             />
-          ))}
+          )
+        }
       </div>
 
       <div className="px-2 pt-4 pb-4">
@@ -138,11 +139,11 @@ function VideoThumbnail({ src, title, id, shouldPlay, isCardHovered, onTimeUpdat
 
   return (
     <div className={clsx("relative w-full h-full rounded-[inherit]")}>
-      <div className="absolute inset-0 flex flex-col justify-between items-end p-2">
+      <div className="absolute inset-0 flex flex-col justify-between items-end p-2 z-10">
         <div
           className={clsx(
             { "opacity-0 invisible": !isPlaying },
-            "z-10 visible bg-gray-600/40 hover:bg-gray-600/75 p-1.5 rounded transition duration-300"
+            "visible bg-gray-600/40 hover:bg-gray-600/75 p-1.5 rounded transition duration-300"
           )}
         >
           <div
@@ -161,7 +162,7 @@ function VideoThumbnail({ src, title, id, shouldPlay, isCardHovered, onTimeUpdat
         </div>
 
         <div className={clsx(
-          "z-10 text-xs text-white bg-gray-600/75 p-1 rounded transition duration-300",
+          "text-xs text-white bg-gray-600/75 p-1 rounded transition duration-300",
           isPlaying ? "opacity-0 invisible" : "opacity-100 visible",
         )}>
           <span className="hidden lg:block">

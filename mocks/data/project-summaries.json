@@ -1,7 +1,26 @@
 {
   "result": [
     {
+      "id": "f04fecd5-3821-4cf5-871f-d03add86f0fa",
+      "showcaseMedia": {
+        "image": {
+          "_type": "captionedImage",
+          "asset": {
+            "_ref": "image-1f5ef04ae3408c723577169fd8d9a753f983ddc7-1366x768-png",
+            "_type": "reference"
+          }
+        }
+      },
+      "slug": "a-nice-project",
+      "startedAt": "2023-03-11T13:45:00.000Z",
+      "tags": [],
+      "title": "A Nice Project"
+    },
+    {
       "id": "d39fb8cf-e52a-4df9-8b9d-beacb7e529e3",
+      "showcaseMedia": {
+        "muxVideoPlaybackId": "dKy3FWpBpKfdwpwzJAerLZrlUeSA6sIicfawCzIqgp4"
+      },
       "slug": "no-stuff",
       "startedAt": "2022-05-12T15:28:00.000Z",
       "tags": [],
@@ -9,35 +28,32 @@
     },
     {
       "id": "04632dbc-ecc3-46ed-9f83-b7910316b51c",
+      "showcaseMedia": {
+        "muxVideoPlaybackId": "DqJpaGb63OyXlIu1HdekmaPS7kAO4vo5M2zDk4OPlNU"
+      },
       "slug": "ai-exam-invigilator",
       "startedAt": "2022-03-18T12:20:00.000Z",
-      "tags": [
-        "AI",
-        "TensorFlow",
-        "TensorFlowJS",
-        "Keras",
-        "ComputerVision"
-      ],
+      "tags": ["AI", "TensorFlow", "TensorFlowJS", "Keras", "ComputerVision"],
       "title": "AI Exam Invigilator"
     },
     {
       "id": "e8098605-5da0-4c2d-9d64-9088f571ff70",
+      "showcaseMedia": {
+        "muxVideoPlaybackId": "dKy3FWpBpKfdwpwzJAerLZrlUeSA6sIicfawCzIqgp4"
+      },
       "slug": "kotlin-symbol-processor-ksp-example",
       "startedAt": "2022-03-10T16:07:00.000Z",
-      "tags": [
-        "Kotlin",
-        "KSP",
-        "CodeGen"
-      ],
+      "tags": ["Kotlin", "KSP", "CodeGen"],
       "title": "Kotlin Symbol Processor (KSP) Example"
     },
     {
       "id": "734ef228-7190-4b69-bd19-8e66e941e7c8",
+      "showcaseMedia": {
+        "muxVideoPlaybackId": "WB02A5kgWHX7QwUrLMhwMOqiFzXj4PlOI016ledP3hM6M"
+      },
       "slug": "keras-video-generator",
       "startedAt": "2022-02-01T14:45:00.000Z",
-      "tags": [
-        "Tag1"
-      ],
+      "tags": ["Tag1"],
       "title": "Keras Video Generator"
     }
   ]

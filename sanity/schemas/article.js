@@ -34,6 +34,7 @@ export default {
       name: 'mainImage',
       title: 'Main Image',
       type: 'captionedImage',
+      validation: Rule => Rule.required(),
       options: {
         hotspot: true,
       }
