@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
+@layer components {
   .caption {
     @apply text-xs lg:text-[13px] tracking-[0.4px];
   }
@@ -20,5 +20,8 @@
   }
   .h4 {
     @apply text-[34px] tracking-[0.25px];
+  }
+  .text-button {
+    @apply text-[14px] tracking-[0.25px] font-medium;
   }
 }

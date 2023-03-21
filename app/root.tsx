@@ -12,7 +12,7 @@ import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { AppBar } from "~/components/AppBar";
-import Button from "@mui/material/Button";
+import Button from "~/components/button";
 import Snackbar from "@mui/material/Snackbar";
 import { CircularProgress } from "@mui/material";
 import { load, trackPageview } from 'fathom-client'
