@@ -7,12 +7,22 @@ import { useMemo, useState } from "react";
 import VideoPlayer from "~/components/post/video-player";
 import { ProjectLink } from "~/components/project/project-link";
 import Tags from "~/components/tags";
-import styled from "@emotion/styled";
-import { emphaticLink } from "~/styles/link";
 import { CSSTransition } from "react-transition-group";
 import Icon from '@mdi/react'
 import { mdiChevronUp, mdiChevronDown, mdiGithub, mdiLink } from '@mdi/js'
 import { type MetaFunction, Response } from "@remix-run/node";
+import style from "~/styles/project.css";
+import postStyle from "~/styles/post.css";
+import hljsStyle from "highlight.js/styles/intellij-light.css";
+
+
+export function links() {
+  return [
+    { rel: "stylesheet", href: style },
+    { rel: "stylesheet", href: postStyle },
+    { rel: "stylesheet", href: hljsStyle },
+  ]
+}
 
 type LoaderData = {
   project: Exclude<Awaited<ReturnType<typeof fetchProject>>, null>;
@@ -45,7 +55,7 @@ export default function Project() {
 
   const videoStartTime = useMemo(() => {
     const startTime = searchParams.get("v")
-    
+
     if (startTime && Number.isNaN(startTime)) {
       invariant(false, "Invalid `v` (video start time) query param")
     }
@@ -70,7 +80,7 @@ export default function Project() {
   }, [project.showcaseMedia, project.slug, project.title, videoStartTime])
 
   return (
-    <>
+    <div className="max-w-screen-md mx-auto mt-2 sm:mt-6 2xl:mt-12">
       <header>
         <PostTitle className="mb-6" title={project.title} date={project.startedAt} />
 
@@ -104,14 +114,15 @@ export default function Project() {
         <div dangerouslySetInnerHTML={{ __html: project.shortDescription }} />
 
         {project.technicalDescription &&
-          <ShowTechnicalDescriptionButton
+          <button
+            className="emphatic-link mt-8"
             onClick={() => setIsShowTechnicalDesc((desc) => !desc)}
           >
             <span className="mr-1">Technical Description</span>
             {isShowTechnicalDesc
               ? <Icon path={mdiChevronUp} size="24px" className="w-6" />
               : <Icon path={mdiChevronDown} size="24px" className="w-6" />}
-          </ShowTechnicalDescriptionButton>
+          </button>
         }
 
         {/* @ts-ignore */}
@@ -121,46 +132,12 @@ export default function Project() {
           timeout={100}
           mountOnEnter
         >
-          <TechnicalDescription
-            className="mt-8"
+          <div
+            className="technical-desc mt-8"
             dangerouslySetInnerHTML={{ __html: project.technicalDescription }}
           />
         </CSSTransition>
       </main>
-    </>
+    </div>
   );
 }
-
-const ShowTechnicalDescriptionButton = styled.button`
-  border: none;
-  padding: 0;
-  margin-top: 32px;
-  ${emphaticLink};
-`
-
-const TechnicalDescription = styled.div`
-  &.technical-desc-enter {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  
-  &.technical-desc-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 100ms, transform 100ms;
-  }
-  
-  &.technical-desc-exit {
-    opacity: 1;
-  }
-  
-  &.technical-desc-exit-active {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 100ms, transform 100ms;
-  }
-  
-  &.technical-desc-exit-done {
-    display: none;
-  }
-`

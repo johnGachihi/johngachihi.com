@@ -4,7 +4,7 @@
 
 @layer components {
   .caption {
-    @apply text-xs lg:text-[13px] tracking-[0.4px];
+    @apply text-xs tracking-[0.4px] lg:text-[13px];
   }
   .body1 {
     @apply text-base tracking-[0.5px];
@@ -21,7 +21,14 @@
   .h4 {
     @apply text-[34px] tracking-[0.25px];
   }
+  .h3 {
+    @apply text-5xl;
+  }
   .text-button {
-    @apply text-[14px] tracking-[0.25px] font-medium;
+    @apply text-[14px] font-medium tracking-[0.25px];
+  }
+
+  .emphatic-link {
+    @apply flex items-center w-fit bg-gray-200 border-b border-black transition-colors duration-200 hover:bg-gray-400;
   }
 }

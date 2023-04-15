@@ -6,7 +6,10 @@ import PostTitle from "~/components/post/post-title";
 import { fetchArticle } from "~/models/article.server";
 import { formatDate } from "~/utils";
 import Tags from "~/components/tags";
-import style from "./article.css"
+import style from "~/styles/article.css";
+import postStyle from "~/styles/post.css";
+import hljsStyle from "highlight.js/styles/intellij-light.css";
+
 
 type LoaderData = {
     article: Exclude<Awaited<ReturnType<typeof fetchArticle>>, null>;
@@ -48,14 +51,18 @@ export const meta: MetaFunction = ({ data }) => {
 }
 
 export function links() {
-    return [{ rel: "stylesheet", href: style }]
+    return [
+        { rel: "stylesheet", href: style },
+        { rel: "stylesheet", href: postStyle },
+        { rel: "stylesheet", href: hljsStyle },
+    ]
 }
 
 export default function Article() {
     const { article } = useLoaderData<LoaderData>();
 
     return (
-        <>
+        <div className="max-w-screen-md mx-auto mt-2 sm:mt-6 2xl:mt-12">
             <header>
                 <PostTitle
                     className="mb-6"
@@ -89,6 +96,6 @@ export default function Article() {
                 />
             </main>
 
-        </>
+        </div>
     );
 }

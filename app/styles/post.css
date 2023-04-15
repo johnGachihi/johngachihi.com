@@ -1,0 +1,81 @@
+a {
+  text-decoration: underline;
+}
+
+figure > figcaption {
+  @apply caption;
+  margin-top: 6px;
+  line-height: 1.25;
+}
+
+.pre-content {
+  @apply body2;
+}
+
+.content h3 {
+  font-size: 32px;
+  margin-top: 56px;
+  font-weight: bold;
+}
+
+.content h4 {
+  font-size: 26px;
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+.content h5 {
+  font-size: 22px;
+  letter-spacing: 0.15px;
+  font-weight: bold;
+  margin-top: 24px;
+}
+
+.content p {
+  @apply text-lg;
+  margin: 8px 0 16px;
+}
+
+.content ul {
+  list-style: disc;
+}
+
+.content ol {
+  list-style: decimal;
+}
+
+.content ul,
+.content ol {
+  list-style-position: initial;
+  padding-left: 28px;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.content li {
+  margin-bottom: 12px;
+}
+
+.content code {
+  background: #eee;
+}
+
+.content img {
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.content .code-block-container {
+  margin: 32px 0;
+  border: 1px solid #afafaf;
+  border-radius: 7px;
+  font-size: 16px;
+  overflow-x: auto;
+}
+.content .code-block-container pre {
+  margin: 24px;
+  width: fit-content;
+}
+.content .code-block-container code {
+  background: inherit;
+}

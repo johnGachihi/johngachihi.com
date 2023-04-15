@@ -10,7 +10,10 @@ module.exports = {
         primary: "#000",
         onPrimary: "#fff",
       },
+      screens: {
+        xShort: { raw: "(max-height: 400px)" },
+      },
     },
-  },
-  plugins: [],
+    plugins: [],
+  }
 };

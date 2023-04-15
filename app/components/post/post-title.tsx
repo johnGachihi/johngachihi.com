@@ -1,6 +1,3 @@
-import styled from "@emotion/styled";
-import { caption, h5 } from "~/styles/text";
-
 type Props = {
   title: string;
   date: string;
@@ -10,17 +7,8 @@ type Props = {
 export default function PostTitle({ title, date, className }: Props) {
   return (
     <div className={className}>
-      <Title>{title}</Title>
-      <Date>{date}</Date>
+      <h2 className="h4 leading-tight">{title}</h2>
+      <div className="body1 mt-2 text-gray-600">{date}</div>
     </div>
   );
 }
-
-const Title = styled.h2` 
-  ${h5};
-  margin: 0;
-`;
-
-const Date = styled.span`
-  ${caption}
-`;

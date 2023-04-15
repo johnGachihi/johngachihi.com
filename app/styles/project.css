@@ -1,0 +1,24 @@
+.technical-desc-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.technical-desc.technical-desc-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 100ms, transform 100ms;
+}
+
+.technical-desc.technical-desc-exit {
+  opacity: 1;
+}
+
+.technical-desc.technical-desc-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 100ms, transform 100ms;
+}
+
+.technical-desc.technical-desc-exit-done {
+  display: none;
+}
