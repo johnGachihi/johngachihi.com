@@ -1,7 +1,6 @@
 import { Link as RouterLink } from "@remix-run/react";
 import styled from "@emotion/styled";
 import { body1, body2, caption, h6 } from "~/styles/text";
-import { Skeleton } from "@mui/material";
 
 type Props = {
   title: string;
@@ -32,24 +31,6 @@ function PostListItem({ title, date, tags, slug, ...otherProps }: Props) {
     </Link>
   );
 }
-
-function PostListItemLoading(props: { className?: string }) {
-  return (
-    <Container {...props}>
-      <StartedOn children={<Skeleton width={75} />} />
-
-      <div style={{ minWidth: "40%" }}>
-        <Title children={<Skeleton width="100%" />} />
-        <Tags>
-          <Tag children={<Skeleton width={60} />} />
-          <Tag children={<Skeleton width={60} />} />
-          <Tag children={<Skeleton width={60} />} />
-        </Tags>
-      </div>
-    </Container>
-  );
-}
-
 const Link = styled(RouterLink)`
   text-decoration: none;
   color: inherit;
@@ -111,4 +92,4 @@ const Tag = styled.span`
   }
 `;
 
-export { PostListItem as default, PostListItemLoading };
+export { PostListItem as default };
