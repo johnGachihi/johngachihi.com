@@ -110,5 +110,11 @@
   },
   "prisma": {
     "seed": "node --require tsconfig-paths/register prisma/seed.js"
+  },
+  "overrides": {
+    "@reach/menu-button": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
