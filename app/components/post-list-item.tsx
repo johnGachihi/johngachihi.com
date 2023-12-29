@@ -1,6 +1,5 @@
-import { Link as RouterLink } from "@remix-run/react";
-import styled from "@emotion/styled";
-import { body1, body2, caption, h6 } from "~/styles/text";
+import { Link } from "@remix-run/react";
+import clsx from "clsx";
 
 type Props = {
   title: string;
@@ -10,86 +9,26 @@ type Props = {
   className?: string;
 };
 
-function PostListItem({ title, date, tags, slug, ...otherProps }: Props) {
+function PostListItem({ title, date, tags, slug, className, ...otherProps }: Props) {
   return (
-    <Link to={slug} {...otherProps}>
-      <Container>
-        <StartedOn>{date}</StartedOn>
+    <Link className={clsx(className, "block")} to={slug} {...otherProps}>
+      <div className="p-4 border border-black/20 rounded-md sm:flex sm:items-baseline sm:border-0 sm:p-0">
+        <span className="caption sm:mr-4 md:body2">{date}</span>
 
         <div>
-          <Title>{title}</Title>
+          <span className="font-medium block body1 mb-2 sm:mb-0 lg:h6 hover:underline">{title}</span>
 
           {tags && (
             <div className="flex flex-wrap">
               {tags.map((tag) => (
-                <Tag children={"#" + tag} key={tag} />
+                <span className="mr-2 caption lg:body2" children={"#" + tag} key={tag} />
               ))}
             </div>
           )}
         </div>
-      </Container>
+      </div>
     </Link>
   );
 }
-const Link = styled(RouterLink)`
-  text-decoration: none;
-  color: inherit;
-  display: block;
-`;
-
-const Container = styled.div`
-  @media (max-width: 600px) {
-    padding: 16px;
-    border: 1px solid #b7b7b7;
-    border-radius: 7px;
-  }
-
-  @media (min-width: 600px) {
-    display: flex;
-    align-items: baseline;
-  }
-`;
-const StartedOn = styled.span`
-  ${caption};
-
-  @media (min-width: 600px) {
-    margin-right: 16px;
-  }
-
-  @media (min-width: 900px) {
-    ${body2};
-  }
-`;
-const Title = styled.span`
-  font-weight: 500;
-  display: block;
-  ${body1};
-
-  @media (max-width: 600px) {
-    margin-bottom: 8px;
-  }
-
-  @media (min-width: 900px) {
-    ${h6};
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Tag = styled.span`
-  margin-right: 8px;
-  ${caption};
-
-  @media (min-width: 900px) {
-    ${body2};
-  }
-`;
 
 export { PostListItem as default };

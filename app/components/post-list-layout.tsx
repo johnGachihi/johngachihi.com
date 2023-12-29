@@ -1,6 +1,4 @@
 import type { PropsWithChildren } from "react";
-import styled from "@emotion/styled";
-import {h4, h6} from "~/styles/text";
 
 type Props = PropsWithChildren<{ title: string }>;
 
@@ -8,21 +6,11 @@ function PostListLayout({ title, children }: Props) {
   return (
     <>
       <header>
-        <Title>{title}</Title>
+        <h2 className="h6 mt-6 mb-4 sm:h4 sm:mt-10 sm:mb-6 sm:font-normal lg:mt-14">{title}</h2>
       </header>
       {children}
     </>
   );
 }
-
-const Title = styled.h2`
-  ${h6};
-  margin-top: 8px;
-  margin-bottom: 16px;
-  @media (min-width: 600px) {
-    ${h4} 
-    margin-bottom: 24px;
-  }
-`;
 
 export default PostListLayout;

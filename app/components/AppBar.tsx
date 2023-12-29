@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import Icon from "@mdi/react";
 import { mdiMenu } from "@mdi/js";
 import { AnimatePresence, motion } from "framer-motion";
