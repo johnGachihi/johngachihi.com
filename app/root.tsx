@@ -14,8 +14,8 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import vendorStyles from "./styles/vendor.css";
 import { AppBar } from "~/components/AppBar";
 import Button from "~/components/button";
-import Snackbar from "@mui/material/Snackbar";
-import { CircularProgress } from "@mui/material";
+import { Snackbar } from "~/components/snackbar";
+import { CircleLoader } from "~/components/circle-loader";
 import { load, trackPageview } from "fathom-client";
 import { useEffect } from "react";
 
@@ -80,16 +80,12 @@ function PageLoadingMessage() {
   const transition = useTransition();
 
   return (
-    <Snackbar
-      open={transition.state === "loading"}
-      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      message={
-        <div className="flex items-center gap-x-4">
-          <CircularProgress size={24} color="inherit" />
-          Page loading...
-        </div>
-      }
-    />
+    <Snackbar open={transition.state === "loading"}>
+      <div className="flex items-center gap-x-4">
+        <CircleLoader color="onPrimary" />
+        Page loading...
+      </div>
+    </Snackbar>
   );
 }
 
