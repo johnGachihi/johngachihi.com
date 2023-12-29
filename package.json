@@ -29,14 +29,9 @@
     "/public/build"
   ],
   "dependencies": {
-    "@emotion/cache": "^11.10.3",
-    "@emotion/react": "^11.10.4",
-    "@emotion/server": "^11.10.0",
-    "@emotion/styled": "^11.10.4",
     "@isaacs/express-prometheus-middleware": "^1.2.1",
     "@mdi/js": "^7.0.96",
     "@mdi/react": "^1.6.1",
-    "@mui/material": "^5.10.6",
     "@mux/mux-player-react": "^1.8.0",
     "@portabletext/to-html": "^1.0.3",
     "@prisma/client": "^4.9.0",
@@ -56,6 +51,7 @@
     "fathom-client": "^3.5.0",
     "framer-motion": "^10.16.16",
     "highlight.js": "^11.6.0",
+    "isbot": "^3.7.1-deprecated",
     "jsdom": "^20.0.0",
     "morgan": "^1.10.0",
     "picosanity": "^4.0.0",

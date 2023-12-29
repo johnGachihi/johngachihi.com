@@ -1,51 +1,114 @@
+import { PassThrough } from "node:stream";
+
 import type { EntryContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import { renderToString } from "react-dom/server";
-import { createEmotionCache } from "./styles/mui/setup-utils";
-import createEmotionServer from "@emotion/server/create-instance";
-import { CacheProvider, ThemeProvider } from "@emotion/react";
-import theme from "./styles/mui/theme";
-import { CssBaseline } from "@mui/material";
+import { renderToPipeableStream } from "react-dom/server";
+import { createReadableStreamFromReadable } from "@remix-run/node";
+import isbot from "isbot";
+
+const ABORT_DELAY = 5_000;
 
 export default function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
-  const cache = createEmotionCache();
-  const { extractCriticalToChunks } = createEmotionServer(cache);
+  return isbot(request.headers.get("user-agent"))
+    ? handleBotRequest(
+      request,
+      responseStatusCode,
+      responseHeaders,
+      remixContext,
+    )
+    : handleBrowserRequest(
+      request,
+      responseStatusCode,
+      responseHeaders,
+      remixContext,
+    );
+}
 
-  const MuiRemixServer = () => (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <RemixServer context={remixContext} url={request.url} />
-      </ThemeProvider>
-    </CacheProvider>
-  );
+function handleBotRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext,
+) {
+  return new Promise((resolve, reject) => {
+    const { abort, pipe } = renderToPipeableStream(
+      <RemixServer
+        context={remixContext}
+        url={request.url}
+        abortDelay={ABORT_DELAY}
+      />,
+      {
+        onAllReady() {
+          const body = new PassThrough();
 
-  const html = renderToString(<MuiRemixServer />);
+          responseHeaders.set("Content-Type", "text/html");
 
-  const { styles } = extractCriticalToChunks(html);
+          resolve(
+            new Response(createReadableStreamFromReadable(body), {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            }),
+          );
 
-  let stylesHtml = "";
+          pipe(body);
+        },
+        onShellError(error: unknown) {
+          reject(error);
+        },
+        onError(error: unknown) {
+          responseStatusCode = 500;
+          console.error(error);
+        },
+      },
+    );
 
-  styles.forEach(({ key, ids, css }) => {
-    const emotionKey = `${key} ${ids.join(' ')}`;
-    const newStyleTag = `<style data-emotion="${emotionKey}">${css}</style>`;
-    stylesHtml = `${stylesHtml}${newStyleTag}`;
+    setTimeout(abort, ABORT_DELAY);
   });
+}
 
-  const markup = html.replace(
-    /<meta(\s)*name="emotion-insertion-point"(\s)*content="emotion-insertion-point"(\s)*\/>/,
-    `<meta name="emotion-insertion-point" content="emotion-insertion-point"/>${stylesHtml}`,
-  );
+function handleBrowserRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext,
+) {
+  return new Promise((resolve, reject) => {
+    const { abort, pipe } = renderToPipeableStream(
+      <RemixServer
+        context={remixContext}
+        url={request.url}
+        abortDelay={ABORT_DELAY}
+      />,
+      {
+        onShellReady() {
+          const body = new PassThrough();
 
-  responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("Content-Type", "text/html");
 
-  return new Response("<!DOCTYPE html>" + markup, {
-    status: responseStatusCode,
-    headers: responseHeaders,
+          resolve(
+            new Response(createReadableStreamFromReadable(body), {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            }),
+          );
+
+          pipe(body);
+        },
+        onShellError(error: unknown) {
+          reject(error);
+        },
+        onError(error: unknown) {
+          console.error(error);
+          responseStatusCode = 500;
+        },
+      },
+    );
+
+    setTimeout(abort, ABORT_DELAY);
   });
 }

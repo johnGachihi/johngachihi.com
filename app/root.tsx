@@ -8,7 +8,6 @@ import {
   Scripts,
   ScrollRestoration, useCatch, useLocation, useTransition
 } from "@remix-run/react";
-import { MuiDocumentWrapper } from "./styles/mui/setup-utils";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import vendorStyles from "./styles/vendor.css";
@@ -59,7 +58,6 @@ export const meta: MetaFunction = () => ({
   title: "John Gachihi",
   viewport: "width=device-width,initial-scale=1",
   "theme-color": "#000",
-  "emotion-insertion-point": "emotion-insertion-point"
 });
 
 const Fathom = () => {
@@ -91,47 +89,43 @@ function PageLoadingMessage() {
 
 export default function App() {
   return (
-    <MuiDocumentWrapper>
-      <html lang="en" className="h-full">
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body className="h-full">
-      <Outlet />
-      <PageLoadingMessage />
+    <html lang="en" className="h-full">
+    <head>
+      <Meta />
+      <Links />
+    </head>
+    <body className="h-full">
+    <Outlet />
+    <PageLoadingMessage />
 
-      <ScrollRestoration />
-      <Scripts />
-      <LiveReload />
+    <ScrollRestoration />
+    <Scripts />
+    <LiveReload />
 
-      <Fathom />
-      </body>
-      </html>
-    </MuiDocumentWrapper>
+    <Fathom />
+    </body>
+    </html>
   );
 }
 
 export function ErrorBoundary() {
   return (
-    <MuiDocumentWrapper>
-      <html lang="en" className="h-full">
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body className="flex flex-col h-full">
-      <AppBar />
-      <main className="w-4/5 mx-auto grow flex flex-col items-center justify-center text-center">
-        <span className="text-5xl text-red-800 max-w-2xl mb-10">Ayaya! Something's wrong here</span>
-        <Link to="/">
-          <Button variant="outlined">Back to Home?</Button>
-        </Link>
-      </main>
-      <Scripts />
-      </body>
-      </html>
-    </MuiDocumentWrapper>
+    <html lang="en" className="h-full">
+    <head>
+      <Meta />
+      <Links />
+    </head>
+    <body className="flex flex-col h-full">
+    <AppBar />
+    <main className="w-4/5 mx-auto grow flex flex-col items-center justify-center text-center">
+      <span className="text-5xl text-red-800 max-w-2xl mb-10">Ayaya! Something's wrong here</span>
+      <Link to="/">
+        <Button variant="outlined">Back to Home?</Button>
+      </Link>
+    </main>
+    <Scripts />
+    </body>
+    </html>
   );
 }
 
@@ -141,22 +135,20 @@ export function CatchBoundary() {
 
   if (caught.status === 404)
     return (
-      <MuiDocumentWrapper>
-        <html lang="en" className="h-full">
-        <head>
-          <Meta />
-          <Links />
-        </head>
-        <body className="flex flex-col h-full">
-        <AppBar />
-        <main className="w-4/5 mx-auto grow flex flex-col items-center justify-center text-center">
-          <span className="text-5xl mb-4">404</span>
-          <span className="text-xl mb-1">This path does not exist </span>
-          <span className="text-xl max-w-full truncate">{location.pathname}</span>
-        </main>
-        <Scripts />
-        </body>
-        </html>
-      </MuiDocumentWrapper>
+      <html lang="en" className="h-full">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body className="flex flex-col h-full">
+      <AppBar />
+      <main className="w-4/5 mx-auto grow flex flex-col items-center justify-center text-center">
+        <span className="text-5xl mb-4">404</span>
+        <span className="text-xl mb-1">This path does not exist </span>
+        <span className="text-xl max-w-full truncate">{location.pathname}</span>
+      </main>
+      <Scripts />
+      </body>
+      </html>
     );
 }
