@@ -1,5 +1,4 @@
-import type { LoaderFunction } from "@remix-run/node";
-import { json, type MetaFunction, Response } from "@remix-run/node";
+import { json, type LoaderFunction, type MetaFunction, Response } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import PostTitle from "~/components/post/post-title";

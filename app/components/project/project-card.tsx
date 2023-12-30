@@ -1,12 +1,11 @@
 import clsx from "clsx";
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import type { ProjectSummary } from "~/models/project.server";
 import style from "./project-card.css";
 import { mdiVolumeHigh, mdiVolumeOff } from "@mdi/js";
 import Icon from "@mdi/react";
 import { Link } from "@remix-run/react";
 import VideoPlayer from "../post/video-player";
-import React from "react";
 
 export function links() {
   return [{ rel: "stylesheet", href: style }]

@@ -1,4 +1,3 @@
-import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import PostTitle from "~/components/post/post-title";
@@ -10,7 +9,7 @@ import Tags from "~/components/tags";
 import { CSSTransition } from "react-transition-group";
 import Icon from '@mdi/react'
 import { mdiChevronUp, mdiChevronDown, mdiGithub, mdiLink } from '@mdi/js'
-import { type MetaFunction, Response } from "@remix-run/node";
+import { type LoaderFunction, type MetaFunction, Response } from "@remix-run/node";
 import style from "~/styles/project.css";
 import postStyle from "~/styles/post.css";
 import hljsStyle from "highlight.js/styles/intellij-light.css";
