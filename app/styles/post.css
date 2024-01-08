@@ -72,7 +72,7 @@ figure > figcaption {
   font-size: 16px;
   overflow-x: auto;
 }
-.content .code-block-container pre {
+.content .code-block-container pre, .content .code-block-container .math {
   margin: 24px;
   width: fit-content;
 }

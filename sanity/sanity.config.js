@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision'
 import { codeInput } from '@sanity/code-input'
 import { StreamLanguage } from '@codemirror/language'
 import schemas from './schemas/schema'
+import { latexInput } from "sanity-plugin-latex-input";
 
 export default defineConfig({
   title: "johngachihi.me",
@@ -21,7 +22,8 @@ export default defineConfig({
             .then(({ kotlin }) => StreamLanguage.define(kotlin)),
         },
       ],
-    })
+    }),
+    latexInput()
   ],
   schema: {
     types: schemas,

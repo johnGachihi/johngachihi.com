@@ -5,6 +5,7 @@ import DOMPurify from "dompurify";
 import {JSDOM} from "jsdom";
 import {sanityImageUrlFor} from ".";
 import hljs from "highlight.js";
+import katex from 'katex';
 
 // @ts-ignore
 const purify = DOMPurify(new JSDOM("").window);
@@ -52,6 +53,11 @@ export function captionedImageToHtml(
     return purify.sanitize(unsanitizedHTML);
 }
 
+function latexToHTMLString(latex: string, isInline: boolean) {
+    return katex.renderToString(latex, { displayMode: !isInline })
+
+}
+
 export function postPortableTextToHtml(
     portableText: (Block | CaptionedImage | CodeBlock)[]
 ): string {
@@ -71,6 +77,19 @@ export function postPortableTextToHtml(
                       }</code></pre>
                     </div>
                 `,
+                latex: (o) => {
+                    const isInline = o.isInline;
+                    const latexHTMLString = latexToHTMLString(o.value.body, isInline)
+
+                    if (isInline)
+                        return `<span>${latexHTMLString}</span>`
+
+                    return `
+                        <div class="code-block-container">
+                          <div class="math">${latexHTMLString}</div>
+                        </div>
+                    `;
+                }
             },
         },
     });
