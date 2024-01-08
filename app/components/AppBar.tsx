@@ -1,5 +1,5 @@
 import Icon from "@mdi/react";
-import { mdiMenu } from "@mdi/js";
+import { mdiMenu, mdiClose } from "@mdi/js";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import { Link, NavLink } from "@remix-run/react";
@@ -52,11 +52,15 @@ export function AppBar() {
 function Menu() {
   return (
     <ReachMenu>
-      <MenuButton className="sm:hidden pr-4 rounded-full">
-        <Icon path={mdiMenu} size={1} />
-      </MenuButton>
+      {({ isExpanded }) => (
+        <>
+          <MenuButton className="sm:hidden pr-4 rounded-full">
+            <Icon path={isExpanded ? mdiClose : mdiMenu} size={1} />
+          </MenuButton>
 
-      <Drawer />
+          <Drawer />
+        </>
+      )}
     </ReachMenu>
   );
 }
